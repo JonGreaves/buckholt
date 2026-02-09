@@ -1,0 +1,12 @@
+<button
+  [attr.type]="type"
+  [disabled]="disabled"
+  [attr.aria-label]="ariaLabel || null"
+  [class]="classes"
+>
+  <div class="btn-icon" *ngIf="icon">
+    <ng-container *ngTemplateOutlet="icon.template"></ng-container>
+  </div>
+
+  <ng-content></ng-content>
+</button>
