@@ -4,9 +4,16 @@
   [attr.aria-label]="ariaLabel || null"
   [class]="classes"
 >
-  <div class="btn-icon" *ngIf="icon">
-    <ng-container *ngTemplateOutlet="icon.template"></ng-container>
+
+  <div class="btn-icon" *ngIf="iconClass">
+    <i [class]="iconClass"></i>
   </div>
 
-  <ng-content></ng-content>
+  <span
+    class="button-label"
+    *ngIf="label"
+  >
+    {{ label }}
+  </span>
+
 </button>

@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
 import { DsButtonComponent } from './ds-button.component';
-import { DsButtonIconDirective } from './ds-button-icon.directive';
 
 /**
  * Story-only args type
@@ -11,18 +10,14 @@ type ButtonStoryArgs = {
   variant: 'primary' | 'secondary' | 'ghost';
   size: 'sm' | 'md' | 'lg';
   disabled: boolean;
+  label: string;
+  iconClass?: string;
 };
 
 const meta: Meta<ButtonStoryArgs> = {
   title: 'Buckholt/Button',
   component: DsButtonComponent,
   tags: ['autodocs'],
-
-  decorators: [
-    moduleMetadata({
-      imports: [DsButtonIconDirective],
-    }),
-  ],
 
   argTypes: {
     variant: {
@@ -35,6 +30,16 @@ const meta: Meta<ButtonStoryArgs> = {
     },
     disabled: {
       control: 'boolean',
+    },
+    iconClass: {
+      control: 'select',
+      options: [
+        '',
+        'fa-regular fa-ghost',
+        'fa-regular fa-user',
+        'fa-regular fa-bell',
+        'fa-regular fa-circle-check',
+      ],
     },
   },
 
@@ -51,19 +56,6 @@ export default meta;
 type Story = StoryObj<ButtonStoryArgs>;
 
 
-// --------------------------------------------------
-// ✅ 1️⃣ Playground — NO render()
-// This enables dynamic source generation
-// --------------------------------------------------
-
-export const Playground: Story = {
-  args: {
-    variant: 'primary',
-    size: 'md',
-    disabled: false,
-  },
-};
-
 
 // --------------------------------------------------
 // 🧱 2️⃣ Example stories with projection
@@ -75,19 +67,8 @@ export const Primary: Story = {
     variant: 'primary',
     size: 'md',
     disabled: false,
+    label: 'Primary',
   },
-  render: (args) => ({
-    props: args,
-    template: `
-      <ds-button
-        [variant]="variant"
-        [size]="size"
-        [disabled]="disabled"
-      >
-        <span class="button-label">Primary</span>
-      </ds-button>
-    `,
-  }),
 };
 
 export const Secondary: Story = {
@@ -95,19 +76,17 @@ export const Secondary: Story = {
     variant: 'secondary',
     size: 'md',
     disabled: false,
+    label: 'Secondary',
   },
-  render: (args) => ({
-    props: args,
-    template: `
-      <ds-button
-        [variant]="variant"
-        [size]="size"
-        [disabled]="disabled"
-      >
-        <span class="button-label">Secondary</span>
-      </ds-button>
-    `,
-  }),
+};
+
+export const Ghost: Story = {
+  args: {
+    variant: 'ghost',
+    size: 'md',
+    disabled: false,
+    label: 'Ghost',
+  },
 };
 
 export const WithIcon: Story = {
@@ -115,24 +94,11 @@ export const WithIcon: Story = {
     variant: 'primary',
     size: 'md',
     disabled: false,
+    label: 'With icon',
+    iconClass: 'fa-regular fa-ghost',
   },
-  render: (args) => ({
-    props: args,
-    template: `
-      <ds-button
-        [variant]="variant"
-        [size]="size"
-        [disabled]="disabled"
-      >
-        <ng-template dsButtonIcon>
-          <i class="fa-regular fa-ghost"></i>
-        </ng-template>
-
-        <span class="button-label">With icon</span>
-      </ds-button>
-    `,
-  }),
 };
+
 
 
 // import type { Meta, StoryObj } from '@storybook/angular';
