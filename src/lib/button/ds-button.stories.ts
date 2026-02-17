@@ -3,11 +3,14 @@ import { moduleMetadata } from '@storybook/angular';
 import { DsButtonComponent } from './ds-button.component';
 import { DsButtonIconDirective } from './ds-button-icon.directive';
 
+/**
+ * Story-only args type
+ * We separate this from the component to avoid TS conflicts.
+ */
 type ButtonStoryArgs = {
   variant: 'primary' | 'secondary' | 'ghost';
   size: 'sm' | 'md' | 'lg';
   disabled: boolean;
-  label: string;
 };
 
 const meta: Meta<ButtonStoryArgs> = {
@@ -33,9 +36,6 @@ const meta: Meta<ButtonStoryArgs> = {
     disabled: {
       control: 'boolean',
     },
-    label: {
-      control: 'text',
-    },
   },
 
   parameters: {
@@ -51,33 +51,30 @@ export default meta;
 type Story = StoryObj<ButtonStoryArgs>;
 
 
-/**
- * 🔥 Base template used by all stories
- */
-const Template: Story = {
-  render: (args) => ({
-    props: args,
-    template: `
-      <ds-button
-        [variant]="variant"
-        [size]="size"
-        [disabled]="disabled"
-      >
-        <span class="button-label">{{ label }}</span>
-      </ds-button>
-    `,
-  }),
-};
+// --------------------------------------------------
+// ✅ 1️⃣ Playground — NO render()
+// This enables dynamic source generation
+// --------------------------------------------------
 
-/**
- * 🎛 Playground (dynamic source works here)
- */
 export const Playground: Story = {
   args: {
     variant: 'primary',
     size: 'md',
     disabled: false,
-    label: 'Button label',
+  },
+};
+
+
+// --------------------------------------------------
+// 🧱 2️⃣ Example stories with projection
+// These must use render(), so source will be static
+// --------------------------------------------------
+
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    disabled: false,
   },
   render: (args) => ({
     props: args,
@@ -87,78 +84,38 @@ export const Playground: Story = {
         [size]="size"
         [disabled]="disabled"
       >
-        <span class="button-label">{{ label }}</span>
+        <span class="button-label">Primary</span>
       </ds-button>
     `,
   }),
 };
-// export const Playground: Story = {
-//   ...Template,
-//   args: {
-//     variant: 'primary',
-//     size: 'md',
-//     disabled: false,
-//     label: 'Button label',
-//   },
-// };
 
-/**
- * 🎨 Variants
- */
 export const Secondary: Story = {
-  ...Template,
   args: {
     variant: 'secondary',
     size: 'md',
     disabled: false,
-    label: 'Secondary',
   },
+  render: (args) => ({
+    props: args,
+    template: `
+      <ds-button
+        [variant]="variant"
+        [size]="size"
+        [disabled]="disabled"
+      >
+        <span class="button-label">Secondary</span>
+      </ds-button>
+    `,
+  }),
 };
 
-export const Ghost: Story = {
-  ...Template,
-  args: {
-    variant: 'ghost',
-    size: 'md',
-    disabled: false,
-    label: 'Ghost',
-  },
-};
-
-export const Small: Story = {
-  ...Template,
-  args: {
-    variant: 'primary',
-    size: 'sm',
-    disabled: false,
-    label: 'Small',
-  },
-};
-
-export const Large: Story = {
-  ...Template,
-  args: {
-    variant: 'primary',
-    size: 'lg',
-    disabled: false,
-    label: 'Large',
-  },
-};
-
-export const Disabled: Story = {
-  ...Template,
-  args: {
-    variant: 'primary',
-    size: 'md',
-    disabled: true,
-    label: 'Disabled',
-  },
-};
-
-/**
- * 🧩 With Icon (projection still works)
- */
 export const WithIcon: Story = {
+  args: {
+    variant: 'primary',
+    size: 'md',
+    disabled: false,
+  },
   render: (args) => ({
     props: args,
     template: `
@@ -171,18 +128,11 @@ export const WithIcon: Story = {
           <i class="fa-regular fa-ghost"></i>
         </ng-template>
 
-        <span class="button-label">{{ label }}</span>
+        <span class="button-label">With icon</span>
       </ds-button>
     `,
   }),
-  args: {
-    variant: 'primary',
-    size: 'md',
-    disabled: false,
-    label: 'With icon',
-  },
 };
-
 
 
 // import type { Meta, StoryObj } from '@storybook/angular';
