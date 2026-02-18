@@ -5511,7 +5511,8 @@ fieldset:disabled .carousel-control-next {
 }
 
 /* Tag ________________________________________________________________________ */
-.tag {
+/* Update to fix Storybook rendering bug - added :not(.token.tag) */
+.tag:not(.token.tag) {
   --tag-padding-y: calc(0.25rem - 1px);
   --tag-padding-x: calc(0.5rem - 1px);
   --tag-radius: 2rem;
