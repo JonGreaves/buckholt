@@ -31,74 +31,7 @@
     "guards": [],
     "interceptors": [],
     "classes": [],
-    "directives": [
-        {
-            "name": "DsButtonIconDirective",
-            "id": "directive-DsButtonIconDirective-995ca85c22c44f35568eb2dfca63c7dc32782dce7858416960d51e8faeea84681635a4a4f7b82b9cef07abaa3c61fe5dd7069014dc04c3b6a5c1e737babd8255",
-            "file": "src/lib/button/ds-button-icon.directive.ts",
-            "type": "directive",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Directive, TemplateRef } from '@angular/core';\r\n\r\n@Directive({\r\n  selector: 'ng-template[dsButtonIcon]',\r\n  standalone: true,\r\n})\r\nexport class DsButtonIconDirective {\r\n  constructor(public template: TemplateRef<unknown>) {}\r\n}\r\n",
-            "selector": "ng-template[dsButtonIcon]",
-            "providers": [],
-            "hostDirectives": [],
-            "standalone": true,
-            "inputsClass": [],
-            "outputsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "propertiesClass": [
-                {
-                    "name": "template",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "TemplateRef<unknown>",
-                    "indexKey": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 8,
-                    "modifierKind": [
-                        125
-                    ]
-                }
-            ],
-            "methodsClass": [],
-            "extends": [],
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "template",
-                        "type": "TemplateRef<unknown>",
-                        "optional": false,
-                        "dotDotDotToken": false,
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 7,
-                "jsdoctags": [
-                    {
-                        "name": "template",
-                        "type": "TemplateRef<unknown>",
-                        "optional": false,
-                        "dotDotDotToken": false,
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            }
-        }
-    ],
+    "directives": [],
     "components": [
         {
             "name": "App",
@@ -290,8 +223,161 @@
             }
         },
         {
+            "name": "DsAlertComponent",
+            "id": "component-DsAlertComponent-5f79bf81fc1a7ec520d4114a7552e4bc052cf5a37cb0700f4a48979b4fd3e4af50c7517bf192d215b143d87b1f333158e00f30373e0156945e9d3fad5b184b27",
+            "file": "src/lib/alert/ds-alert.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-alert",
+            "styleUrls": [
+                "./ds-alert.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-alert.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "dismissible",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nOptional",
+                    "description": "<p>Optional</p>\n",
+                    "line": 27,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "message",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\nREQUIRED",
+                    "description": "<p>REQUIRED</p>\n",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "note",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "noteSmall",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "AlertVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "dismiss",
+                    "defaultValue": "new EventEmitter<void>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onDismiss",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 46,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n} from '@angular/core';\r\nimport { NgIf } from '@angular/common';\r\n\r\ntype AlertVariant = 'info' | 'success' | 'warning' | 'error';\r\n\r\n@Component({\r\n  selector: 'ds-alert',\r\n  standalone: true,\r\n  imports: [NgIf],\r\n  templateUrl: './ds-alert.component.html',\r\n  styleUrls: ['./ds-alert.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAlertComponent {\r\n  @Input() variant: AlertVariant = 'info';\r\n\r\n  /** REQUIRED */\r\n  @Input() message!: string;\r\n\r\n  /** Optional */\r\n  @Input() iconClass?: string;\r\n  @Input() note?: string;\r\n  @Input() noteSmall?: string;\r\n  @Input() dismissible = false;\r\n\r\n  @Output() dismiss = new EventEmitter<void>();\r\n\r\n  get classes(): string {\r\n    return ['alert', `alert-${this.variant}`].join(' ');\r\n  }\r\n\r\n  get hasNote(): boolean {\r\n    return !!(this.note || this.noteSmall);\r\n  }\r\n\r\n  get hasContextBar(): boolean {\r\n    return false; // controlled via ng-content presence\r\n  }\r\n\r\n  onDismiss(): void {\r\n    this.dismiss.emit();\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-alert.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 34
+                    }
+                },
+                "hasNote": {
+                    "name": "hasNote",
+                    "getSignature": {
+                        "name": "hasNote",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 38
+                    }
+                },
+                "hasContextBar": {
+                    "name": "hasContextBar",
+                    "getSignature": {
+                        "name": "hasContextBar",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 42
+                    }
+                }
+            },
+            "templateData": "<div\r\n  [class]=\"classes\"\r\n  role=\"alert\"\r\n>\r\n  <div class=\"alert-content\">\r\n\r\n    <!-- Optional Icon (must come before body) -->\r\n    <div class=\"alert-icon\" *ngIf=\"iconClass\">\r\n      <i [class]=\"iconClass\"></i>\r\n    </div>\r\n\r\n    <div class=\"alert-body\">\r\n\r\n      <!-- Required message -->\r\n      <div class=\"alert-message\">\r\n        <h6>{{ message }}</h6>\r\n      </div>\r\n\r\n      <!-- Optional Note -->\r\n      <div\r\n        class=\"alert-note\"\r\n        *ngIf=\"hasNote\"\r\n      >\r\n        <p *ngIf=\"note\">{{ note }}</p>\r\n        <p *ngIf=\"noteSmall\">\r\n          <small>{{ noteSmall }}</small>\r\n        </p>\r\n      </div>\r\n\r\n      <!-- Optional Context Bar -->\r\n      <div class=\"alert-contextbar\">\r\n        <ng-content select=\"[alert-context]\"></ng-content>\r\n      </div>\r\n\r\n    </div>\r\n\r\n    <!-- Optional Close Button -->\r\n    <button\r\n      *ngIf=\"dismissible\"\r\n      type=\"button\"\r\n      class=\"btn-close\"\r\n      aria-label=\"Close\"\r\n      (click)=\"onDismiss()\"\r\n    ></button>\r\n\r\n  </div>\r\n</div>\r\n"
+        },
+        {
             "name": "DsButtonComponent",
-            "id": "component-DsButtonComponent-4516f7c4d54b84ccb5d4133a9e929f9d918ac12628b4683a579cf52600eae1645b10d2c8f51821556b790fb0cc0a993c74a67dbd511804f1c35297932e3d55a1",
+            "id": "component-DsButtonComponent-6faaee2f7f9371bc5acce657455496c4d4cbd8919b272968aef32ea552ee16f3b4145b5587a036bc07d285750d7234ec0b4fcf66097424df27f00e050241a244",
             "file": "src/lib/button/ds-button.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -316,7 +402,7 @@
                     "deprecationMessage": "",
                     "rawdescription": "\nRequired for icon-only buttons",
                     "description": "<p>Required for icon-only buttons</p>\n",
-                    "line": 30,
+                    "line": 29,
                     "type": "string",
                     "decorators": []
                 },
@@ -325,8 +411,24 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 24,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "string",
                     "decorators": []
                 },
                 {
@@ -334,7 +436,7 @@
                     "defaultValue": "'md'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
+                    "line": 23,
                     "type": "ButtonSize",
                     "decorators": []
                 },
@@ -343,7 +445,7 @@
                     "defaultValue": "'button'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 25,
                     "type": "ButtonType",
                     "decorators": []
                 },
@@ -352,33 +454,13 @@
                     "defaultValue": "'primary'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 22,
                     "type": "ButtonVariant",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "icon",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "DsButtonIconDirective",
-                    "indexKey": "",
-                    "optional": true,
-                    "description": "",
-                    "line": 32,
-                    "decorators": [
-                        {
-                            "name": "ContentChild",
-                            "stringifiedArguments": "DsButtonIconDirective"
-                        }
-                    ],
-                    "modifierKind": [
-                        171
-                    ]
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
@@ -388,19 +470,12 @@
             "imports": [
                 {
                     "name": "NgIf"
-                },
-                {
-                    "name": "NgTemplateOutlet"
-                },
-                {
-                    "name": "DsButtonIconDirective",
-                    "type": "directive"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  ContentChild,\r\n  Input,\r\n} from '@angular/core';\r\nimport { NgIf, NgTemplateOutlet } from '@angular/common';\r\nimport { DsButtonIconDirective } from './ds-button-icon.directive';\r\n\r\ntype ButtonVariant = 'primary' | 'secondary' | 'ghost';\r\ntype ButtonSize = 'sm' | 'md' | 'lg';\r\ntype ButtonType = 'button' | 'submit' | 'reset';\r\n\r\n@Component({\r\n  selector: 'ds-button',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet, DsButtonIconDirective],\r\n  templateUrl: './ds-button.component.html',\r\n  styleUrls: ['./ds-button.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\n\r\nexport class DsButtonComponent {\r\n  @Input() variant: ButtonVariant = 'primary';\r\n  @Input() size: ButtonSize = 'md';\r\n  @Input() disabled = false;\r\n  @Input() type: ButtonType = 'button';\r\n\r\n  /** Required for icon-only buttons */\r\n  @Input('aria-label') ariaLabel?: string;\r\n\r\n  @ContentChild(DsButtonIconDirective) icon?: DsButtonIconDirective;\r\n\r\n  get hasIcon(): boolean {\r\n    return !!this.icon;\r\n  }\r\n\r\n  get classes(): string {\r\n    const variantClass =\r\n      this.variant === 'secondary'\r\n        ? 'btn-secondary'\r\n        : this.variant === 'ghost'\r\n        ? 'btn-ghost'\r\n        : 'btn-primary';\r\n\r\n    const sizeClass =\r\n      this.size === 'sm'\r\n        ? 'btn-sm'\r\n        : this.size === 'lg'\r\n        ? 'btn-lg'\r\n        : '';\r\n\r\n    return ['btn', variantClass, sizeClass].filter(Boolean).join(' ');\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport { NgIf, NgTemplateOutlet } from '@angular/common';\r\n\r\ntype ButtonVariant = 'primary' | 'secondary' | 'ghost';\r\ntype ButtonSize = 'sm' | 'md' | 'lg';\r\ntype ButtonType = 'button' | 'submit' | 'reset';\r\n\r\n@Component({\r\n  selector: 'ds-button',\r\n  standalone: true,\r\n  imports: [NgIf],\r\n  templateUrl: './ds-button.component.html',\r\n  styleUrls: ['./ds-button.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\n\r\nexport class DsButtonComponent {\r\n  @Input() variant: ButtonVariant = 'primary';\r\n  @Input() size: ButtonSize = 'md';\r\n  @Input() disabled = false;\r\n  @Input() type: ButtonType = 'button';\r\n  @Input() label?: string;\r\n\r\n  /** Required for icon-only buttons */\r\n  @Input('aria-label') ariaLabel?: string;\r\n  @Input() iconClass?: string;\r\n\r\n  get classes(): string {\r\n    const variantClass =\r\n      this.variant === 'secondary'\r\n        ? 'btn-secondary'\r\n        : this.variant === 'ghost'\r\n        ? 'btn-ghost'\r\n        : 'btn-primary';\r\n\r\n    const sizeClass =\r\n      this.size === 'sm'\r\n        ? 'btn-sm'\r\n        : this.size === 'lg'\r\n        ? 'btn-lg'\r\n        : '';\r\n\r\n    return ['btn', variantClass, sizeClass].filter(Boolean).join(' ');\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -411,26 +486,17 @@
             "stylesData": "",
             "extends": [],
             "accessors": {
-                "hasIcon": {
-                    "name": "hasIcon",
-                    "getSignature": {
-                        "name": "hasIcon",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 34
-                    }
-                },
                 "classes": {
                     "name": "classes",
                     "getSignature": {
                         "name": "classes",
                         "type": "string",
                         "returnType": "string",
-                        "line": 38
+                        "line": 32
                     }
                 }
             },
-            "templateData": "<button\r\n  [attr.type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [attr.aria-label]=\"ariaLabel || null\"\r\n  [class]=\"classes\"\r\n>\r\n  <div class=\"btn-icon\" *ngIf=\"icon\">\r\n    <ng-container *ngTemplateOutlet=\"icon.template\"></ng-container>\r\n  </div>\r\n\r\n  <ng-content></ng-content>\r\n</button>\r\n"
+            "templateData": "<button\r\n  [attr.type]=\"type\"\r\n  [disabled]=\"disabled\"\r\n  [attr.aria-label]=\"ariaLabel || null\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <div class=\"btn-icon\" *ngIf=\"iconClass\">\r\n    <i [class]=\"iconClass\"></i>\r\n  </div>\r\n\r\n  <span\r\n    class=\"button-label\"\r\n    *ngIf=\"label\"\r\n  >\r\n    {{ label }}\r\n  </span>\r\n\r\n</button>\r\n"
         },
         {
             "name": "HeaderComponent",
@@ -627,6 +693,26 @@
                 "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideRouter(routes)\r\n  ]\r\n}"
             },
             {
+                "name": "BUCKHOLT_ICON_OPTIONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/lib/icons/buckholt-icons.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "string[]",
+                "defaultValue": "[\n  \"\",\n  ...BUCKHOLT_ICONS.map((i) => i.iconClass),\n]"
+            },
+            {
+                "name": "BUCKHOLT_ICONS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/lib/icons/buckholt-icons.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "BuckholtIcon[]",
+                "defaultValue": "[\n  {\n    \"name\": \"Accessibility\",\n    \"iconClass\": \"fa-regular fa-universal-access\"\n  },\n  {\n    \"name\": \"Agreement\",\n    \"iconClass\": \"fa-regular fa-handshake\"\n  },\n  {\n    \"name\": \"AI-generated-content\",\n    \"iconClass\": \"fa-solid fa-sparkles\"\n  },\n  {\n    \"name\": \"Archive\",\n    \"iconClass\": \"fa-regular fa-box-archive\"\n  },\n  {\n    \"name\": \"Arrow-left\",\n    \"iconClass\": \"fa-regular fa-arrow-left\"\n  },\n  {\n    \"name\": \"Arrow-right\",\n    \"iconClass\": \"fa-regular fa-arrow-right\"\n  },\n  {\n    \"name\": \"Bin\",\n    \"iconClass\": \"fa-regular fa-trash-can\"\n  },\n  {\n    \"name\": \"Bootstrap\",\n    \"iconClass\": \"fa-brands fa-bootstrap\"\n  },\n  {\n    \"name\": \"Bullet\",\n    \"iconClass\": \"fa-regular fa-circle-small\"\n  },\n  {\n    \"name\": \"Bullet-solid\",\n    \"iconClass\": \"fa-solid fa-circle-small\"\n  },\n  {\n    \"name\": \"Calculator\",\n    \"iconClass\": \"fa-regular fa-calculator\"\n  },\n  {\n    \"name\": \"Calendar\",\n    \"iconClass\": \"fa-regular fa-calendar-day\"\n  },\n  {\n    \"name\": \"Car\",\n    \"iconClass\": \"fa-regular fa-car\"\n  },\n  {\n    \"name\": \"Car-windscreen\",\n    \"iconClass\": \"fa-regular fa-car-bolt\"\n  },\n  {\n    \"name\": \"Caret-down\",\n    \"iconClass\": \"fa-solid fa-caret-down\"\n  },\n  {\n    \"name\": \"Caret-left\",\n    \"iconClass\": \"fa-solid fa-caret-left\"\n  },\n  {\n    \"name\": \"Caret-right\",\n    \"iconClass\": \"fa-solid fa-caret-right\"\n  },\n  {\n    \"name\": \"Caret-up\",\n    \"iconClass\": \"fa-solid fa-caret-up\"\n  },\n  {\n    \"name\": \"Change\",\n    \"iconClass\": \"fa-regular fa-swap-arrows\"\n  },\n  {\n    \"name\": \"Check\",\n    \"iconClass\": \"fa-regular fa-check\"\n  },\n  {\n    \"name\": \"Chevron-down\",\n    \"iconClass\": \"fa-regular fa-chevron-down\"\n  },\n  {\n    \"name\": \"Chevron-left\",\n    \"iconClass\": \"fa-regular fa-chevron-left\"\n  },\n  {\n    \"name\": \"Chevron-right\",\n    \"iconClass\": \"fa-regular fa-chevron-right\"\n  },\n  {\n    \"name\": \"Chevron-up\",\n    \"iconClass\": \"fa-regular fa-chevron-up\"\n  },\n  {\n    \"name\": \"Circle\",\n    \"iconClass\": \"fa-regular fa-circle\"\n  },\n  {\n    \"name\": \"Circle-solid\",\n    \"iconClass\": \"fa-solid fa-circle\"\n  },\n  {\n    \"name\": \"Close\",\n    \"iconClass\": \"fa-regular fa-xmark\"\n  },\n  {\n    \"name\": \"Contract\",\n    \"iconClass\": \"fa-regular fa-arrow-left-from-line\"\n  },\n  {\n    \"name\": \"Copy\",\n    \"iconClass\": \"fa-regular fa-copy\"\n  },\n  {\n    \"name\": \"Credit-card\",\n    \"iconClass\": \"fa-regular fa-credit-card\"\n  },\n  {\n    \"name\": \"Document\",\n    \"iconClass\": \"fa-regular fa-file-lines\"\n  },\n  {\n    \"name\": \"Document-blank\",\n    \"iconClass\": \"fa-regular fa-file\"\n  },\n  {\n    \"name\": \"Document-pdf\",\n    \"iconClass\": \"fa-regular fa-file-pdf\"\n  },\n  {\n    \"name\": \"Download\",\n    \"iconClass\": \"fa-regular fa-arrow-down-to-bracket\"\n  },\n  {\n    \"name\": \"Drag-horizontal\",\n    \"iconClass\": \"fa-regular fa-grip-dots\"\n  },\n  {\n    \"name\": \"Drag-vertical\",\n    \"iconClass\": \"fa-regular fa-grip-dots-vertical\"\n  },\n  {\n    \"name\": \"Edit\",\n    \"iconClass\": \"fa-regular fa-pencil\"\n  },\n  {\n    \"name\": \"Email\",\n    \"iconClass\": \"fa-regular fa-envelope\"\n  },\n  {\n    \"name\": \"Error\",\n    \"iconClass\": \"fa-regular fa-circle-exclamation\"\n  },\n  {\n    \"name\": \"Error-solid\",\n    \"iconClass\": \"fa-solid fa-circle-exclamation\"\n  },\n  {\n    \"name\": \"Expand\",\n    \"iconClass\": \"fa-regular fa-arrow-right-from-line\"\n  },\n  {\n    \"name\": \"Export\",\n    \"iconClass\": \"fa-regular fa-file-export\"\n  },\n  {\n    \"name\": \"External-link\",\n    \"iconClass\": \"fa-regular fa-arrow-up-right-from-square\"\n  },\n  {\n    \"name\": \"Facebook\",\n    \"iconClass\": \"fa-brands fa-facebook\"\n  },\n  {\n    \"name\": \"Flag\",\n    \"iconClass\": \"fa-regular fa-flag\"\n  },\n  {\n    \"name\": \"Google\",\n    \"iconClass\": \"fa-brands fa-google\"\n  },\n  {\n    \"name\": \"Help\",\n    \"iconClass\": \"fa-regular fa-circle-question\"\n  },\n  {\n    \"name\": \"Help-solid\",\n    \"iconClass\": \"fa-solid fa-circle-question\"\n  },\n  {\n    \"name\": \"Home\",\n    \"iconClass\": \"fa-regular fa-house\"\n  },\n  {\n    \"name\": \"Import\",\n    \"iconClass\": \"fa-regular fa-file-import\"\n  },\n  {\n    \"name\": \"Info\",\n    \"iconClass\": \"fa-regular fa-circle-info\"\n  },\n  {\n    \"name\": \"Info-solid\",\n    \"iconClass\": \"fa-solid fa-circle-info\"\n  },\n  {\n    \"name\": \"Instagram\",\n    \"iconClass\": \"fa-brands fa-instagram\"\n  },\n  {\n    \"name\": \"Key\",\n    \"iconClass\": \"fa-regular fa-key\"\n  },\n  {\n    \"name\": \"Launch\",\n    \"iconClass\": \"fa-regular fa-rocket\"\n  },\n  {\n    \"name\": \"Launch-hover\",\n    \"iconClass\": \"fa-regular fa-rocket-launch\"\n  },\n  {\n    \"name\": \"Linkedin\",\n    \"iconClass\": \"fa-brands fa-linkedin\"\n  },\n  {\n    \"name\": \"List\",\n    \"iconClass\": \"fa-regular fa-list\"\n  },\n  {\n    \"name\": \"Location\",\n    \"iconClass\": \"fa-regular fa-location-dot\"\n  },\n  {\n    \"name\": \"Login\",\n    \"iconClass\": \"fa-regular fa-arrow-right-to-bracket\"\n  },\n  {\n    \"name\": \"Logout\",\n    \"iconClass\": \"fa-regular fa-arrow-right-from-bracket\"\n  },\n  {\n    \"name\": \"Menu\",\n    \"iconClass\": \"fa-regular fa-bars\"\n  },\n  {\n    \"name\": \"Minus\",\n    \"iconClass\": \"fa-regular fa-minus\"\n  },\n  {\n    \"name\": \"Misuse\",\n    \"iconClass\": \"fa-regular fa-circle-xmark\"\n  },\n  {\n    \"name\": \"Misuse-solid\",\n    \"iconClass\": \"fa-solid fa-circle-xmark\"\n  },\n  {\n    \"name\": \"Notification\",\n    \"iconClass\": \"fa-regular fa-bell\"\n  },\n  {\n    \"name\": \"Overflow-menu-horizontal\",\n    \"iconClass\": \"fa-regular fa-ellipsis\"\n  },\n  {\n    \"name\": \"Overflow-menu-vertical\",\n    \"iconClass\": \"fa-regular fa-ellipsis-vertical\"\n  },\n  {\n    \"name\": \"Password\",\n    \"iconClass\": \"fa-regular fa-lock-keyhole\"\n  },\n  {\n    \"name\": \"Pet\",\n    \"iconClass\": \"fa-regular fa-dog\"\n  },\n  {\n    \"name\": \"Phone\",\n    \"iconClass\": \"fa-regular fa-phone\"\n  },\n  {\n    \"name\": \"Plus\",\n    \"iconClass\": \"fa-regular fa-plus\"\n  },\n  {\n    \"name\": \"Pound\",\n    \"iconClass\": \"fa-regular fa-sterling-sign\"\n  },\n  {\n    \"name\": \"Product\",\n    \"iconClass\": \"fa-regular fa-box-open\"\n  },\n  {\n    \"name\": \"Recent\",\n    \"iconClass\": \"fa-regular fa-clock-rotate-left\"\n  },\n  {\n    \"name\": \"Redo\",\n    \"iconClass\": \"fa-regular fa-arrow-rotate-right\"\n  },\n  {\n    \"name\": \"Reg-plate\",\n    \"iconClass\": \"fa-regular fa-input-text\"\n  },\n  {\n    \"name\": \"Renew\",\n    \"iconClass\": \"fa-regular fa-arrows-rotate\"\n  },\n  {\n    \"name\": \"Save\",\n    \"iconClass\": \"fa-regular fa-floppy-disk\"\n  },\n  {\n    \"name\": \"Search\",\n    \"iconClass\": \"fa-regular fa-magnifying-glass\"\n  },\n  {\n    \"name\": \"Settings\",\n    \"iconClass\": \"fa-regular fa-gear\"\n  },\n  {\n    \"name\": \"Share\",\n    \"iconClass\": \"fa-regular fa-share-nodes\"\n  },\n  {\n    \"name\": \"Shield\",\n    \"iconClass\": \"fa-regular fa-shield\"\n  },\n  {\n    \"name\": \"Shield-check\",\n    \"iconClass\": \"fa-regular fa-shield-check\"\n  },\n  {\n    \"name\": \"Shield-cross\",\n    \"iconClass\": \"fa-regular fa-shield-xmark\"\n  },\n  {\n    \"name\": \"Shield-plus\",\n    \"iconClass\": \"fa-regular fa-shield-plus\"\n  },\n  {\n    \"name\": \"Sort\",\n    \"iconClass\": \"fa-solid fa-sort\"\n  },\n  {\n    \"name\": \"Sort-down\",\n    \"iconClass\": \"fa-solid fa-sort-down\"\n  },\n  {\n    \"name\": \"Sort-up\",\n    \"iconClass\": \"fa-solid fa-sort-up\"\n  },\n  {\n    \"name\": \"Success\",\n    \"iconClass\": \"fa-regular fa-circle-check\"\n  },\n  {\n    \"name\": \"Success-solid\",\n    \"iconClass\": \"fa-solid fa-circle-check\"\n  },\n  {\n    \"name\": \"Temporary\",\n    \"iconClass\": \"fa-regular fa-ghost\"\n  },\n  {\n    \"name\": \"Time\",\n    \"iconClass\": \"fa-regular fa-clock\"\n  },\n  {\n    \"name\": \"Tools\",\n    \"iconClass\": \"fa-regular fa-wrench\"\n  },\n  {\n    \"name\": \"Upload\",\n    \"iconClass\": \"fa-regular fa-arrow-up-from-bracket\"\n  },\n  {\n    \"name\": \"User\",\n    \"iconClass\": \"fa-regular fa-user\"\n  },\n  {\n    \"name\": \"User-group\",\n    \"iconClass\": \"fa-regular fa-users\"\n  },\n  {\n    \"name\": \"Users\",\n    \"iconClass\": \"fa-regular fa-user-group\"\n  },\n  {\n    \"name\": \"View\",\n    \"iconClass\": \"fa-regular fa-eye\"\n  },\n  {\n    \"name\": \"View-off\",\n    \"iconClass\": \"fa-regular fa-eye-slash\"\n  },\n  {\n    \"name\": \"Warning\",\n    \"iconClass\": \"fa-regular fa-triangle-exclamation\"\n  },\n  {\n    \"name\": \"Warning-solid\",\n    \"iconClass\": \"fa-solid fa-triangle-exclamation\"\n  },\n  {\n    \"name\": \"X-twitter\",\n    \"iconClass\": \"fa-brands fa-x-twitter\"\n  },\n  {\n    \"name\": \"Youtube\",\n    \"iconClass\": \"fa-brands fa-youtube\"\n  }\n] as const"
+            },
+            {
                 "name": "Large",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -690,6 +776,28 @@
         "functions": [],
         "typealiases": [
             {
+                "name": "AlertVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                "file": "src/lib/alert/ds-alert.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "BuckholtIcon",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/lib/icons/buckholt-icons.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 188
+            },
+            {
                 "name": "ButtonSize",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -746,6 +854,28 @@
                     "deprecationMessage": "",
                     "type": "ApplicationConfig",
                     "defaultValue": "{\r\n  providers: [\r\n    provideBrowserGlobalErrorListeners(),\r\n    provideRouter(routes)\r\n  ]\r\n}"
+                }
+            ],
+            "src/lib/icons/buckholt-icons.ts": [
+                {
+                    "name": "BUCKHOLT_ICON_OPTIONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/lib/icons/buckholt-icons.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string[]",
+                    "defaultValue": "[\n  \"\",\n  ...BUCKHOLT_ICONS.map((i) => i.iconClass),\n]"
+                },
+                {
+                    "name": "BUCKHOLT_ICONS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/lib/icons/buckholt-icons.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BuckholtIcon[]",
+                    "defaultValue": "[\n  {\n    \"name\": \"Accessibility\",\n    \"iconClass\": \"fa-regular fa-universal-access\"\n  },\n  {\n    \"name\": \"Agreement\",\n    \"iconClass\": \"fa-regular fa-handshake\"\n  },\n  {\n    \"name\": \"AI-generated-content\",\n    \"iconClass\": \"fa-solid fa-sparkles\"\n  },\n  {\n    \"name\": \"Archive\",\n    \"iconClass\": \"fa-regular fa-box-archive\"\n  },\n  {\n    \"name\": \"Arrow-left\",\n    \"iconClass\": \"fa-regular fa-arrow-left\"\n  },\n  {\n    \"name\": \"Arrow-right\",\n    \"iconClass\": \"fa-regular fa-arrow-right\"\n  },\n  {\n    \"name\": \"Bin\",\n    \"iconClass\": \"fa-regular fa-trash-can\"\n  },\n  {\n    \"name\": \"Bootstrap\",\n    \"iconClass\": \"fa-brands fa-bootstrap\"\n  },\n  {\n    \"name\": \"Bullet\",\n    \"iconClass\": \"fa-regular fa-circle-small\"\n  },\n  {\n    \"name\": \"Bullet-solid\",\n    \"iconClass\": \"fa-solid fa-circle-small\"\n  },\n  {\n    \"name\": \"Calculator\",\n    \"iconClass\": \"fa-regular fa-calculator\"\n  },\n  {\n    \"name\": \"Calendar\",\n    \"iconClass\": \"fa-regular fa-calendar-day\"\n  },\n  {\n    \"name\": \"Car\",\n    \"iconClass\": \"fa-regular fa-car\"\n  },\n  {\n    \"name\": \"Car-windscreen\",\n    \"iconClass\": \"fa-regular fa-car-bolt\"\n  },\n  {\n    \"name\": \"Caret-down\",\n    \"iconClass\": \"fa-solid fa-caret-down\"\n  },\n  {\n    \"name\": \"Caret-left\",\n    \"iconClass\": \"fa-solid fa-caret-left\"\n  },\n  {\n    \"name\": \"Caret-right\",\n    \"iconClass\": \"fa-solid fa-caret-right\"\n  },\n  {\n    \"name\": \"Caret-up\",\n    \"iconClass\": \"fa-solid fa-caret-up\"\n  },\n  {\n    \"name\": \"Change\",\n    \"iconClass\": \"fa-regular fa-swap-arrows\"\n  },\n  {\n    \"name\": \"Check\",\n    \"iconClass\": \"fa-regular fa-check\"\n  },\n  {\n    \"name\": \"Chevron-down\",\n    \"iconClass\": \"fa-regular fa-chevron-down\"\n  },\n  {\n    \"name\": \"Chevron-left\",\n    \"iconClass\": \"fa-regular fa-chevron-left\"\n  },\n  {\n    \"name\": \"Chevron-right\",\n    \"iconClass\": \"fa-regular fa-chevron-right\"\n  },\n  {\n    \"name\": \"Chevron-up\",\n    \"iconClass\": \"fa-regular fa-chevron-up\"\n  },\n  {\n    \"name\": \"Circle\",\n    \"iconClass\": \"fa-regular fa-circle\"\n  },\n  {\n    \"name\": \"Circle-solid\",\n    \"iconClass\": \"fa-solid fa-circle\"\n  },\n  {\n    \"name\": \"Close\",\n    \"iconClass\": \"fa-regular fa-xmark\"\n  },\n  {\n    \"name\": \"Contract\",\n    \"iconClass\": \"fa-regular fa-arrow-left-from-line\"\n  },\n  {\n    \"name\": \"Copy\",\n    \"iconClass\": \"fa-regular fa-copy\"\n  },\n  {\n    \"name\": \"Credit-card\",\n    \"iconClass\": \"fa-regular fa-credit-card\"\n  },\n  {\n    \"name\": \"Document\",\n    \"iconClass\": \"fa-regular fa-file-lines\"\n  },\n  {\n    \"name\": \"Document-blank\",\n    \"iconClass\": \"fa-regular fa-file\"\n  },\n  {\n    \"name\": \"Document-pdf\",\n    \"iconClass\": \"fa-regular fa-file-pdf\"\n  },\n  {\n    \"name\": \"Download\",\n    \"iconClass\": \"fa-regular fa-arrow-down-to-bracket\"\n  },\n  {\n    \"name\": \"Drag-horizontal\",\n    \"iconClass\": \"fa-regular fa-grip-dots\"\n  },\n  {\n    \"name\": \"Drag-vertical\",\n    \"iconClass\": \"fa-regular fa-grip-dots-vertical\"\n  },\n  {\n    \"name\": \"Edit\",\n    \"iconClass\": \"fa-regular fa-pencil\"\n  },\n  {\n    \"name\": \"Email\",\n    \"iconClass\": \"fa-regular fa-envelope\"\n  },\n  {\n    \"name\": \"Error\",\n    \"iconClass\": \"fa-regular fa-circle-exclamation\"\n  },\n  {\n    \"name\": \"Error-solid\",\n    \"iconClass\": \"fa-solid fa-circle-exclamation\"\n  },\n  {\n    \"name\": \"Expand\",\n    \"iconClass\": \"fa-regular fa-arrow-right-from-line\"\n  },\n  {\n    \"name\": \"Export\",\n    \"iconClass\": \"fa-regular fa-file-export\"\n  },\n  {\n    \"name\": \"External-link\",\n    \"iconClass\": \"fa-regular fa-arrow-up-right-from-square\"\n  },\n  {\n    \"name\": \"Facebook\",\n    \"iconClass\": \"fa-brands fa-facebook\"\n  },\n  {\n    \"name\": \"Flag\",\n    \"iconClass\": \"fa-regular fa-flag\"\n  },\n  {\n    \"name\": \"Google\",\n    \"iconClass\": \"fa-brands fa-google\"\n  },\n  {\n    \"name\": \"Help\",\n    \"iconClass\": \"fa-regular fa-circle-question\"\n  },\n  {\n    \"name\": \"Help-solid\",\n    \"iconClass\": \"fa-solid fa-circle-question\"\n  },\n  {\n    \"name\": \"Home\",\n    \"iconClass\": \"fa-regular fa-house\"\n  },\n  {\n    \"name\": \"Import\",\n    \"iconClass\": \"fa-regular fa-file-import\"\n  },\n  {\n    \"name\": \"Info\",\n    \"iconClass\": \"fa-regular fa-circle-info\"\n  },\n  {\n    \"name\": \"Info-solid\",\n    \"iconClass\": \"fa-solid fa-circle-info\"\n  },\n  {\n    \"name\": \"Instagram\",\n    \"iconClass\": \"fa-brands fa-instagram\"\n  },\n  {\n    \"name\": \"Key\",\n    \"iconClass\": \"fa-regular fa-key\"\n  },\n  {\n    \"name\": \"Launch\",\n    \"iconClass\": \"fa-regular fa-rocket\"\n  },\n  {\n    \"name\": \"Launch-hover\",\n    \"iconClass\": \"fa-regular fa-rocket-launch\"\n  },\n  {\n    \"name\": \"Linkedin\",\n    \"iconClass\": \"fa-brands fa-linkedin\"\n  },\n  {\n    \"name\": \"List\",\n    \"iconClass\": \"fa-regular fa-list\"\n  },\n  {\n    \"name\": \"Location\",\n    \"iconClass\": \"fa-regular fa-location-dot\"\n  },\n  {\n    \"name\": \"Login\",\n    \"iconClass\": \"fa-regular fa-arrow-right-to-bracket\"\n  },\n  {\n    \"name\": \"Logout\",\n    \"iconClass\": \"fa-regular fa-arrow-right-from-bracket\"\n  },\n  {\n    \"name\": \"Menu\",\n    \"iconClass\": \"fa-regular fa-bars\"\n  },\n  {\n    \"name\": \"Minus\",\n    \"iconClass\": \"fa-regular fa-minus\"\n  },\n  {\n    \"name\": \"Misuse\",\n    \"iconClass\": \"fa-regular fa-circle-xmark\"\n  },\n  {\n    \"name\": \"Misuse-solid\",\n    \"iconClass\": \"fa-solid fa-circle-xmark\"\n  },\n  {\n    \"name\": \"Notification\",\n    \"iconClass\": \"fa-regular fa-bell\"\n  },\n  {\n    \"name\": \"Overflow-menu-horizontal\",\n    \"iconClass\": \"fa-regular fa-ellipsis\"\n  },\n  {\n    \"name\": \"Overflow-menu-vertical\",\n    \"iconClass\": \"fa-regular fa-ellipsis-vertical\"\n  },\n  {\n    \"name\": \"Password\",\n    \"iconClass\": \"fa-regular fa-lock-keyhole\"\n  },\n  {\n    \"name\": \"Pet\",\n    \"iconClass\": \"fa-regular fa-dog\"\n  },\n  {\n    \"name\": \"Phone\",\n    \"iconClass\": \"fa-regular fa-phone\"\n  },\n  {\n    \"name\": \"Plus\",\n    \"iconClass\": \"fa-regular fa-plus\"\n  },\n  {\n    \"name\": \"Pound\",\n    \"iconClass\": \"fa-regular fa-sterling-sign\"\n  },\n  {\n    \"name\": \"Product\",\n    \"iconClass\": \"fa-regular fa-box-open\"\n  },\n  {\n    \"name\": \"Recent\",\n    \"iconClass\": \"fa-regular fa-clock-rotate-left\"\n  },\n  {\n    \"name\": \"Redo\",\n    \"iconClass\": \"fa-regular fa-arrow-rotate-right\"\n  },\n  {\n    \"name\": \"Reg-plate\",\n    \"iconClass\": \"fa-regular fa-input-text\"\n  },\n  {\n    \"name\": \"Renew\",\n    \"iconClass\": \"fa-regular fa-arrows-rotate\"\n  },\n  {\n    \"name\": \"Save\",\n    \"iconClass\": \"fa-regular fa-floppy-disk\"\n  },\n  {\n    \"name\": \"Search\",\n    \"iconClass\": \"fa-regular fa-magnifying-glass\"\n  },\n  {\n    \"name\": \"Settings\",\n    \"iconClass\": \"fa-regular fa-gear\"\n  },\n  {\n    \"name\": \"Share\",\n    \"iconClass\": \"fa-regular fa-share-nodes\"\n  },\n  {\n    \"name\": \"Shield\",\n    \"iconClass\": \"fa-regular fa-shield\"\n  },\n  {\n    \"name\": \"Shield-check\",\n    \"iconClass\": \"fa-regular fa-shield-check\"\n  },\n  {\n    \"name\": \"Shield-cross\",\n    \"iconClass\": \"fa-regular fa-shield-xmark\"\n  },\n  {\n    \"name\": \"Shield-plus\",\n    \"iconClass\": \"fa-regular fa-shield-plus\"\n  },\n  {\n    \"name\": \"Sort\",\n    \"iconClass\": \"fa-solid fa-sort\"\n  },\n  {\n    \"name\": \"Sort-down\",\n    \"iconClass\": \"fa-solid fa-sort-down\"\n  },\n  {\n    \"name\": \"Sort-up\",\n    \"iconClass\": \"fa-solid fa-sort-up\"\n  },\n  {\n    \"name\": \"Success\",\n    \"iconClass\": \"fa-regular fa-circle-check\"\n  },\n  {\n    \"name\": \"Success-solid\",\n    \"iconClass\": \"fa-solid fa-circle-check\"\n  },\n  {\n    \"name\": \"Temporary\",\n    \"iconClass\": \"fa-regular fa-ghost\"\n  },\n  {\n    \"name\": \"Time\",\n    \"iconClass\": \"fa-regular fa-clock\"\n  },\n  {\n    \"name\": \"Tools\",\n    \"iconClass\": \"fa-regular fa-wrench\"\n  },\n  {\n    \"name\": \"Upload\",\n    \"iconClass\": \"fa-regular fa-arrow-up-from-bracket\"\n  },\n  {\n    \"name\": \"User\",\n    \"iconClass\": \"fa-regular fa-user\"\n  },\n  {\n    \"name\": \"User-group\",\n    \"iconClass\": \"fa-regular fa-users\"\n  },\n  {\n    \"name\": \"Users\",\n    \"iconClass\": \"fa-regular fa-user-group\"\n  },\n  {\n    \"name\": \"View\",\n    \"iconClass\": \"fa-regular fa-eye\"\n  },\n  {\n    \"name\": \"View-off\",\n    \"iconClass\": \"fa-regular fa-eye-slash\"\n  },\n  {\n    \"name\": \"Warning\",\n    \"iconClass\": \"fa-regular fa-triangle-exclamation\"\n  },\n  {\n    \"name\": \"Warning-solid\",\n    \"iconClass\": \"fa-solid fa-triangle-exclamation\"\n  },\n  {\n    \"name\": \"X-twitter\",\n    \"iconClass\": \"fa-brands fa-x-twitter\"\n  },\n  {\n    \"name\": \"Youtube\",\n    \"iconClass\": \"fa-brands fa-youtube\"\n  }\n] as const"
                 }
             ],
             "src/stories/button.stories - Copy.ts": [
@@ -816,6 +946,32 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "src/lib/alert/ds-alert.component.ts": [
+                {
+                    "name": "AlertVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                    "file": "src/lib/alert/ds-alert.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/icons/buckholt-icons.ts": [
+                {
+                    "name": "BuckholtIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/lib/icons/buckholt-icons.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 188
+                }
+            ],
             "src/lib/button/ds-button.component.ts": [
                 {
                     "name": "ButtonSize",
@@ -905,12 +1061,22 @@
                 "status": "low"
             },
             {
-                "filePath": "src/lib/button/ds-button-icon.directive.ts",
-                "type": "directive",
-                "linktype": "directive",
-                "name": "DsButtonIconDirective",
+                "filePath": "src/lib/alert/ds-alert.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsAlertComponent",
+                "coveragePercent": 22,
+                "coverageCount": "2/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/alert/ds-alert.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "AlertVariant",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -918,8 +1084,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "DsButtonComponent",
-                "coveragePercent": 14,
-                "coverageCount": "1/7",
+                "coveragePercent": 12,
+                "coverageCount": "1/8",
                 "status": "low"
             },
             {
@@ -948,6 +1114,36 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "ButtonVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/icons/buckholt-icons.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BUCKHOLT_ICON_OPTIONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/icons/buckholt-icons.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "BUCKHOLT_ICONS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/icons/buckholt-icons.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "BuckholtIcon",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

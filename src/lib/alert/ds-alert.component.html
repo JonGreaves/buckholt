@@ -1,0 +1,47 @@
+<div
+  [class]="classes"
+  role="alert"
+>
+  <div class="alert-content">
+
+    <!-- Optional Icon (must come before body) -->
+    <div class="alert-icon" *ngIf="iconClass">
+      <i [class]="iconClass"></i>
+    </div>
+
+    <div class="alert-body">
+
+      <!-- Required message -->
+      <div class="alert-message">
+        <h6>{{ message }}</h6>
+      </div>
+
+      <!-- Optional Note -->
+      <div
+        class="alert-note"
+        *ngIf="hasNote"
+      >
+        <p *ngIf="note">{{ note }}</p>
+        <p *ngIf="noteSmall">
+          <small>{{ noteSmall }}</small>
+        </p>
+      </div>
+
+      <!-- Optional Context Bar -->
+      <div class="alert-contextbar">
+        <ng-content select="[alert-context]"></ng-content>
+      </div>
+
+    </div>
+
+    <!-- Optional Close Button -->
+    <button
+      *ngIf="dismissible"
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="onDismiss()"
+    ></button>
+
+  </div>
+</div>

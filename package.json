@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "storybook": "ng run angular-latest:storybook",
     "build-storybook": "ng run angular-latest:build-storybook",
-    "deploy-storybook": "npm run build-storybook && gh-pages -d storybook-static"
+    "deploy-storybook": "npm run build-storybook && gh-pages -d storybook-static",
+    "update:icons": "node scripts/update-buckholt-icons.mjs"
   },
   "prettier": {
     "printWidth": 100,
