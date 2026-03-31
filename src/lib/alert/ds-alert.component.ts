@@ -24,10 +24,13 @@ export class DsAlertComponent {
   @Input() message!: string;
 
   /** Optional */
-  @Input() iconClass?: string;
   @Input() note?: string;
   @Input() noteSmall?: string;
+
+  /** Controls */
+  @Input() icon = false;
   @Input() dismissible = false;
+  @Input() hasContext = false;
 
   @Output() dismiss = new EventEmitter<void>();
 
@@ -39,8 +42,20 @@ export class DsAlertComponent {
     return !!(this.note || this.noteSmall);
   }
 
-  get hasContextBar(): boolean {
-    return false; // controlled via ng-content presence
+  /**
+   * Auto-map variant to correct Buckholt solid icon
+   */
+  get iconClass(): string {
+    switch (this.variant) {
+      case 'success':
+        return 'fa-solid fa-circle-check';
+      case 'warning':
+        return 'fa-solid fa-triangle-exclamation';
+      case 'error':
+        return 'fa-solid fa-circle-xmark';
+      default:
+        return 'fa-solid fa-circle-info';
+    }
   }
 
   onDismiss(): void {

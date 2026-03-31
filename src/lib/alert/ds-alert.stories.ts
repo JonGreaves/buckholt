@@ -1,22 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DsAlertComponent } from './ds-alert.component';
-import { BUCKHOLT_ICONS } from '../icons/buckholt-icons';
 
 type AlertStoryArgs = {
   variant: 'info' | 'success' | 'warning' | 'error';
   message: string;
   note?: string;
   noteSmall?: string;
-  iconClass?: string;
+  icon: boolean;
   dismissible: boolean;
+  hasContext: boolean;
 };
-
-const ICON_OPTIONS = ['(none)', ...BUCKHOLT_ICONS.map(i => i.name)];
-
-const ICON_MAPPING = Object.fromEntries([
-  ['(none)', ''],
-  ...BUCKHOLT_ICONS.map(i => [i.name, i.iconClass]),
-]);
 
 const meta: Meta<AlertStoryArgs> = {
   title: 'Buckholt/Alert',
@@ -31,13 +24,9 @@ const meta: Meta<AlertStoryArgs> = {
     message: { control: 'text' },
     note: { control: 'text' },
     noteSmall: { control: 'text' },
+    icon: { control: 'boolean' },
     dismissible: { control: 'boolean' },
-    iconClass: {
-      name: 'Icon',
-      control: { type: 'select' },
-      options: ICON_OPTIONS,
-      mapping: ICON_MAPPING,
-    },
+    hasContext: { control: 'boolean' },
   },
 
   parameters: {
@@ -58,41 +47,44 @@ export const Info: Story = {
     message: 'This is an informational alert.',
     note: '',
     noteSmall: '',
-    iconClass: '(none)',
+    icon: true,
     dismissible: false,
+    hasContext: false,
   },
 };
 
-export const WithNote: Story = {
+export const Success: Story = {
   args: {
     variant: 'success',
-    message: 'Changes saved successfully.',
-    note: 'Your settings have been updated.',
+    message: 'This is an success alert.',
+    note: '',
     noteSmall: '',
-    iconClass: '(none)',
+    icon: true,
     dismissible: false,
+    hasContext: false,
   },
 };
 
-export const WithSmallNote: Story = {
+export const Warning: Story = {
   args: {
     variant: 'warning',
-    message: 'Please review your inputs.',
-    note: '',
-    noteSmall: 'Fields marked * are required.',
-    iconClass: '(none)',
-    dismissible: false,
-  },
-};
-
-export const Dismissible: Story = {
-  args: {
-    variant: 'error',
-    message: 'Something went wrong.',
+    message: 'This is an warning alert.',
     note: '',
     noteSmall: '',
-    iconClass: '(none)',
-    dismissible: true,
+    icon: true,
+    dismissible: false,
+    hasContext: false,
   },
 };
 
+export const Error: Story = {
+  args: {
+    variant: 'error',
+    message: 'This is an error alert.',
+    note: '',
+    noteSmall: '',
+    icon: true,
+    dismissible: false,
+    hasContext: false,
+  },
+};

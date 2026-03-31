@@ -1,0 +1,19 @@
+<a
+  [href]="href"
+  [class]="classes"
+  [attr.target]="computedTarget"
+  [attr.rel]="computedRel"
+>
+  <!-- Standalone icon only (left) -->
+  <span
+    class="icon"
+    *ngIf="showIcon"
+  >
+    <i
+      [class]="iconClass"
+      aria-hidden="true"
+    ></i>
+  </span>
+
+  {{ text }}
+</a>
