@@ -1,0 +1,47 @@
+<div class="input" [class.disabled]="disabled">
+  <div class="input-label">
+    <label [for]="id" class="form-label">{{ label }}</label>
+    @if (showAssistiveText) {
+      <small class="form-helper">
+        {{ assistiveText }}
+      </small>
+    }
+  </div>
+
+  <div class="response check-input">
+    @for (item of items; track trackById($index, item)) {
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          [class.is-invalid]="invalid || !!item.invalid"
+          type="checkbox"
+          [id]="item.id"
+          [attr.name]="item.name || null"
+          [value]="item.value || ''"
+          [checked]="!!item.checked"
+          [disabled]="disabled || !!item.disabled"
+          [indeterminate]="!!item.indeterminate"
+          [required]="!!item.required"
+          [attr.readonly]="readonly || item.readonly ? '' : null"
+          (click)="onClick($event, item)"
+          (keydown)="onKeydown($event, item)"
+        />
+        <label class="form-check-label" [for]="item.id">
+          {{ item.label }}
+        </label>
+      </div>
+    }
+  </div>
+
+  @if (showHelperText) {
+    <small class="form-helper">
+      {{ helperText }}
+    </small>
+  }
+
+  @if (validationMessage) {
+    <div class="invalid-feedback">
+      {{ validationMessage }}
+    </div>
+  }
+</div>

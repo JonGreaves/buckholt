@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 
 const meta: Meta = {
-  title: 'Buckholt/Button (HTML)',
+  title: 'Example/Button (HTML)',
 };
 
 export default meta;

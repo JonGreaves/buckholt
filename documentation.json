@@ -2,6 +2,111 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "DsAccordionItem",
+            "id": "interface-DsAccordionItem-0a5537a79ca265f767c92a12346056abacafe01008522d8b95e9192578eb6c6338dcea9d281257f7abb8a539b91a2f0df80a14f034a2124b135f61ce5b8f7be1",
+            "file": "src/lib/accordion/ds-accordion.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport interface DsAccordionItem {\r\n  heading: string;\r\n  bodyHtml: string;\r\n  expanded?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  templateUrl: './ds-accordion.component.html',\r\n  styleUrl: './ds-accordion.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAccordionComponent {\r\n  @Input() items: DsAccordionItem[] = [];\r\n\r\n  @Input() size: 'medium' | 'large' = 'medium';\r\n\r\n  @Input() singleExpand = false;\r\n\r\n  @Input() accordionId = 'dsAccordion';\r\n\r\n  protected isExpanded(index: number): boolean {\r\n    return !!this.items[index]?.expanded;\r\n  }\r\n\r\n  protected getAccordionClasses(): string[] {\r\n    return this.size === 'large' ? ['accordion', 'accordion-lg'] : ['accordion'];\r\n  }\r\n\r\n  protected getCollapseId(index: number): string {\r\n    return `${this.accordionId}_item_${index + 1}`;\r\n  }\r\n\r\n  protected toggleItem(index: number): void {\r\n    const currentItem = this.items[index];\r\n\r\n    if (!currentItem) {\r\n      return;\r\n    }\r\n\r\n    if (this.singleExpand) {\r\n      this.items = this.items.map((item, itemIndex) => ({\r\n        ...item,\r\n        expanded: itemIndex === index ? !item.expanded : false,\r\n      }));\r\n      return;\r\n    }\r\n\r\n    this.items = this.items.map((item, itemIndex) =>\r\n      itemIndex === index\r\n        ? { ...item, expanded: !item.expanded }\r\n        : item\r\n    );\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "bodyHtml",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "expanded",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "heading",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsBreadcrumbItem",
+            "id": "interface-DsBreadcrumbItem-8e532b7e0511720500ce1ccaaf83582c1c68cc18670aaa41ec8c677cab622b5bc538c8082c2f14c8fe680d391430182cb901ac92a7760fe5f2714afee966942e",
+            "file": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport type DsBreadcrumbListTag = 'ol' | 'ul';\r\n\r\nexport interface DsBreadcrumbItem {\r\n  label: string;\r\n  href: string;\r\n}\r\n\r\nexport interface DsBreadcrumbOverflowItem {\r\n  label: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-breadcrumb',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-breadcrumb.component.html',\r\n  styleUrl: './ds-breadcrumb.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsBreadcrumbComponent {\r\n  @Input() items: DsBreadcrumbItem[] = [];\r\n  @Input() overflowItems: DsBreadcrumbOverflowItem[] = [];\r\n  @Input() currentLabel?: string;\r\n  @Input() includeCurrent = false;\r\n  @Input() listTag: DsBreadcrumbListTag = 'ol';\r\n  @Input() dividerIcon?: string;\r\n  @Input() menuPanelId = 'menu-panel-breadcrumb';\r\n  @Input() overflowTooltipTitle = 'Options';\r\n\r\n  @Output() overflowItemSelected = new EventEmitter<DsBreadcrumbOverflowItem>();\r\n\r\n  get hasOverflow(): boolean {\r\n    return this.overflowItems.length > 0;\r\n  }\r\n\r\n  get navStyle(): Record<string, string> | null {\r\n    if (!this.dividerIcon) {\r\n      return null;\r\n    }\r\n\r\n    return {\r\n      '--breadcrumb-divider-icon': `'${this.dividerIcon}'`,\r\n    };\r\n  }\r\n\r\n  onOverflowItemClick(item: DsBreadcrumbOverflowItem): void {\r\n    this.overflowItemSelected.emit(item);\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "href",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsBreadcrumbOverflowItem",
+            "id": "interface-DsBreadcrumbOverflowItem-8e532b7e0511720500ce1ccaaf83582c1c68cc18670aaa41ec8c677cab622b5bc538c8082c2f14c8fe680d391430182cb901ac92a7760fe5f2714afee966942e",
+            "file": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport type DsBreadcrumbListTag = 'ol' | 'ul';\r\n\r\nexport interface DsBreadcrumbItem {\r\n  label: string;\r\n  href: string;\r\n}\r\n\r\nexport interface DsBreadcrumbOverflowItem {\r\n  label: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-breadcrumb',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-breadcrumb.component.html',\r\n  styleUrl: './ds-breadcrumb.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsBreadcrumbComponent {\r\n  @Input() items: DsBreadcrumbItem[] = [];\r\n  @Input() overflowItems: DsBreadcrumbOverflowItem[] = [];\r\n  @Input() currentLabel?: string;\r\n  @Input() includeCurrent = false;\r\n  @Input() listTag: DsBreadcrumbListTag = 'ol';\r\n  @Input() dividerIcon?: string;\r\n  @Input() menuPanelId = 'menu-panel-breadcrumb';\r\n  @Input() overflowTooltipTitle = 'Options';\r\n\r\n  @Output() overflowItemSelected = new EventEmitter<DsBreadcrumbOverflowItem>();\r\n\r\n  get hasOverflow(): boolean {\r\n    return this.overflowItems.length > 0;\r\n  }\r\n\r\n  get navStyle(): Record<string, string> | null {\r\n    if (!this.dividerIcon) {\r\n      return null;\r\n    }\r\n\r\n    return {\r\n      '--breadcrumb-divider-icon': `'${this.dividerIcon}'`,\r\n    };\r\n  }\r\n\r\n  onOverflowItemClick(item: DsBreadcrumbOverflowItem): void {\r\n    this.overflowItemSelected.emit(item);\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 18
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -224,7 +329,7 @@
         },
         {
             "name": "DsAccordionComponent",
-            "id": "component-DsAccordionComponent-bdff1c55e5babe92205756e1125b40fc3e0f084501a1ddc473afd67f42023e1f607d9711ac3b2db4e1ac68e7564e9ee2adf0beff730520ed06dcdb0af8373f0f",
+            "id": "component-DsAccordionComponent-0a5537a79ca265f767c92a12346056abacafe01008522d8b95e9192578eb6c6338dcea9d281257f7abb8a539b91a2f0df80a14f034a2124b135f61ce5b8f7be1",
             "file": "src/lib/accordion/ds-accordion.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -233,9 +338,7 @@
             "outputs": [],
             "providers": [],
             "selector": "ds-accordion",
-            "styleUrls": [
-                "./ds-accordion.component.css"
-            ],
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
                 "./ds-accordion.component.html"
@@ -245,10 +348,10 @@
             "inputsClass": [
                 {
                     "name": "accordionId",
-                    "defaultValue": "'accordionExample'",
+                    "defaultValue": "'dsAccordion'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 22,
+                    "line": 23,
                     "type": "string",
                     "decorators": []
                 },
@@ -257,8 +360,8 @@
                     "defaultValue": "[]",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
-                    "type": "AccordionItem[]",
+                    "line": 17,
+                    "type": "DsAccordionItem[]",
                     "decorators": []
                 },
                 {
@@ -266,17 +369,17 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 24,
+                    "line": 21,
                     "type": "boolean",
                     "decorators": []
                 },
                 {
                     "name": "size",
-                    "defaultValue": "'md'",
+                    "defaultValue": "'medium'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 23,
-                    "type": "AccordionSize",
+                    "line": 19,
+                    "type": "\"medium\" | \"large\"",
                     "decorators": []
                 }
             ],
@@ -284,11 +387,59 @@
             "propertiesClass": [],
             "methodsClass": [
                 {
-                    "name": "itemExpanded",
+                    "name": "getAccordionClasses",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string[]",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ]
+                },
+                {
+                    "name": "getCollapseId",
                     "args": [
                         {
-                            "name": "item",
-                            "type": "AccordionItem",
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "isExpanded",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
                             "optional": false,
                             "dotDotDotToken": false,
                             "deprecated": false,
@@ -298,41 +449,12 @@
                     "optional": false,
                     "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 40,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "item",
-                            "type": "AccordionItem",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "panelId",
-                    "args": [
-                        {
-                            "name": "index",
-                            "type": "number",
-                            "optional": false,
-                            "dotDotDotToken": false,
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
+                    "modifierKind": [
+                        124
                     ],
-                    "optional": false,
-                    "returnType": "string",
-                    "typeParameters": [],
-                    "line": 32,
-                    "deprecated": false,
-                    "deprecationMessage": "",
                     "jsdoctags": [
                         {
                             "name": "index",
@@ -348,17 +470,7 @@
                     ]
                 },
                 {
-                    "name": "parentTarget",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "string",
-                    "typeParameters": [],
-                    "line": 44,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "targetId",
+                    "name": "toggleItem",
                     "args": [
                         {
                             "name": "index",
@@ -370,11 +482,14 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "string",
+                    "returnType": "void",
                     "typeParameters": [],
-                    "line": 36,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
                     "jsdoctags": [
                         {
                             "name": "index",
@@ -395,39 +510,17 @@
             "hostBindings": [],
             "hostListeners": [],
             "standalone": true,
-            "imports": [
-                {
-                    "name": "NgFor"
-                },
-                {
-                    "name": "NgIf"
-                }
-            ],
+            "imports": [],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { NgFor, NgIf } from '@angular/common';\r\n\r\nexport type AccordionSize = 'md' | 'lg';\r\n\r\nexport type AccordionItem = {\r\n  heading: string;\r\n  body: string;\r\n  subheading?: string;\r\n  expanded?: boolean;\r\n};\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  imports: [NgFor, NgIf],\r\n  templateUrl: './ds-accordion.component.html',\r\n  styleUrls: ['./ds-accordion.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAccordionComponent {\r\n  @Input() accordionId = 'accordionExample';\r\n  @Input() size: AccordionSize = 'md';\r\n  @Input() singleExpand = false;\r\n\r\n  @Input() items: AccordionItem[] = [];\r\n\r\n  get containerClasses(): string {\r\n    return this.size === 'lg' ? 'accordion accordion-lg' : 'accordion';\r\n  }\r\n\r\n  panelId(index: number): string {\r\n    return `${this.accordionId}_item_${index + 1}`;\r\n  }\r\n\r\n  targetId(index: number): string {\r\n    return `#${this.panelId(index)}`;\r\n  }\r\n\r\n  itemExpanded(item: AccordionItem): boolean {\r\n    return !!item.expanded;\r\n  }\r\n\r\n  parentTarget(): string {\r\n    return `#${this.accordionId}`;\r\n  }\r\n}",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport interface DsAccordionItem {\r\n  heading: string;\r\n  bodyHtml: string;\r\n  expanded?: boolean;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  templateUrl: './ds-accordion.component.html',\r\n  styleUrl: './ds-accordion.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAccordionComponent {\r\n  @Input() items: DsAccordionItem[] = [];\r\n\r\n  @Input() size: 'medium' | 'large' = 'medium';\r\n\r\n  @Input() singleExpand = false;\r\n\r\n  @Input() accordionId = 'dsAccordion';\r\n\r\n  protected isExpanded(index: number): boolean {\r\n    return !!this.items[index]?.expanded;\r\n  }\r\n\r\n  protected getAccordionClasses(): string[] {\r\n    return this.size === 'large' ? ['accordion', 'accordion-lg'] : ['accordion'];\r\n  }\r\n\r\n  protected getCollapseId(index: number): string {\r\n    return `${this.accordionId}_item_${index + 1}`;\r\n  }\r\n\r\n  protected toggleItem(index: number): void {\r\n    const currentItem = this.items[index];\r\n\r\n    if (!currentItem) {\r\n      return;\r\n    }\r\n\r\n    if (this.singleExpand) {\r\n      this.items = this.items.map((item, itemIndex) => ({\r\n        ...item,\r\n        expanded: itemIndex === index ? !item.expanded : false,\r\n      }));\r\n      return;\r\n    }\r\n\r\n    this.items = this.items.map((item, itemIndex) =>\r\n      itemIndex === index\r\n        ? { ...item, expanded: !item.expanded }\r\n        : item\r\n    );\r\n  }\r\n}",
+            "styleUrl": "./ds-accordion.component.css",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ":host { display: inline-block; }",
-                    "styleUrl": "./ds-accordion.component.css"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "accessors": {
-                "containerClasses": {
-                    "name": "containerClasses",
-                    "getSignature": {
-                        "name": "containerClasses",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 28
-                    }
-                }
-            },
-            "templateData": "<div\r\n  [class]=\"containerClasses\"\r\n  [id]=\"accordionId\"\r\n>\r\n  <div\r\n    class=\"accordion-item\"\r\n    *ngFor=\"let item of items; let i = index\"\r\n  >\r\n    <h2 class=\"accordion-header\">\r\n      <button\r\n        class=\"accordion-button\"\r\n        [class.collapsed]=\"!itemExpanded(item)\"\r\n        type=\"button\"\r\n        data-bs-toggle=\"collapse\"\r\n        [attr.data-bs-target]=\"targetId(i)\"\r\n        [attr.aria-expanded]=\"itemExpanded(item)\"\r\n        [attr.aria-controls]=\"panelId(i)\"\r\n      >\r\n        {{ item.heading }}\r\n      </button>\r\n    </h2>\r\n\r\n    <div\r\n      [id]=\"panelId(i)\"\r\n      class=\"accordion-collapse collapse\"\r\n      [class.show]=\"itemExpanded(item)\"\r\n      [attr.data-bs-parent]=\"singleExpand ? parentTarget() : null\"\r\n    >\r\n      <div class=\"accordion-body\">\r\n        <div class=\"text-block\">\r\n          <h6 *ngIf=\"item.subheading\">{{ item.subheading }}</h6>\r\n          <p>{{ item.body }}</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+            "templateData": "<div [class]=\"getAccordionClasses().join(' ')\" [id]=\"accordionId\">\r\n  @for (item of items; track $index) {\r\n    <div class=\"accordion-item\">\r\n      <h2 class=\"accordion-header\">\r\n        <button\r\n          [class]=\"isExpanded($index) ? 'accordion-button' : 'accordion-button collapsed'\"\r\n          type=\"button\"\r\n          data-bs-toggle=\"collapse\"\r\n          [attr.data-bs-target]=\"'#' + getCollapseId($index)\"\r\n          [attr.aria-expanded]=\"isExpanded($index)\"\r\n          [attr.aria-controls]=\"getCollapseId($index)\"\r\n          (click)=\"toggleItem($index)\">\r\n          {{ item.heading }}\r\n        </button>\r\n      </h2>\r\n\r\n      <div\r\n        [id]=\"getCollapseId($index)\"\r\n        [class]=\"isExpanded($index) ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'\"\r\n        [attr.data-bs-parent]=\"singleExpand ? '#' + accordionId : null\">\r\n        <div class=\"accordion-body\">\r\n          <div class=\"text-block\" [innerHTML]=\"item.bodyHtml\"></div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  }\r\n</div>"
         },
         {
             "name": "DsAlertComponent",
@@ -730,6 +823,183 @@
                 }
             },
             "templateData": "<div [ngClass]=\"hostClasses\">\r\n  @if (variant === 'icon') {\r\n    <div class=\"avatar-icon\">\r\n      <i [class]=\"iconClass\" aria-hidden=\"true\"></i>\r\n    </div>\r\n  }\r\n\r\n  @if (variant === 'initials') {\r\n    <div class=\"avatar-initials\">\r\n      {{ initials }}\r\n    </div>\r\n  }\r\n\r\n  @if (variant === 'image') {\r\n    <img\r\n      class=\"avatar-img\"\r\n      [src]=\"src\"\r\n      [alt]=\"alt\"\r\n    />\r\n  }\r\n</div>"
+        },
+        {
+            "name": "DsBreadcrumbComponent",
+            "id": "component-DsBreadcrumbComponent-8e532b7e0511720500ce1ccaaf83582c1c68cc18670aaa41ec8c677cab622b5bc538c8082c2f14c8fe680d391430182cb901ac92a7760fe5f2714afee966942e",
+            "file": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-breadcrumb",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-breadcrumb.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "currentLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "dividerIcon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "includeCurrent",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "DsBreadcrumbItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "listTag",
+                    "defaultValue": "'ol'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "DsBreadcrumbListTag",
+                    "decorators": []
+                },
+                {
+                    "name": "menuPanelId",
+                    "defaultValue": "'menu-panel-breadcrumb'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "overflowItems",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "DsBreadcrumbOverflowItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "overflowTooltipTitle",
+                    "defaultValue": "'Options'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "overflowItemSelected",
+                    "defaultValue": "new EventEmitter<DsBreadcrumbOverflowItem>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "onOverflowItemClick",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "DsBreadcrumbOverflowItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "DsBreadcrumbOverflowItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  EventEmitter,\r\n  Input,\r\n  Output,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport type DsBreadcrumbListTag = 'ol' | 'ul';\r\n\r\nexport interface DsBreadcrumbItem {\r\n  label: string;\r\n  href: string;\r\n}\r\n\r\nexport interface DsBreadcrumbOverflowItem {\r\n  label: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-breadcrumb',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-breadcrumb.component.html',\r\n  styleUrl: './ds-breadcrumb.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsBreadcrumbComponent {\r\n  @Input() items: DsBreadcrumbItem[] = [];\r\n  @Input() overflowItems: DsBreadcrumbOverflowItem[] = [];\r\n  @Input() currentLabel?: string;\r\n  @Input() includeCurrent = false;\r\n  @Input() listTag: DsBreadcrumbListTag = 'ol';\r\n  @Input() dividerIcon?: string;\r\n  @Input() menuPanelId = 'menu-panel-breadcrumb';\r\n  @Input() overflowTooltipTitle = 'Options';\r\n\r\n  @Output() overflowItemSelected = new EventEmitter<DsBreadcrumbOverflowItem>();\r\n\r\n  get hasOverflow(): boolean {\r\n    return this.overflowItems.length > 0;\r\n  }\r\n\r\n  get navStyle(): Record<string, string> | null {\r\n    if (!this.dividerIcon) {\r\n      return null;\r\n    }\r\n\r\n    return {\r\n      '--breadcrumb-divider-icon': `'${this.dividerIcon}'`,\r\n    };\r\n  }\r\n\r\n  onOverflowItemClick(item: DsBreadcrumbOverflowItem): void {\r\n    this.overflowItemSelected.emit(item);\r\n  }\r\n}",
+            "styleUrl": "./ds-breadcrumb.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hasOverflow": {
+                    "name": "hasOverflow",
+                    "getSignature": {
+                        "name": "hasOverflow",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 41
+                    }
+                },
+                "navStyle": {
+                    "name": "navStyle",
+                    "getSignature": {
+                        "name": "navStyle",
+                        "type": "unknown",
+                        "returnType": "Record | null",
+                        "line": 45
+                    }
+                }
+            },
+            "templateData": "<nav aria-label=\"breadcrumb\" [ngStyle]=\"navStyle\">\r\n  @switch (listTag) {\r\n    @case ('ul') {\r\n      <ul class=\"breadcrumb\">\r\n        @for (item of items; track item.href + '-' + item.label) {\r\n          <li class=\"breadcrumb-item\">\r\n            <a class=\"breadcrumb-link\" [href]=\"item.href\">{{ item.label }}</a>\r\n          </li>\r\n        }\r\n\r\n        @if (hasOverflow) {\r\n          <li\r\n            class=\"breadcrumb-item menu\"\r\n            data-bs-toggle=\"tooltip\"\r\n            [attr.data-bs-title]=\"overflowTooltipTitle\"\r\n          >\r\n            <a\r\n              class=\"breadcrumb-link menu-toggle\"\r\n              href=\"#\"\r\n              data-bs-toggle=\"dropdown\"\r\n              aria-expanded=\"false\"\r\n              [attr.aria-controls]=\"menuPanelId\"\r\n              (click)=\"$event.preventDefault()\"\r\n            >\r\n              …\r\n            </a>\r\n\r\n            <div class=\"menu-panel dropdown-menu\" [id]=\"menuPanelId\">\r\n              <ul class=\"menu-body\" role=\"menu\">\r\n                @for (overflowItem of overflowItems; track overflowItem.label) {\r\n                  <li>\r\n                    <button\r\n                      class=\"menu-item\"\r\n                      type=\"button\"\r\n                      (click)=\"onOverflowItemClick(overflowItem)\"\r\n                    >\r\n                      {{ overflowItem.label }}\r\n                    </button>\r\n                  </li>\r\n                }\r\n              </ul>\r\n            </div>\r\n          </li>\r\n        }\r\n\r\n        @if (includeCurrent && currentLabel) {\r\n          <li class=\"breadcrumb-item active\" aria-current=\"page\">\r\n            {{ currentLabel }}\r\n          </li>\r\n        }\r\n      </ul>\r\n    }\r\n\r\n    @default {\r\n      <ol class=\"breadcrumb\">\r\n        @for (item of items; track item.href + '-' + item.label) {\r\n          <li class=\"breadcrumb-item\">\r\n            <a class=\"breadcrumb-link\" [href]=\"item.href\">{{ item.label }}</a>\r\n          </li>\r\n        }\r\n\r\n        @if (hasOverflow) {\r\n          <li\r\n            class=\"breadcrumb-item menu\"\r\n            data-bs-toggle=\"tooltip\"\r\n            [attr.data-bs-title]=\"overflowTooltipTitle\"\r\n          >\r\n            <a\r\n              class=\"breadcrumb-link menu-toggle\"\r\n              href=\"#\"\r\n              data-bs-toggle=\"dropdown\"\r\n              aria-expanded=\"false\"\r\n              [attr.aria-controls]=\"menuPanelId\"\r\n              (click)=\"$event.preventDefault()\"\r\n            >\r\n              …\r\n            </a>\r\n\r\n            <div class=\"menu-panel dropdown-menu\" [id]=\"menuPanelId\">\r\n              <ul class=\"menu-body\" role=\"menu\">\r\n                @for (overflowItem of overflowItems; track overflowItem.label) {\r\n                  <li>\r\n                    <button\r\n                      class=\"menu-item\"\r\n                      type=\"button\"\r\n                      (click)=\"onOverflowItemClick(overflowItem)\"\r\n                    >\r\n                      {{ overflowItem.label }}\r\n                    </button>\r\n                  </li>\r\n                }\r\n              </ul>\r\n            </div>\r\n          </li>\r\n        }\r\n\r\n        @if (includeCurrent && currentLabel) {\r\n          <li class=\"breadcrumb-item active\" aria-current=\"page\">\r\n            {{ currentLabel }}\r\n          </li>\r\n        }\r\n      </ol>\r\n    }\r\n  }\r\n</nav>"
         },
         {
             "name": "DsButtonComponent",
@@ -1471,28 +1741,6 @@
         "functions": [],
         "typealiases": [
             {
-                "name": "AccordionItem",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "literal type",
-                "file": "src/lib/accordion/ds-accordion.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 188
-            },
-            {
-                "name": "AccordionSize",
-                "ctype": "miscellaneous",
-                "subtype": "typealias",
-                "rawtype": "\"md\" | \"lg\"",
-                "file": "src/lib/accordion/ds-accordion.component.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "kind": 193
-            },
-            {
                 "name": "AlertVariant",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -1625,6 +1873,17 @@
                 "kind": 193
             },
             {
+                "name": "DsBreadcrumbListTag",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"ol\" | \"ul\"",
+                "file": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "LinkType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -1751,30 +2010,6 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "src/lib/accordion/ds-accordion.component.ts": [
-                {
-                    "name": "AccordionItem",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "literal type",
-                    "file": "src/lib/accordion/ds-accordion.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 188
-                },
-                {
-                    "name": "AccordionSize",
-                    "ctype": "miscellaneous",
-                    "subtype": "typealias",
-                    "rawtype": "\"md\" | \"lg\"",
-                    "file": "src/lib/accordion/ds-accordion.component.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "kind": 193
-                }
-            ],
             "src/lib/alert/ds-alert.component.ts": [
                 {
                     "name": "AlertVariant",
@@ -1917,6 +2152,19 @@
                     "kind": 193
                 }
             ],
+            "src/lib/breadcrumb/ds-breadcrumb.component.ts": [
+                {
+                    "name": "DsBreadcrumbListTag",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"ol\" | \"ul\"",
+                    "file": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/link/ds-link.component.ts": [
                 {
                     "name": "LinkType",
@@ -1951,7 +2199,7 @@
         "children": []
     },
     "coverage": {
-        "count": 5,
+        "count": 4,
         "status": "low",
         "files": [
             {
@@ -1994,22 +2242,11 @@
             },
             {
                 "filePath": "src/lib/accordion/ds-accordion.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "AccordionItem",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsAccordionItem",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/lib/accordion/ds-accordion.component.ts",
-                "type": "type alias",
-                "linktype": "miscellaneous",
-                "linksubtype": "typealias",
-                "name": "AccordionSize",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {
@@ -2066,6 +2303,43 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "DsAvatarVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsBreadcrumbComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/11",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsBreadcrumbItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsBreadcrumbOverflowItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/breadcrumb/ds-breadcrumb.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsBreadcrumbListTag",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

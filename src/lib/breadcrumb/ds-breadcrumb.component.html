@@ -1,0 +1,105 @@
+<nav aria-label="breadcrumb" [ngStyle]="navStyle">
+  @switch (listTag) {
+    @case ('ul') {
+      <ul class="breadcrumb">
+        @for (item of items; track item.href + '-' + item.label) {
+          <li class="breadcrumb-item">
+            <a class="breadcrumb-link" [href]="item.href">{{ item.label }}</a>
+          </li>
+        }
+
+        @if (hasOverflow) {
+          <li
+            class="breadcrumb-item menu"
+            data-bs-toggle="tooltip"
+            [attr.data-bs-title]="overflowTooltipTitle"
+          >
+            <a
+              class="breadcrumb-link menu-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [attr.aria-controls]="menuPanelId"
+              (click)="$event.preventDefault()"
+            >
+              …
+            </a>
+
+            <div class="menu-panel dropdown-menu" [id]="menuPanelId">
+              <ul class="menu-body" role="menu">
+                @for (overflowItem of overflowItems; track overflowItem.label) {
+                  <li>
+                    <button
+                      class="menu-item"
+                      type="button"
+                      (click)="onOverflowItemClick(overflowItem)"
+                    >
+                      {{ overflowItem.label }}
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          </li>
+        }
+
+        @if (includeCurrent && currentLabel) {
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ currentLabel }}
+          </li>
+        }
+      </ul>
+    }
+
+    @default {
+      <ol class="breadcrumb">
+        @for (item of items; track item.href + '-' + item.label) {
+          <li class="breadcrumb-item">
+            <a class="breadcrumb-link" [href]="item.href">{{ item.label }}</a>
+          </li>
+        }
+
+        @if (hasOverflow) {
+          <li
+            class="breadcrumb-item menu"
+            data-bs-toggle="tooltip"
+            [attr.data-bs-title]="overflowTooltipTitle"
+          >
+            <a
+              class="breadcrumb-link menu-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [attr.aria-controls]="menuPanelId"
+              (click)="$event.preventDefault()"
+            >
+              …
+            </a>
+
+            <div class="menu-panel dropdown-menu" [id]="menuPanelId">
+              <ul class="menu-body" role="menu">
+                @for (overflowItem of overflowItems; track overflowItem.label) {
+                  <li>
+                    <button
+                      class="menu-item"
+                      type="button"
+                      (click)="onOverflowItemClick(overflowItem)"
+                    >
+                      {{ overflowItem.label }}
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          </li>
+        }
+
+        @if (includeCurrent && currentLabel) {
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ currentLabel }}
+          </li>
+        }
+      </ol>
+    }
+  }
+</nav>
