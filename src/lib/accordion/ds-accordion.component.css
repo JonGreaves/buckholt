@@ -1,1 +1,7 @@
 :host { display: inline-block; }
+
+#story--buckholt-accordion--default--primary-inner story--buckholt-accordion--default--primary-inner,
+#story--buckholt-accordion--default--primary-inner ds-accordion {
+    display: block;
+    width: 100%;
+}

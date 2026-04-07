@@ -1,47 +1,58 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
 
-export type AccordionSize = 'md' | 'lg';
-
-export type AccordionItem = {
+export interface DsAccordionItem {
   heading: string;
-  body: string;
-  subheading?: string;
+  bodyHtml: string;
   expanded?: boolean;
-};
+}
 
 @Component({
   selector: 'ds-accordion',
   standalone: true,
-  imports: [NgFor, NgIf],
   templateUrl: './ds-accordion.component.html',
-  styleUrls: ['./ds-accordion.component.css'],
+  styleUrl: './ds-accordion.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsAccordionComponent {
-  @Input() accordionId = 'accordionExample';
-  @Input() size: AccordionSize = 'md';
+  @Input() items: DsAccordionItem[] = [];
+
+  @Input() size: 'medium' | 'large' = 'medium';
+
   @Input() singleExpand = false;
 
-  @Input() items: AccordionItem[] = [];
+  @Input() accordionId = 'dsAccordion';
 
-  get containerClasses(): string {
-    return this.size === 'lg' ? 'accordion accordion-lg' : 'accordion';
+  protected isExpanded(index: number): boolean {
+    return !!this.items[index]?.expanded;
   }
 
-  panelId(index: number): string {
+  protected getAccordionClasses(): string[] {
+    return this.size === 'large' ? ['accordion', 'accordion-lg'] : ['accordion'];
+  }
+
+  protected getCollapseId(index: number): string {
     return `${this.accordionId}_item_${index + 1}`;
   }
 
-  targetId(index: number): string {
-    return `#${this.panelId(index)}`;
-  }
+  protected toggleItem(index: number): void {
+    const currentItem = this.items[index];
 
-  itemExpanded(item: AccordionItem): boolean {
-    return !!item.expanded;
-  }
+    if (!currentItem) {
+      return;
+    }
 
-  parentTarget(): string {
-    return `#${this.accordionId}`;
+    if (this.singleExpand) {
+      this.items = this.items.map((item, itemIndex) => ({
+        ...item,
+        expanded: itemIndex === index ? !item.expanded : false,
+      }));
+      return;
+    }
+
+    this.items = this.items.map((item, itemIndex) =>
+      itemIndex === index
+        ? { ...item, expanded: !item.expanded }
+        : item
+    );
   }
 }

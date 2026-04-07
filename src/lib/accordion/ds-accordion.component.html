@@ -1,37 +1,27 @@
-<div
-  [class]="containerClasses"
-  [id]="accordionId"
->
-  <div
-    class="accordion-item"
-    *ngFor="let item of items; let i = index"
-  >
-    <h2 class="accordion-header">
-      <button
-        class="accordion-button"
-        [class.collapsed]="!itemExpanded(item)"
-        type="button"
-        data-bs-toggle="collapse"
-        [attr.data-bs-target]="targetId(i)"
-        [attr.aria-expanded]="itemExpanded(item)"
-        [attr.aria-controls]="panelId(i)"
-      >
-        {{ item.heading }}
-      </button>
-    </h2>
+<div [class]="getAccordionClasses().join(' ')" [id]="accordionId">
+  @for (item of items; track $index) {
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          [class]="isExpanded($index) ? 'accordion-button' : 'accordion-button collapsed'"
+          type="button"
+          data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#' + getCollapseId($index)"
+          [attr.aria-expanded]="isExpanded($index)"
+          [attr.aria-controls]="getCollapseId($index)"
+          (click)="toggleItem($index)">
+          {{ item.heading }}
+        </button>
+      </h2>
 
-    <div
-      [id]="panelId(i)"
-      class="accordion-collapse collapse"
-      [class.show]="itemExpanded(item)"
-      [attr.data-bs-parent]="singleExpand ? parentTarget() : null"
-    >
-      <div class="accordion-body">
-        <div class="text-block">
-          <h6 *ngIf="item.subheading">{{ item.subheading }}</h6>
-          <p>{{ item.body }}</p>
+      <div
+        [id]="getCollapseId($index)"
+        [class]="isExpanded($index) ? 'accordion-collapse collapse show' : 'accordion-collapse collapse'"
+        [attr.data-bs-parent]="singleExpand ? '#' + accordionId : null">
+        <div class="accordion-body">
+          <div class="text-block" [innerHTML]="item.bodyHtml"></div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </div>
