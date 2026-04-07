@@ -1,0 +1,32 @@
+<div class="collapse-item">
+  <a
+    class="collapse-trigger"
+    data-bs-toggle="collapse"
+    [attr.href]="targetSelector"
+    role="button"
+    [attr.aria-expanded]="ariaExpanded"
+    [attr.aria-controls]="id"
+  >
+    {{ trigger }}
+  </a>
+
+  <div
+    class="collapse-card collapse"
+    [class.show]="expanded"
+    [id]="id"
+  >
+    <div class="collapse-content">
+      <ng-content />
+    </div>
+
+    @if (showCloseButton) {
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-toggle="collapse"
+        [attr.href]="targetSelector"
+        [attr.aria-label]="closeAriaLabel"
+      ></button>
+    }
+  </div>
+</div>
