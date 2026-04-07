@@ -7,15 +7,13 @@
 
   <!-- Optional image -->
   <img
-    *ngIf="imgSrc"
+    *ngIf="hasImage"
     [src]="imgSrc"
     class="card-img"
-    [alt]="imgAlt || ''"
+    [alt]="imgAlt"
   />
 
-  <div class="card-body">
-    <ng-content></ng-content>
-  </div>
+  <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
 
 </a>
 
@@ -30,22 +28,26 @@
       class="form-check-input"
       [type]="inputType"
       [name]="name"
-      [value]="value"
+      [id]="inputId"
+      [value]="inputValue"
       [checked]="checked"
     />
 
     <!-- Optional image -->
     <img
-      *ngIf="imgSrc"
+      *ngIf="hasImage"
       [src]="imgSrc"
       class="card-img"
-      [alt]="imgAlt || ''"
+      [alt]="imgAlt"
     />
 
-    <div class="card-body">
-      <ng-content></ng-content>
-    </div>
+    <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
 
   </div>
+</ng-template>
 
+<ng-template #cardBody>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
 </ng-template>

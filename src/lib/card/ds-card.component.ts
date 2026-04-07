@@ -3,36 +3,42 @@ import {
   Component,
   Input,
 } from '@angular/core';
-import { NgIf } from '@angular/common';
+import {
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
 
-type CardLayout = 'default' | 'horizontal' | 'horizontal-right';
-type CardSize = 'default' | 'lg';
 type CardVariant =
-  | 'default'
+  | 'base'
   | 'clickable'
   | 'selectable-radio'
   | 'selectable-checkbox';
+type CardStyle = 'default' | 'secondary';
+type CardSize = 'default' | 'large';
+type CardImagePosition = 'none' | 'top' | 'left' | 'right';
 
 @Component({
   selector: 'ds-card',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, NgTemplateOutlet],
   templateUrl: './ds-card.component.html',
   styleUrls: ['./ds-card.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsCardComponent {
-  @Input() layout: CardLayout = 'default';
+  @Input() variant: CardVariant = 'base';
+  @Input() style: CardStyle = 'default';
   @Input() size: CardSize = 'default';
-  @Input() variant: CardVariant = 'default';
+  @Input() imagePosition: CardImagePosition = 'none';
 
-  @Input() href?: string;
+  @Input() href = '#';
 
   @Input() imgSrc?: string;
-  @Input() imgAlt?: string;
+  @Input() imgAlt = '';
 
   @Input() name?: string;
-  @Input() value?: string;
+  @Input() inputId?: string;
+  @Input() inputValue = '';
   @Input() checked = false;
 
   get isClickable(): boolean {
@@ -55,19 +61,7 @@ export class DsCardComponent {
   get classes(): string {
     const classes = ['card'];
 
-    if (this.size === 'lg') {
-      classes.push('card-lg');
-    }
-
-    if (this.layout === 'horizontal') {
-      classes.push('card-horizontal');
-    }
-
-    if (this.layout === 'horizontal-right') {
-      classes.push('card-horizontal', 'card-horizontal-right');
-    }
-
-    if (this.variant === 'clickable') {
+    if (this.isClickable) {
       classes.push('card-clickable');
     }
 
@@ -75,6 +69,26 @@ export class DsCardComponent {
       classes.push('card-selectable');
     }
 
+    if (this.style === 'secondary') {
+      classes.push('card-secondary');
+    }
+
+    if (this.size === 'large') {
+      classes.push('card-lg');
+    }
+
+    if (this.imagePosition === 'left') {
+      classes.push('card-horizontal');
+    }
+
+    if (this.imagePosition === 'right') {
+      classes.push('card-horizontal', 'card-horizontal-right');
+    }
+
     return classes.join(' ');
+  }
+
+  get hasImage(): boolean {
+    return this.imagePosition !== 'none' && !!this.imgSrc;
   }
 }

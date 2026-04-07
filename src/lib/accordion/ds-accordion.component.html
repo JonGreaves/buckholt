@@ -1,0 +1,37 @@
+<div
+  [class]="containerClasses"
+  [id]="accordionId"
+>
+  <div
+    class="accordion-item"
+    *ngFor="let item of items; let i = index"
+  >
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button"
+        [class.collapsed]="!itemExpanded(item)"
+        type="button"
+        data-bs-toggle="collapse"
+        [attr.data-bs-target]="targetId(i)"
+        [attr.aria-expanded]="itemExpanded(item)"
+        [attr.aria-controls]="panelId(i)"
+      >
+        {{ item.heading }}
+      </button>
+    </h2>
+
+    <div
+      [id]="panelId(i)"
+      class="accordion-collapse collapse"
+      [class.show]="itemExpanded(item)"
+      [attr.data-bs-parent]="singleExpand ? parentTarget() : null"
+    >
+      <div class="accordion-body">
+        <div class="text-block">
+          <h6 *ngIf="item.subheading">{{ item.subheading }}</h6>
+          <p>{{ item.body }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

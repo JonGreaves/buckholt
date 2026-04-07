@@ -1,0 +1,21 @@
+<div [ngClass]="hostClasses">
+  @if (variant === 'icon') {
+    <div class="avatar-icon">
+      <i [class]="iconClass" aria-hidden="true"></i>
+    </div>
+  }
+
+  @if (variant === 'initials') {
+    <div class="avatar-initials">
+      {{ initials }}
+    </div>
+  }
+
+  @if (variant === 'image') {
+    <img
+      class="avatar-img"
+      [src]="src"
+      [alt]="alt"
+    />
+  }
+</div>

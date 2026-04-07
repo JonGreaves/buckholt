@@ -1,20 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DsCardComponent } from './ds-card.component';
-import { DsLinkComponent } from '../link/ds-link.component';
 
 type CardStoryArgs = {
-  layout: 'default' | 'horizontal' | 'horizontal-right';
-  size: 'default' | 'lg';
-  variant:
-    | 'default'
-    | 'clickable'
-    | 'selectable-radio'
-    | 'selectable-checkbox';
-  imgSrc?: string;
-  imgAlt?: string;
-  href?: string;
-  name?: string;
-  value?: string;
+  variant: 'base' | 'clickable' | 'selectable-radio' | 'selectable-checkbox';
+  style: 'default' | 'secondary';
+  size: 'default' | 'large';
+  imagePosition: 'none' | 'top' | 'left' | 'right';
+  href: string;
+  imgSrc: string;
+  imgAlt: string;
+  name: string;
+  inputId: string;
+  inputValue: string;
   checked: boolean;
 };
 
@@ -22,33 +19,44 @@ const meta: Meta<CardStoryArgs> = {
   title: 'Buckholt/Card',
   component: DsCardComponent,
   tags: ['autodocs'],
-
+  args: {
+    variant: 'base',
+    style: 'default',
+    size: 'default',
+    imagePosition: 'none',
+    href: '#',
+    imgSrc: '',
+    imgAlt: '',
+    name: 'selectable',
+    inputId: 'card-selectable',
+    inputValue: '',
+    checked: false,
+  },
   argTypes: {
-    layout: {
-      control: 'radio',
-      options: ['default', 'horizontal', 'horizontal-right'],
-    },
-    size: {
-      control: 'radio',
-      options: ['default', 'lg'],
-    },
     variant: {
       control: 'select',
-      options: [
-        'default',
-        'clickable',
-        'selectable-radio',
-        'selectable-checkbox',
-      ],
+      options: ['base', 'clickable', 'selectable-radio', 'selectable-checkbox'],
     },
+    style: {
+      control: 'select',
+      options: ['default', 'secondary'],
+    },
+    size: {
+      control: 'select',
+      options: ['default', 'large'],
+    },
+    imagePosition: {
+      control: 'select',
+      options: ['none', 'top', 'left', 'right'],
+    },
+    href: { control: 'text' },
     imgSrc: { control: 'text' },
     imgAlt: { control: 'text' },
-    href: { control: 'text' },
     name: { control: 'text' },
-    value: { control: 'text' },
+    inputId: { control: 'text' },
+    inputValue: { control: 'text' },
     checked: { control: 'boolean' },
   },
-
   parameters: {
     docs: {
       source: {
@@ -61,115 +69,59 @@ const meta: Meta<CardStoryArgs> = {
 export default meta;
 type Story = StoryObj<CardStoryArgs>;
 
-
-const renderCard = (args: CardStoryArgs) => ({
-  props: args,
-  imports: [DsCardComponent, DsLinkComponent],
-  template: `
-    <ds-card
-      [layout]="layout"
-      [size]="size"
-      [variant]="variant"
-      [imgSrc]="imgSrc"
-      [imgAlt]="imgAlt"
-      [href]="href"
-      [name]="name"
-      [value]="value"
-      [checked]="checked"
-    >
-
-      <div class="text-block">
-        <h4 class="title-03">Card title</h4>
-        <p>
-          This is an example of Buckholt card content.
-          It follows the documented structure.
-        </p>
-      </div>
-
-      <ds-link
-        type="inline"
-        href="#"
-        text="Learn more"
-      ></ds-link>
-
-    </ds-card>
-  `,
-});
-
-
-export const Default: Story = {
-  render: renderCard,
-  args: {
-    layout: 'default',
-    size: 'default',
-    variant: 'default',
-    imgSrc: '',
-    imgAlt: '',
-    href: '#',
-    name: 'example',
-    value: '1',
-    checked: false,
-  },
-};
-
-export const Large: Story = {
-  render: renderCard,
-  args: {
-    ...Default.args,
-    size: 'lg',
-  },
-};
-
-export const WithImage: Story = {
-  render: renderCard,
-  args: {
-    ...Default.args,
-    imgSrc: 'https://via.placeholder.com/600x300',
-    imgAlt: 'Example image',
-  },
-};
-
-export const Horizontal: Story = {
-  render: renderCard,
-  args: {
-    ...WithImage.args,
-    layout: 'horizontal',
-  },
-};
-
-export const HorizontalRight: Story = {
-  render: renderCard,
-  args: {
-    ...WithImage.args,
-    layout: 'horizontal-right',
-  },
-};
+export const Base: Story = {};
 
 export const Clickable: Story = {
-  render: renderCard,
   args: {
-    ...Default.args,
     variant: 'clickable',
-    href: '#',
   },
 };
 
 export const SelectableRadio: Story = {
-  render: renderCard,
   args: {
-    ...Default.args,
     variant: 'selectable-radio',
-    name: 'selectable',
-    value: 'card-1',
+    name: 'selectable-group',
   },
 };
 
 export const SelectableCheckbox: Story = {
-  render: renderCard,
   args: {
-    ...Default.args,
     variant: 'selectable-checkbox',
-    name: 'selectable',
-    value: 'card-1',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    style: 'secondary',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'large',
+  },
+};
+
+export const ImageTop: Story = {
+  args: {
+    imagePosition: 'top',
+    imgSrc: 'https://picsum.photos/640/360',
+    imgAlt: 'Card image',
+  },
+};
+
+export const ImageLeft: Story = {
+  args: {
+    imagePosition: 'left',
+    imgSrc: 'https://picsum.photos/640/360',
+    imgAlt: 'Card image',
+  },
+};
+
+export const ImageRight: Story = {
+  args: {
+    imagePosition: 'right',
+    imgSrc: 'https://picsum.photos/640/360',
+    imgAlt: 'Card image',
   },
 };

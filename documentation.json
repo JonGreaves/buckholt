@@ -223,6 +223,213 @@
             }
         },
         {
+            "name": "DsAccordionComponent",
+            "id": "component-DsAccordionComponent-bdff1c55e5babe92205756e1125b40fc3e0f084501a1ddc473afd67f42023e1f607d9711ac3b2db4e1ac68e7564e9ee2adf0beff730520ed06dcdb0af8373f0f",
+            "file": "src/lib/accordion/ds-accordion.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-accordion",
+            "styleUrls": [
+                "./ds-accordion.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-accordion.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "accordionId",
+                    "defaultValue": "'accordionExample'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "AccordionItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "singleExpand",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "AccordionSize",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "itemExpanded",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "AccordionItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "AccordionItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "panelId",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "parentTarget",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "targetId",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgFor"
+                },
+                {
+                    "name": "NgIf"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { NgFor, NgIf } from '@angular/common';\r\n\r\nexport type AccordionSize = 'md' | 'lg';\r\n\r\nexport type AccordionItem = {\r\n  heading: string;\r\n  body: string;\r\n  subheading?: string;\r\n  expanded?: boolean;\r\n};\r\n\r\n@Component({\r\n  selector: 'ds-accordion',\r\n  standalone: true,\r\n  imports: [NgFor, NgIf],\r\n  templateUrl: './ds-accordion.component.html',\r\n  styleUrls: ['./ds-accordion.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAccordionComponent {\r\n  @Input() accordionId = 'accordionExample';\r\n  @Input() size: AccordionSize = 'md';\r\n  @Input() singleExpand = false;\r\n\r\n  @Input() items: AccordionItem[] = [];\r\n\r\n  get containerClasses(): string {\r\n    return this.size === 'lg' ? 'accordion accordion-lg' : 'accordion';\r\n  }\r\n\r\n  panelId(index: number): string {\r\n    return `${this.accordionId}_item_${index + 1}`;\r\n  }\r\n\r\n  targetId(index: number): string {\r\n    return `#${this.panelId(index)}`;\r\n  }\r\n\r\n  itemExpanded(item: AccordionItem): boolean {\r\n    return !!item.expanded;\r\n  }\r\n\r\n  parentTarget(): string {\r\n    return `#${this.accordionId}`;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-accordion.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "containerClasses": {
+                    "name": "containerClasses",
+                    "getSignature": {
+                        "name": "containerClasses",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 28
+                    }
+                }
+            },
+            "templateData": "<div\r\n  [class]=\"containerClasses\"\r\n  [id]=\"accordionId\"\r\n>\r\n  <div\r\n    class=\"accordion-item\"\r\n    *ngFor=\"let item of items; let i = index\"\r\n  >\r\n    <h2 class=\"accordion-header\">\r\n      <button\r\n        class=\"accordion-button\"\r\n        [class.collapsed]=\"!itemExpanded(item)\"\r\n        type=\"button\"\r\n        data-bs-toggle=\"collapse\"\r\n        [attr.data-bs-target]=\"targetId(i)\"\r\n        [attr.aria-expanded]=\"itemExpanded(item)\"\r\n        [attr.aria-controls]=\"panelId(i)\"\r\n      >\r\n        {{ item.heading }}\r\n      </button>\r\n    </h2>\r\n\r\n    <div\r\n      [id]=\"panelId(i)\"\r\n      class=\"accordion-collapse collapse\"\r\n      [class.show]=\"itemExpanded(item)\"\r\n      [attr.data-bs-parent]=\"singleExpand ? parentTarget() : null\"\r\n    >\r\n      <div class=\"accordion-body\">\r\n        <div class=\"text-block\">\r\n          <h6 *ngIf=\"item.subheading\">{{ item.subheading }}</h6>\r\n          <p>{{ item.body }}</p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+        },
+        {
             "name": "DsAlertComponent",
             "id": "component-DsAlertComponent-0bb90bf7c8fb83c6c33af692e35b904513e5e3a27054c4ced4f1d28b055f98716bd1d86413c562051962c278ce622beaac1156c88f6cf43724f91834b4ff5f04",
             "file": "src/lib/alert/ds-alert.component.ts",
@@ -390,6 +597,141 @@
             "templateData": "<div\r\n  [class]=\"classes\"\r\n  role=\"alert\"\r\n>\r\n  <div class=\"alert-content\">\r\n\r\n    <!-- Icon -->\r\n    <span\r\n      class=\"alert-icon\"\r\n      *ngIf=\"icon\"\r\n    >\r\n      <i\r\n        [class]=\"iconClass\"\r\n        aria-hidden=\"true\"\r\n      ></i>\r\n    </span>\r\n\r\n    <div class=\"alert-body\">\r\n\r\n      <div class=\"alert-message\">\r\n        <h6>{{ message }}</h6>\r\n      </div>\r\n\r\n      <!-- Alert Note -->\r\n      <div\r\n        class=\"alert-note\"\r\n        *ngIf=\"hasNote\"\r\n      >\r\n        {{ note }}\r\n\r\n        <p *ngIf=\"noteSmall\">\r\n          <small>{{ noteSmall }}</small>\r\n        </p>\r\n      </div>\r\n\r\n      <!-- Context bar -->\r\n      <div\r\n        class=\"alert-contextbar\"\r\n        *ngIf=\"hasContext\"\r\n      >\r\n        <ng-content select=\"[alert-context]\"></ng-content>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n    <!-- Close button -->\r\n    <button\r\n      *ngIf=\"dismissible\"\r\n      type=\"button\"\r\n      class=\"btn-close\"\r\n      data-bs-dismiss=\"alert\"\r\n      aria-label=\"Close\"\r\n      (click)=\"onDismiss()\"\r\n    ></button>\r\n\r\n</div>\r\n"
         },
         {
+            "name": "DsAvatarComponent",
+            "id": "component-DsAvatarComponent-f47d628b370a7f98e348965c15b6006e5f6570ed7c03b0edf1d32ff7cf343aefb97836531a4986107c37778b624b52cf03ab2ab9eaf854479d1fcadb301f8337",
+            "file": "src/lib/avatar/ds-avatar.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-avatar",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-avatar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "alt",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "expressiveDark",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nAdds `.expressive-dark` when true.\n",
+                    "description": "<p>Adds <code>.expressive-dark</code> when true.</p>\n",
+                    "line": 47,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "expressivePalette",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDefault expressive palette is represented by no extra palette class.\n",
+                    "description": "<p>Default expressive palette is represented by no extra palette class.</p>\n",
+                    "line": 42,
+                    "type": "DsAvatarExpressivePalette",
+                    "decorators": []
+                },
+                {
+                    "name": "iconClass",
+                    "defaultValue": "'fa-regular fa-user'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nBuckholt examples show Font Awesome icons inside `.avatar-icon`.\nDefault keeps parity with the documented base example.\n",
+                    "description": "<p>Buckholt examples show Font Awesome icons inside <code>.avatar-icon</code>.\nDefault keeps parity with the documented base example.</p>\n",
+                    "line": 28,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "initials",
+                    "defaultValue": "'MF'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nBuckholt documents up to two initials.\nThis component renders the provided value as-is.\n",
+                    "description": "<p>Buckholt documents up to two initials.\nThis component renders the provided value as-is.</p>\n",
+                    "line": 34,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "DsAvatarSize",
+                    "decorators": []
+                },
+                {
+                    "name": "src",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'icon'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "DsAvatarVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgClass"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { NgClass } from '@angular/common';\r\n\r\nexport type DsAvatarVariant = 'icon' | 'initials' | 'image';\r\nexport type DsAvatarSize = 'md' | 'sm' | 'xs';\r\nexport type DsAvatarExpressivePalette =\r\n  | 'default'\r\n  | 'secondary'\r\n  | 'tertiary'\r\n  | 'quaternary';\r\n\r\n@Component({\r\n  selector: 'ds-avatar',\r\n  standalone: true,\r\n  imports: [NgClass],\r\n  templateUrl: './ds-avatar.component.html',\r\n  styleUrl: './ds-avatar.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsAvatarComponent {\r\n  @Input() variant: DsAvatarVariant = 'icon';\r\n  @Input() size: DsAvatarSize = 'md';\r\n\r\n  /**\r\n   * Buckholt examples show Font Awesome icons inside `.avatar-icon`.\r\n   * Default keeps parity with the documented base example.\r\n   */\r\n  @Input() iconClass = 'fa-regular fa-user';\r\n\r\n  /**\r\n   * Buckholt documents up to two initials.\r\n   * This component renders the provided value as-is.\r\n   */\r\n  @Input() initials = 'MF';\r\n\r\n  @Input() src = '';\r\n  @Input() alt = '';\r\n\r\n  /**\r\n   * Default expressive palette is represented by no extra palette class.\r\n   */\r\n  @Input() expressivePalette: DsAvatarExpressivePalette = 'default';\r\n\r\n  /**\r\n   * Adds `.expressive-dark` when true.\r\n   */\r\n  @Input() expressiveDark = false;\r\n\r\n  get hostClasses(): string[] {\r\n    const classes = ['avatar'];\r\n\r\n    if (this.size === 'sm') {\r\n      classes.push('avatar-sm');\r\n    }\r\n\r\n    if (this.size === 'xs') {\r\n      classes.push('avatar-xs');\r\n    }\r\n\r\n    if (this.expressivePalette === 'secondary') {\r\n      classes.push('expressive-secondary');\r\n    }\r\n\r\n    if (this.expressivePalette === 'tertiary') {\r\n      classes.push('expressive-tertiary');\r\n    }\r\n\r\n    if (this.expressivePalette === 'quaternary') {\r\n      classes.push('expressive-quaternary');\r\n    }\r\n\r\n    if (this.expressiveDark) {\r\n      classes.push('expressive-dark');\r\n    }\r\n\r\n    return classes;\r\n  }\r\n}",
+            "styleUrl": "./ds-avatar.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 49
+                    }
+                }
+            },
+            "templateData": "<div [ngClass]=\"hostClasses\">\r\n  @if (variant === 'icon') {\r\n    <div class=\"avatar-icon\">\r\n      <i [class]=\"iconClass\" aria-hidden=\"true\"></i>\r\n    </div>\r\n  }\r\n\r\n  @if (variant === 'initials') {\r\n    <div class=\"avatar-initials\">\r\n      {{ initials }}\r\n    </div>\r\n  }\r\n\r\n  @if (variant === 'image') {\r\n    <img\r\n      class=\"avatar-img\"\r\n      [src]=\"src\"\r\n      [alt]=\"alt\"\r\n    />\r\n  }\r\n</div>"
+        },
+        {
             "name": "DsButtonComponent",
             "id": "component-DsButtonComponent-6faaee2f7f9371bc5acce657455496c4d4cbd8919b272968aef32ea552ee16f3b4145b5587a036bc07d285750d7234ec0b4fcf66097424df27f00e050241a244",
             "file": "src/lib/button/ds-button.component.ts",
@@ -514,7 +856,7 @@
         },
         {
             "name": "DsCardComponent",
-            "id": "component-DsCardComponent-431ded31a4ad9d53d6c85d6b1b1ffcebc6f29d794355d04256397e179b70ae88ed94f55634bda27646087fa5d780228d12bf431a6e316ef9c6d82117bae4711b",
+            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305",
             "file": "src/lib/card/ds-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -538,23 +880,34 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 36,
+                    "line": 42,
                     "type": "boolean",
                     "decorators": []
                 },
                 {
                     "name": "href",
+                    "defaultValue": "'#'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 29,
+                    "line": 34,
                     "type": "string",
                     "decorators": []
                 },
                 {
-                    "name": "imgAlt",
+                    "name": "imagePosition",
+                    "defaultValue": "'none'",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 32,
+                    "type": "CardImagePosition",
+                    "decorators": []
+                },
+                {
+                    "name": "imgAlt",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
                     "type": "string",
                     "decorators": []
                 },
@@ -562,24 +915,32 @@
                     "name": "imgSrc",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 36,
                     "type": "string",
                     "decorators": []
                 },
                 {
-                    "name": "layout",
-                    "defaultValue": "'default'",
+                    "name": "inputId",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 25,
-                    "type": "CardLayout",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
                     "decorators": []
                 },
                 {
                     "name": "name",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 34,
+                    "line": 39,
                     "type": "string",
                     "decorators": []
                 },
@@ -588,24 +949,25 @@
                     "defaultValue": "'default'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 31,
                     "type": "CardSize",
                     "decorators": []
                 },
                 {
-                    "name": "value",
+                    "name": "style",
+                    "defaultValue": "'default'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 35,
-                    "type": "string",
+                    "line": 30,
+                    "type": "CardStyle",
                     "decorators": []
                 },
                 {
                     "name": "variant",
-                    "defaultValue": "'default'",
+                    "defaultValue": "'base'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 27,
+                    "line": 29,
                     "type": "CardVariant",
                     "decorators": []
                 }
@@ -621,12 +983,15 @@
             "imports": [
                 {
                     "name": "NgIf"
+                },
+                {
+                    "name": "NgTemplateOutlet"
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport { NgIf } from '@angular/common';\r\n\r\ntype CardLayout = 'default' | 'horizontal' | 'horizontal-right';\r\ntype CardSize = 'default' | 'lg';\r\ntype CardVariant =\r\n  | 'default'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() layout: CardLayout = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() variant: CardVariant = 'default';\r\n\r\n  @Input() href?: string;\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt?: string;\r\n\r\n  @Input() name?: string;\r\n  @Input() value?: string;\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.size === 'lg') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.layout === 'horizontal') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.layout === 'horizontal-right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    if (this.variant === 'clickable') {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n}",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -643,7 +1008,7 @@
                         "name": "isClickable",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 38
+                        "line": 44
                     }
                 },
                 "isSelectable": {
@@ -652,7 +1017,7 @@
                         "name": "isSelectable",
                         "type": "boolean",
                         "returnType": "boolean",
-                        "line": 42
+                        "line": 48
                     }
                 },
                 "inputType": {
@@ -661,7 +1026,7 @@
                         "name": "inputType",
                         "type": "unknown",
                         "returnType": "\"radio\" | \"checkbox\"",
-                        "line": 49
+                        "line": 55
                     }
                 },
                 "classes": {
@@ -670,11 +1035,20 @@
                         "name": "classes",
                         "type": "string",
                         "returnType": "string",
-                        "line": 55
+                        "line": 61
+                    }
+                },
+                "hasImage": {
+                    "name": "hasImage",
+                    "getSignature": {
+                        "name": "hasImage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 91
                     }
                 }
             },
-            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"imgSrc\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt || ''\"\r\n  />\r\n\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [value]=\"value\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"imgSrc\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt || ''\"\r\n    />\r\n\r\n    <div class=\"card-body\">\r\n      <ng-content></ng-content>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</ng-template>"
+            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
         },
         {
             "name": "DsLinkComponent",
@@ -1097,6 +1471,28 @@
         "functions": [],
         "typealiases": [
             {
+                "name": "AccordionItem",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "literal type",
+                "file": "src/lib/accordion/ds-accordion.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 188
+            },
+            {
+                "name": "AccordionSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"md\" | \"lg\"",
+                "file": "src/lib/accordion/ds-accordion.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "AlertVariant",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -1152,10 +1548,10 @@
                 "kind": 193
             },
             {
-                "name": "CardLayout",
+                "name": "CardImagePosition",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"default\" | \"horizontal\" | \"horizontal-right\"",
+                "rawtype": "\"none\" | \"top\" | \"left\" | \"right\"",
                 "file": "src/lib/card/ds-card.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1166,7 +1562,18 @@
                 "name": "CardSize",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"default\" | \"lg\"",
+                "rawtype": "\"default\" | \"large\"",
+                "file": "src/lib/card/ds-card.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "CardStyle",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"default\" | \"secondary\"",
                 "file": "src/lib/card/ds-card.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -1177,8 +1584,41 @@
                 "name": "CardVariant",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
-                "rawtype": "\"default\" | \"clickable\" | \"selectable-radio\" | \"selectable-checkbox\"",
+                "rawtype": "\"base\" | \"clickable\" | \"selectable-radio\" | \"selectable-checkbox\"",
                 "file": "src/lib/card/ds-card.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsAvatarExpressivePalette",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"default\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                "file": "src/lib/avatar/ds-avatar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsAvatarSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"md\" | \"sm\" | \"xs\"",
+                "file": "src/lib/avatar/ds-avatar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsAvatarVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"icon\" | \"initials\" | \"image\"",
+                "file": "src/lib/avatar/ds-avatar.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1311,6 +1751,30 @@
         "groupedFunctions": {},
         "groupedEnumerations": {},
         "groupedTypeAliases": {
+            "src/lib/accordion/ds-accordion.component.ts": [
+                {
+                    "name": "AccordionItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "literal type",
+                    "file": "src/lib/accordion/ds-accordion.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 188
+                },
+                {
+                    "name": "AccordionSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"md\" | \"lg\"",
+                    "file": "src/lib/accordion/ds-accordion.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/alert/ds-alert.component.ts": [
                 {
                     "name": "AlertVariant",
@@ -1374,10 +1838,10 @@
             ],
             "src/lib/card/ds-card.component.ts": [
                 {
-                    "name": "CardLayout",
+                    "name": "CardImagePosition",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"default\" | \"horizontal\" | \"horizontal-right\"",
+                    "rawtype": "\"none\" | \"top\" | \"left\" | \"right\"",
                     "file": "src/lib/card/ds-card.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1388,7 +1852,18 @@
                     "name": "CardSize",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"default\" | \"lg\"",
+                    "rawtype": "\"default\" | \"large\"",
+                    "file": "src/lib/card/ds-card.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "CardStyle",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"default\" | \"secondary\"",
                     "file": "src/lib/card/ds-card.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -1399,8 +1874,43 @@
                     "name": "CardVariant",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
-                    "rawtype": "\"default\" | \"clickable\" | \"selectable-radio\" | \"selectable-checkbox\"",
+                    "rawtype": "\"base\" | \"clickable\" | \"selectable-radio\" | \"selectable-checkbox\"",
                     "file": "src/lib/card/ds-card.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/avatar/ds-avatar.component.ts": [
+                {
+                    "name": "DsAvatarExpressivePalette",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"default\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                    "file": "src/lib/avatar/ds-avatar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsAvatarSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"md\" | \"sm\" | \"xs\"",
+                    "file": "src/lib/avatar/ds-avatar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsAvatarVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"icon\" | \"initials\" | \"image\"",
+                    "file": "src/lib/avatar/ds-avatar.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1441,7 +1951,7 @@
         "children": []
     },
     "coverage": {
-        "count": 4,
+        "count": 5,
         "status": "low",
         "files": [
             {
@@ -1474,6 +1984,35 @@
                 "status": "low"
             },
             {
+                "filePath": "src/lib/accordion/ds-accordion.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsAccordionComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/accordion/ds-accordion.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "AccordionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/accordion/ds-accordion.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "AccordionSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/lib/alert/ds-alert.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -1488,6 +2027,45 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "AlertVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/avatar/ds-avatar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsAvatarComponent",
+                "coveragePercent": 44,
+                "coverageCount": "4/9",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/lib/avatar/ds-avatar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsAvatarExpressivePalette",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/avatar/ds-avatar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsAvatarSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/avatar/ds-avatar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsAvatarVariant",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1537,7 +2115,7 @@
                 "linktype": "component",
                 "name": "DsCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/10",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -1545,7 +2123,7 @@
                 "type": "type alias",
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
-                "name": "CardLayout",
+                "name": "CardImagePosition",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -1556,6 +2134,16 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "CardSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/card/ds-card.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "CardStyle",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
