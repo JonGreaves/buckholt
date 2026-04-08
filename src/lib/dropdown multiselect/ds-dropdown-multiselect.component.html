@@ -1,0 +1,103 @@
+<div class="input">
+  <div class="input-label">
+    <label [for]="id" class="form-label">{{ label }}</label>
+
+    @if (assistiveText) {
+      <small class="form-helper">{{ assistiveText }}</small>
+    }
+  </div>
+
+  <div class="response dropdown-input">
+    <div
+      [class]="dropdownClasses.join(' ')"
+      [attr.data-collapse-threshold]="collapseThreshold ?? null"
+      [attr.data-summary-label]="collapseThreshold !== undefined ? summaryLabel : null">
+      @if (selectedOptions.length > 0) {
+        <div class="tag-set">
+          @for (option of visibleTags; track option.value) {
+            <span class="tag tag-dismissible expressive-light">
+              <span class="tag-label">{{ option.label }}</span>
+              <button
+                type="button"
+                class="btn-close btn-close-sm"
+                aria-label="Close"
+                (click)="removeTag(option.value, $event)"></button>
+            </span>
+          }
+
+          @if (showCollapsedSummary) {
+            <span class="tag expressive-light">
+              <span class="tag-label">+{{ collapsedCount }} {{ summaryLabel }}</span>
+            </span>
+          }
+        </div>
+      }
+
+      <button
+        [id]="id"
+        [class]="toggleClasses.join(' ')"
+        type="button"
+        [attr.aria-expanded]="open"
+        [disabled]="disabled || readonly"
+        (click)="toggleDropdown($event)">
+        <span class="dropdown-label">
+          {{ selectedOptions.length > 0 ? '' : placeholder }}
+        </span>
+      </button>
+
+      <ul
+        class="dropdown-menu dropdown-menu-panel"
+        role="menu"
+        [class.show]="open"
+        [attr.aria-labelledby]="id"
+        (click)="$event.stopPropagation()">
+        @if (showSelectAll) {
+          <li
+            [id]="id + '-option-0'"
+            class="dropdown-item"
+            role="option"
+            aria-label="All"
+            [attr.aria-selected]="allSelected"
+            tabindex="0"
+            (click)="toggleSelectAll($event)"
+            (keydown)="onSelectAllKeydown($event)">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="id + '-checkbox-all'"
+              [checked]="allSelected"
+              [indeterminate]="partiallySelected" />
+            <label class="form-check-label" [for]="id + '-checkbox-all'">All</label>
+          </li>
+          <li class="dropdown-divider"></li>
+        }
+
+        @for (option of renderedOptions; track option.value; let index = $index) {
+          <li
+            [id]="id + '-option-' + (index + 1)"
+            class="dropdown-item"
+            role="option"
+            [attr.aria-label]="option.label"
+            [attr.aria-selected]="isSelected(option.value)"
+            tabindex="0"
+            (click)="toggleOption(option.value, $event)"
+            (keydown)="onOptionKeydown($event, option.value)">
+            <input
+              #optionCheckbox
+              class="form-check-input"
+              type="checkbox"
+              [id]="id + '-checkbox-' + option.value"
+              [checked]="isSelected(option.value)" />
+            <label class="form-check-label" [for]="id + '-checkbox-' + option.value">
+              {{ option.label }}
+            </label>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">{{ helperText }}</small>
+  }
+</div>

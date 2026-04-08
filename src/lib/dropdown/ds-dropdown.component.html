@@ -1,0 +1,48 @@
+<div class="input">
+  <div class="input-label">
+    <label [for]="id" class="form-label">{{ label }}</label>
+
+    @if (assistiveText) {
+      <small class="form-helper">{{ assistiveText }}</small>
+    }
+  </div>
+
+  <div class="response dropdown-input">
+    <div [class]="dropdownClasses.join(' ')">
+      <button
+        [id]="id"
+        [class]="toggleClasses.join(' ')"
+        type="button"
+        [attr.aria-expanded]="open"
+        [disabled]="disabled || readonly"
+        (click)="toggleDropdown($event)">
+        <span class="dropdown-label">{{ displayLabel }}</span>
+      </button>
+
+      <ul
+        class="dropdown-menu dropdown-menu-panel"
+        role="menu"
+        [class.show]="open"
+        [attr.aria-labelledby]="id"
+        (click)="$event.stopPropagation()">
+        @for (option of options; track option.value; let index = $index) {
+          <li
+            [id]="id + '-option-' + (index + 1)"
+            class="dropdown-item"
+            role="option"
+            [attr.aria-label]="option.label"
+            [attr.aria-selected]="option.value === value"
+            tabindex="0"
+            (click)="selectOption(option, $event)"
+            (keydown)="onOptionKeydown($event, option)">
+            {{ option.label }}
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">{{ helperText }}</small>
+  }
+</div>
