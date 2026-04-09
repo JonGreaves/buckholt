@@ -1,0 +1,54 @@
+<div class="text-block">
+  <div class="heading">
+    <div class="heading-content">
+      @if (eyebrow) {
+        <span class="eyebrow">{{ eyebrow }}</span>
+      }
+
+      @if (hasIconBlock) {
+        <div [class]="iconBlockClass">
+          <i [class]="iconBlockIconClass"></i>
+        </div>
+      }
+
+      <h3 [class]="headingClass">
+        @if (hasInlineIcon) {
+          <span class="icon">
+            <i [class]="inlineIconClass"></i>
+          </span>
+        }
+        {{ heading }}
+      </h3>
+    </div>
+
+    @switch (attachmentType) {
+      @case ('close') {
+        <button
+          type="button"
+          class="btn-close"
+          [attr.aria-label]="closeAriaLabel">
+        </button>
+      }
+
+      @case ('link') {
+        <a
+          class="link-standalone"
+          [href]="linkHref"
+          [attr.target]="linkTarget">
+          <span class="icon">
+            <i [class]="linkIconClass"></i>
+          </span>
+          {{ linkLabel }}
+        </a>
+      }
+
+      @case ('tag') {
+        <span class="tag">
+          <span class="tag-label">{{ tagLabel }}</span>
+        </span>
+      }
+    }
+  </div>
+
+  <p>{{ body }}</p>
+</div>
