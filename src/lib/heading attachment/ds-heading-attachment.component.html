@@ -2,7 +2,7 @@
   <div class="heading">
     <div class="heading-content">
       @if (eyebrow) {
-        <span class="eyebrow">{{ eyebrow }}</span>
+        <span class="eyebrow">{{eyebrow}}</span>
       }
 
       @if (hasIconBlock) {
@@ -16,9 +16,7 @@
           <span class="icon">
             <i [class]="inlineIconClass"></i>
           </span>
-        }
-        {{ heading }}
-      </h3>
+        }{{heading}}</h3>
     </div>
 
     @switch (attachmentType) {
@@ -38,17 +36,17 @@
           <span class="icon">
             <i [class]="linkIconClass"></i>
           </span>
-          {{ linkLabel }}
+          {{linkLabel}}
         </a>
       }
 
       @case ('tag') {
         <span class="tag">
-          <span class="tag-label">{{ tagLabel }}</span>
+          <span class="tag-label">{{tagLabel}}</span>
         </span>
       }
     }
   </div>
 
-  <p>{{ body }}</p>
+  <p>{{body}}</p>
 </div>
