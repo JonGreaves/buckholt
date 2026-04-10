@@ -1,53 +1,86 @@
-<!-- Clickable variant -->
-<a
-  *ngIf="isClickable; else nonClickable"
-  [href]="href"
-  [class]="classes"
->
+@if (isClickable) {
+  <a [href]="href" [class]="''" [ngClass]="cardClasses">
+    @if (hasImage) {
+      <img
+        [src]="imageSrc"
+        class="card-img"
+        [alt]="imageAlt"
+      />
+    }
 
-  <!-- Optional image -->
-  <img
-    *ngIf="hasImage"
-    [src]="imgSrc"
-    class="card-img"
-    [alt]="imgAlt"
-  />
+    <div class="card-body">
+      <div class="text-block">
+        @if (title) {
+          <h4 class="title-03">
+            {{ title }}
+          </h4>
+        }
 
-  <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
+        @if (body) {
+          <p>{{ body }}</p>
+        }
+      </div>
+    </div>
 
-</a>
+    @if (hasEmphasisTile) {
+      <div class="card-body">
+        <div [ngClass]="emphasisTileClasses">
+          @if (emphasisTitle) {
+            <h4 class="title-03">{{ emphasisTitle }}</h4>
+          }
 
-<!-- Non-clickable variants -->
-<ng-template #nonClickable>
+          @if (emphasisBody) {
+            <p>{{ emphasisBody }}</p>
+          }
+        </div>
+      </div>
+    }
+  </a>
+} @else {
+  <div [class]="''" [ngClass]="cardClasses">
+    @if (hasImage) {
+      <img
+        [src]="imageSrc"
+        class="card-img"
+        [alt]="imageAlt"
+      />
+    }
 
-  <div [class]="classes">
+    <div class="card-body">
+      <div class="text-block">
+        @if (title) {
+          <h4 class="title-03">
+            {{ title }}
+          </h4>
+        }
 
-    <!-- Selectable input -->
-    <input
-      *ngIf="isSelectable"
-      class="form-check-input"
-      [type]="inputType"
-      [name]="name"
-      [id]="inputId"
-      [value]="inputValue"
-      [checked]="checked"
-    />
+        @if (body) {
+          <p>{{ body }}</p>
+        }
+      </div>
 
-    <!-- Optional image -->
-    <img
-      *ngIf="hasImage"
-      [src]="imgSrc"
-      class="card-img"
-      [alt]="imgAlt"
-    />
+      @if (hasStandaloneLink) {
+        <a class="link-standalone" [href]="linkHref" [target]="linkTarget">
+          <span class="icon">
+            <i class="fa-regular fa-arrow-right" aria-hidden="true"></i>
+          </span>
+          {{ linkText }}
+        </a>
+      }
+    </div>
 
-    <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
+    @if (hasEmphasisTile) {
+      <div class="card-body">
+        <div [ngClass]="emphasisTileClasses">
+          @if (emphasisTitle) {
+            <h4 class="title-03">{{ emphasisTitle }}</h4>
+          }
 
+          @if (emphasisBody) {
+            <p>{{ emphasisBody }}</p>
+          }
+        </div>
+      </div>
+    }
   </div>
-</ng-template>
-
-<ng-template #cardBody>
-  <div class="card-body">
-    <ng-content></ng-content>
-  </div>
-</ng-template>
+}

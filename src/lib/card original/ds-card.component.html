@@ -1,0 +1,53 @@
+<!-- Clickable variant -->
+<a
+  *ngIf="isClickable; else nonClickable"
+  [href]="href"
+  [class]="classes"
+>
+
+  <!-- Optional image -->
+  <img
+    *ngIf="hasImage"
+    [src]="imgSrc"
+    class="card-img"
+    [alt]="imgAlt"
+  />
+
+  <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
+
+</a>
+
+<!-- Non-clickable variants -->
+<ng-template #nonClickable>
+
+  <div [class]="classes">
+
+    <!-- Selectable input -->
+    <input
+      *ngIf="isSelectable"
+      class="form-check-input"
+      [type]="inputType"
+      [name]="name"
+      [id]="inputId"
+      [value]="inputValue"
+      [checked]="checked"
+    />
+
+    <!-- Optional image -->
+    <img
+      *ngIf="hasImage"
+      [src]="imgSrc"
+      class="card-img"
+      [alt]="imgAlt"
+    />
+
+    <ng-container [ngTemplateOutlet]="cardBody"></ng-container>
+
+  </div>
+</ng-template>
+
+<ng-template #cardBody>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+</ng-template>

@@ -1,0 +1,25 @@
+<div class="card card-selectable" (click)="onCardClick($event)">
+  <input
+    class="form-check-input"
+    [type]="selectionType"
+    [attr.name]="selectionType === 'radio' ? name : null"
+    [id]="inputId"
+    [attr.value]="selectionType === 'checkbox' ? value : null"
+    [checked]="checked"
+    (change)="onInputChange($event)"
+  />
+
+  <div class="card-body">
+    <div class="text-block">
+      @if (title) {
+        <h4 class="title-03">
+          {{ title }}
+        </h4>
+      }
+
+      @if (body) {
+        <p>{{ body }}</p>
+      }
+    </div>
+  </div>
+</div>

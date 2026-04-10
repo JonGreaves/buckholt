@@ -1,62 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DsCardComponent } from './ds-card.component';
 
-type CardStoryArgs = {
-  variant: 'base' | 'clickable' | 'selectable-radio' | 'selectable-checkbox';
-  style: 'default' | 'secondary';
-  size: 'default' | 'large';
-  imagePosition: 'none' | 'top' | 'left' | 'right';
-  href: string;
-  imgSrc: string;
-  imgAlt: string;
-  name: string;
-  inputId: string;
-  inputValue: string;
-  checked: boolean;
-};
-
-const meta: Meta<CardStoryArgs> = {
-  title: 'Buckholt/Card',
+const meta: Meta<DsCardComponent> = {
+  title: 'Buckholt/Card - Basic',
   component: DsCardComponent,
   tags: ['autodocs'],
-  args: {
-    variant: 'base',
-    style: 'default',
-    size: 'default',
-    imagePosition: 'none',
-    href: '#',
-    imgSrc: '',
-    imgAlt: '',
-    name: 'selectable',
-    inputId: 'card-selectable',
-    inputValue: '',
-    checked: false,
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['base', 'clickable', 'selectable-radio', 'selectable-checkbox'],
-    },
-    style: {
-      control: 'select',
-      options: ['default', 'secondary'],
-    },
-    size: {
-      control: 'select',
-      options: ['default', 'large'],
-    },
-    imagePosition: {
-      control: 'select',
-      options: ['none', 'top', 'left', 'right'],
-    },
-    href: { control: 'text' },
-    imgSrc: { control: 'text' },
-    imgAlt: { control: 'text' },
-    name: { control: 'text' },
-    inputId: { control: 'text' },
-    inputValue: { control: 'text' },
-    checked: { control: 'boolean' },
-  },
   parameters: {
     docs: {
       source: {
@@ -64,29 +12,66 @@ const meta: Meta<CardStoryArgs> = {
       },
     },
   },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['core', 'clickable'],
+    },
+    size: {
+      control: 'select',
+      options: ['md', 'lg'],
+    },
+    style: {
+      control: 'select',
+      options: ['default', 'secondary'],
+    },
+    imageAlignment: {
+      control: 'select',
+      options: ['top', 'left', 'right'],
+    },
+    linkTarget: {
+      control: 'select',
+      options: ['_self', '_blank'],
+    },
+    emphasisInline: {
+      control: 'boolean',
+    },
+    emphasisCentered: {
+      control: 'boolean',
+    },
+    emphasisSecondary: {
+      control: 'boolean',
+    },
+  },
+  args: {
+    variant: 'core',
+    size: 'md',
+    style: 'default',
+    title: 'Card title text',
+    body: 'Duis non quam et nisi tincidunt fermentum. Pellentesque habitant morbi tristique senectus.',
+    href: '#',
+    imageSrc: '',
+    imageAlt: '',
+    imageAlignment: 'top',
+    linkText: '',
+    linkHref: '#',
+    linkTarget: '_self',
+    emphasisTitle: '',
+    emphasisBody: '',
+    emphasisInline: false,
+    emphasisCentered: false,
+    emphasisSecondary: false,
+  },
 };
 
 export default meta;
-type Story = StoryObj<CardStoryArgs>;
+type Story = StoryObj<DsCardComponent>;
 
-export const Base: Story = {};
+export const Default: Story = {};
 
-export const Clickable: Story = {
+export const Large: Story = {
   args: {
-    variant: 'clickable',
-  },
-};
-
-export const SelectableRadio: Story = {
-  args: {
-    variant: 'selectable-radio',
-    name: 'selectable-group',
-  },
-};
-
-export const SelectableCheckbox: Story = {
-  args: {
-    variant: 'selectable-checkbox',
+    size: 'lg',
   },
 };
 
@@ -96,32 +81,74 @@ export const Secondary: Story = {
   },
 };
 
-export const Large: Story = {
+export const WithTopImage: Story = {
   args: {
-    size: 'large',
+    imageSrc: 'buckholt/pexels-therato-18903363-scaled.jpg',
+    imageAlt: 'Placeholder image',
+    linkText: 'Link text',
   },
 };
 
-export const ImageTop: Story = {
+export const WithHorizontalImageLeft: Story = {
   args: {
-    imagePosition: 'top',
-    imgSrc: 'https://picsum.photos/640/360',
-    imgAlt: 'Card image',
+    imageSrc: 'buckholt/pexels-pixabay-268533.jpg',
+    imageAlt: 'Placeholder image',
+    imageAlignment: 'left',
+    linkText: 'Link text',
   },
 };
 
-export const ImageLeft: Story = {
+export const WithHorizontalImageRight: Story = {
   args: {
-    imagePosition: 'left',
-    imgSrc: 'https://picsum.photos/640/360',
-    imgAlt: 'Card image',
+    imageSrc: 'buckholt/pexels-maxandrey-1366630-scaled.jpg',
+    imageAlt: 'Placeholder image',
+    imageAlignment: 'right',
+    linkText: 'Link text',
   },
 };
 
-export const ImageRight: Story = {
+export const WithStandaloneLink: Story = {
   args: {
-    imagePosition: 'right',
-    imgSrc: 'https://picsum.photos/640/360',
-    imgAlt: 'Card image',
+    linkText: 'Link text',
+  },
+};
+
+export const Clickable: Story = {
+  args: {
+    variant: 'clickable',
+    href: '#',
+  },
+};
+
+export const ClickableWithImage: Story = {
+  args: {
+    variant: 'clickable',
+    href: '#',
+    imageSrc: 'buckholt/pexels-magalie-parise-2147945619-32285955-scaled-e1749471330673.jpg',
+    imageAlt: 'Placeholder image',
+  },
+};
+
+export const WithEmphasisTile: Story = {
+  args: {
+    emphasisTitle: 'Emphasis tile',
+    emphasisBody: 'Duis non quam et nisi tincidunt fermentum.',
+  },
+};
+
+export const WithInlineEmphasisTile: Story = {
+  args: {
+    emphasisTitle: 'Emphasis tile',
+    emphasisBody: 'Duis non quam et nisi tincidunt fermentum.',
+    emphasisInline: true,
+  },
+};
+
+export const SecondaryCardWithSecondaryEmphasisTile: Story = {
+  args: {
+    style: 'secondary',
+    emphasisTitle: 'Emphasis tile secondary',
+    emphasisBody: 'Duis non quam et nisi tincidunt fermentum.',
+    emphasisSecondary: true,
   },
 };

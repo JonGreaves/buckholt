@@ -1,94 +1,77 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-} from '@angular/core';
-import {
-  NgIf,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-type CardVariant =
-  | 'base'
-  | 'clickable'
-  | 'selectable-radio'
-  | 'selectable-checkbox';
-type CardStyle = 'default' | 'secondary';
-type CardSize = 'default' | 'large';
-type CardImagePosition = 'none' | 'top' | 'left' | 'right';
+export type DsCardVariant = 'core' | 'clickable';
+export type DsCardSize = 'md' | 'lg';
+export type DsCardStyle = 'default' | 'secondary';
+export type DsCardImageAlignment = 'top' | 'left' | 'right';
 
 @Component({
   selector: 'ds-card',
   standalone: true,
-  imports: [NgIf, NgTemplateOutlet],
+  imports: [CommonModule],
   templateUrl: './ds-card.component.html',
-  styleUrls: ['./ds-card.component.css'],
+  styleUrl: './ds-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DsCardComponent {
-  @Input() variant: CardVariant = 'base';
-  @Input() style: CardStyle = 'default';
-  @Input() size: CardSize = 'default';
-  @Input() imagePosition: CardImagePosition = 'none';
+  @Input() variant: DsCardVariant = 'core';
+  @Input() size: DsCardSize = 'md';
+  @Input() style: DsCardStyle = 'default';
+
+  @Input() title = 'Card title text';
+  @Input() body =
+    'Duis non quam et nisi tincidunt fermentum. Pellentesque habitant morbi tristique senectus.';
 
   @Input() href = '#';
 
-  @Input() imgSrc?: string;
-  @Input() imgAlt = '';
+  @Input() imageSrc = '';
+  @Input() imageAlt = '';
+  @Input() imageAlignment: DsCardImageAlignment = 'top';
 
-  @Input() name?: string;
-  @Input() inputId?: string;
-  @Input() inputValue = '';
-  @Input() checked = false;
+  @Input() linkText = '';
+  @Input() linkHref = '#';
+  @Input() linkTarget: '_self' | '_blank' = '_self';
+
+  @Input() emphasisTitle = '';
+  @Input() emphasisBody = '';
+  @Input() emphasisInline = false;
+  @Input() emphasisCentered = false;
+  @Input() emphasisSecondary = false;
 
   get isClickable(): boolean {
     return this.variant === 'clickable';
   }
 
-  get isSelectable(): boolean {
-    return (
-      this.variant === 'selectable-radio' ||
-      this.variant === 'selectable-checkbox'
-    );
-  }
-
-  get inputType(): 'radio' | 'checkbox' {
-    return this.variant === 'selectable-radio'
-      ? 'radio'
-      : 'checkbox';
-  }
-
-  get classes(): string {
-    const classes = ['card'];
-
-    if (this.isClickable) {
-      classes.push('card-clickable');
-    }
-
-    if (this.isSelectable) {
-      classes.push('card-selectable');
-    }
-
-    if (this.style === 'secondary') {
-      classes.push('card-secondary');
-    }
-
-    if (this.size === 'large') {
-      classes.push('card-lg');
-    }
-
-    if (this.imagePosition === 'left') {
-      classes.push('card-horizontal');
-    }
-
-    if (this.imagePosition === 'right') {
-      classes.push('card-horizontal', 'card-horizontal-right');
-    }
-
-    return classes.join(' ');
-  }
-
   get hasImage(): boolean {
-    return this.imagePosition !== 'none' && !!this.imgSrc;
+    return this.imageSrc.trim().length > 0;
+  }
+
+  get hasStandaloneLink(): boolean {
+    return !this.isClickable && this.linkText.trim().length > 0;
+  }
+
+  get hasEmphasisTile(): boolean {
+    return this.emphasisTitle.trim().length > 0 || this.emphasisBody.trim().length > 0;
+  }
+
+  get cardClasses(): Record<string, boolean> {
+    return {
+      card: true,
+      'card-clickable': this.isClickable,
+      'card-lg': this.size === 'lg',
+      'card-secondary': this.style === 'secondary',
+      'card-horizontal': this.hasImage && this.imageAlignment !== 'top',
+      'card-horizontal-right': this.hasImage && this.imageAlignment === 'right',
+    };
+  }
+
+  get emphasisTileClasses(): Record<string, boolean> {
+    return {
+      'emphasis-tile': true,
+      'emphasis-tile-inline': this.emphasisInline,
+      'emphasis-tile-center': this.emphasisCentered,
+      'emphasis-tile-secondary': this.emphasisSecondary,
+    };
   }
 }
