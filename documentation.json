@@ -327,6 +327,111 @@
             "extends": []
         },
         {
+            "name": "DsKeyValueGridItem",
+            "id": "interface-DsKeyValueGridItem-1bce000044ea166bd3a27461113d9f3ee0dba66dd3deefb297b73f780ee14c9ffcfa86d28877a805ec7b1326f28a27da8d472531ce489b0edbd3e83435539dcc",
+            "file": "src/lib/key value pair grid/ds-key-value-grid.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  HostBinding,\r\n  HostListener,\r\n  Input,\r\n} from '@angular/core';\r\n\r\nexport interface DsKeyValueGridItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\n@Component({\r\n  selector: '[dsKeyValueGrid]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-grid.component.html',\r\n  styleUrls: ['./ds-key-value-grid.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueGridComponent {\r\n  @Input() items: DsKeyValueGridItem[] = [];\r\n  @Input() columns = 3;\r\n\r\n  @HostBinding('class')\r\n  readonly hostClasses = 'grid key-value-grid';\r\n\r\n  @HostBinding('style.--columns')\r\n  get hostColumns(): string {\r\n    return String(this.columns);\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsKeyValueListItem",
+            "id": "interface-DsKeyValueListItem-ec83a031b11705d28989e59b7cb5094e6b362c32c58134366f37a357998307a71f85b0131b55644599b26cbc78b2870e1f71e771872836aed8ad73114ba05e06",
+            "file": "src/lib/key value pair list/ds-key-value-list.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';\r\n\r\nexport interface DsKeyValueListItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\nexport type DsKeyValueListDirection = 'column' | 'row';\r\n\r\n@Component({\r\n  selector: '[dsKeyValueList]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-list.component.html',\r\n  styleUrls: ['./ds-key-value-list.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueListComponent {\r\n  @Input() items: DsKeyValueListItem[] = [];\r\n  @Input() direction: DsKeyValueListDirection = 'column';\r\n  @Input() stacked = false;\r\n\r\n  @HostBinding('class')\r\n  get hostClasses(): string {\r\n    const classes = ['key-value-list'];\r\n\r\n    if (this.direction === 'row') {\r\n      classes.push('key-value-list-row');\r\n    }\r\n\r\n    if (this.stacked) {\r\n      classes.push('key-value-list-stacked');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsKeyValueTableItem",
+            "id": "interface-DsKeyValueTableItem-085ff5544b8b3c9f8bdc9cc02206ca1eeb761fa9080c55859f04087dccca6aa843c20148e87399f3029592d74c4fb33c1da61df33349f9232c87793b9d056129",
+            "file": "src/lib/key value pair table/ds-key-value-table.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';\r\n\r\nexport interface DsKeyValueTableItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\n@Component({\r\n  selector: '[dsKeyValueTable]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-table.component.html',\r\n  styleUrls: ['./ds-key-value-table.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueTableComponent {\r\n  @Input() items: DsKeyValueTableItem[] = [];\r\n  @Input() dividers = false;\r\n\r\n  @HostBinding('class')\r\n  readonly hostClasses = 'key-value-table';\r\n}",
+            "properties": [
+                {
+                    "name": "key",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "value",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -3841,7 +3946,7 @@
                     }
                 }
             },
-            "templateData": "<div class=\"text-block\">\r\n  <div class=\"heading\">\r\n    <div class=\"heading-content\">\r\n      @if (eyebrow) {\r\n        <span class=\"eyebrow\">{{eyebrow}}</span>\r\n      }\r\n\r\n      @if (hasIconBlock) {\r\n        <div [class]=\"iconBlockClass\">\r\n          <i [class]=\"iconBlockIconClass\"></i>\r\n        </div>\r\n      }\r\n\r\n      <h3 [class]=\"headingClass\">\r\n        @if (hasInlineIcon) {\r\n          <span class=\"icon\">\r\n            <i [class]=\"inlineIconClass\"></i>\r\n          </span>\r\n        }\r\n        {{heading}}\r\n      </h3>\r\n    </div>\r\n\r\n    @switch (attachmentType) {\r\n      @case ('close') {\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn-close\"\r\n          [attr.aria-label]=\"closeAriaLabel\">\r\n        </button>\r\n      }\r\n\r\n      @case ('link') {\r\n        <a\r\n          class=\"link-standalone\"\r\n          [href]=\"linkHref\"\r\n          [attr.target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i [class]=\"linkIconClass\"></i>\r\n          </span>\r\n          {{linkLabel}}\r\n        </a>\r\n      }\r\n\r\n      @case ('tag') {\r\n        <span class=\"tag\">\r\n          <span class=\"tag-label\">{{tagLabel}}</span>\r\n        </span>\r\n      }\r\n    }\r\n  </div>\r\n\r\n  <p>{{body}}</p>\r\n</div>"
+            "templateData": "<div class=\"text-block\">\r\n  <div class=\"heading\">\r\n    <div class=\"heading-content\">\r\n      @if (eyebrow) {\r\n        <span class=\"eyebrow\">{{eyebrow}}</span>\r\n      }\r\n\r\n      @if (hasIconBlock) {\r\n        <div [class]=\"iconBlockClass\">\r\n          <i [class]=\"iconBlockIconClass\"></i>\r\n        </div>\r\n      }\r\n\r\n      <h3 [class]=\"headingClass\">\r\n        @if (hasInlineIcon) {\r\n          <span class=\"icon\">\r\n            <i [class]=\"inlineIconClass\"></i>\r\n          </span>\r\n        }{{heading}}</h3>\r\n    </div>\r\n\r\n    @switch (attachmentType) {\r\n      @case ('close') {\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn-close\"\r\n          [attr.aria-label]=\"closeAriaLabel\">\r\n        </button>\r\n      }\r\n\r\n      @case ('link') {\r\n        <a\r\n          class=\"link-standalone\"\r\n          [href]=\"linkHref\"\r\n          [attr.target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i [class]=\"linkIconClass\"></i>\r\n          </span>\r\n          {{linkLabel}}\r\n        </a>\r\n      }\r\n\r\n      @case ('tag') {\r\n        <span class=\"tag\">\r\n          <span class=\"tag-label\">{{tagLabel}}</span>\r\n        </span>\r\n      }\r\n    }\r\n  </div>\r\n\r\n  <p>{{body}}</p>\r\n</div>"
         },
         {
             "name": "DsIconBlockComponent",
@@ -3937,6 +4042,430 @@
                 }
             },
             "templateData": "<div [class]=\"containerClassNames\">\r\n  <i [class]=\"iconClass\"></i>\r\n</div>"
+        },
+        {
+            "name": "DsKeyValueComponent",
+            "id": "component-DsKeyValueComponent-68d81ba681fa2f6a7306034054f6ddc9f8d97b0010ee6265b7d313691bdf4a291139edfe3561173af413d768aa9a330991b55b6ad93ac26e6d8cdfcb88a469b9",
+            "file": "src/lib/key value pair/ds-key-value.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "[dsKeyValue]",
+            "styleUrls": [
+                "./ds-key-value.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-key-value.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "expressive",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "DsKeyValueExpressive",
+                    "decorators": []
+                },
+                {
+                    "name": "flipped",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "keyText",
+                    "defaultValue": "'Key'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'md'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "DsKeyValueSize",
+                    "decorators": []
+                },
+                {
+                    "name": "stacked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "valueText",
+                    "defaultValue": "'Value'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';\r\n\r\nexport type DsKeyValueSize = 'md' | 'xs' | 'sm' | 'lg' | 'xl' | 'display';\r\nexport type DsKeyValueExpressive = false | 'primary' | 'secondary' | 'tertiary' | 'quaternary';\r\n\r\n@Component({\r\n  selector: '[dsKeyValue]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value.component.html',\r\n  styleUrls: ['./ds-key-value.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueComponent {\r\n  @Input() keyText = 'Key';\r\n  @Input() valueText = 'Value';\r\n  @Input() stacked = false;\r\n  @Input() flipped = false;\r\n  @Input() size: DsKeyValueSize = 'md';\r\n  @Input() expressive: DsKeyValueExpressive = false;\r\n\r\n  @HostBinding('class')\r\n  get hostClasses(): string {\r\n    const classes = ['key-value'];\r\n\r\n    if (this.stacked) {\r\n      classes.push('key-value-stacked');\r\n\r\n      if (this.size !== 'md') {\r\n        classes.push(`key-value-${this.size}`);\r\n      }\r\n    }\r\n\r\n    if (this.flipped) {\r\n      classes.push('key-value-flipped');\r\n    }\r\n\r\n    if (this.expressive) {\r\n      classes.push('expressive');\r\n\r\n      if (this.expressive !== 'primary') {\r\n        classes.push(`expressive-${this.expressive}`);\r\n      }\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-key-value.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 22
+                    }
+                }
+            },
+            "templateData": "<span class=\"key\">{{ keyText }}</span>\r\n<span class=\"value\">{{ valueText }}</span>"
+        },
+        {
+            "name": "DsKeyValueGridComponent",
+            "id": "component-DsKeyValueGridComponent-1bce000044ea166bd3a27461113d9f3ee0dba66dd3deefb297b73f780ee14c9ffcfa86d28877a805ec7b1326f28a27da8d472531ce489b0edbd3e83435539dcc",
+            "file": "src/lib/key value pair grid/ds-key-value-grid.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "[dsKeyValueGrid]",
+            "styleUrls": [
+                "./ds-key-value-grid.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-key-value-grid.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "columns",
+                    "defaultValue": "3",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 22,
+                    "type": "DsKeyValueGridItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "'grid key-value-grid'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26,
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class'"
+                        }
+                    ],
+                    "modifierKind": [
+                        171,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "defaultValue": "'grid key-value-grid'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "\"grid key-value-grid\"",
+                    "decorators": []
+                },
+                {
+                    "name": "style.--columns",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  HostBinding,\r\n  HostListener,\r\n  Input,\r\n} from '@angular/core';\r\n\r\nexport interface DsKeyValueGridItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\n@Component({\r\n  selector: '[dsKeyValueGrid]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-grid.component.html',\r\n  styleUrls: ['./ds-key-value-grid.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueGridComponent {\r\n  @Input() items: DsKeyValueGridItem[] = [];\r\n  @Input() columns = 3;\r\n\r\n  @HostBinding('class')\r\n  readonly hostClasses = 'grid key-value-grid';\r\n\r\n  @HostBinding('style.--columns')\r\n  get hostColumns(): string {\r\n    return String(this.columns);\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-key-value-grid.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostColumns": {
+                    "name": "hostColumns",
+                    "getSignature": {
+                        "name": "hostColumns",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 29
+                    }
+                }
+            },
+            "templateData": "@for (item of items; track item.key + '-' + item.value + '-' + $index) {\r\n  <div class=\"key-value-item\">\r\n    <div class=\"key-value\">\r\n      <span class=\"key\">{{ item.key }}</span>\r\n      <span class=\"value\">{{ item.value }}</span>\r\n    </div>\r\n  </div>\r\n}"
+        },
+        {
+            "name": "DsKeyValueListComponent",
+            "id": "component-DsKeyValueListComponent-ec83a031b11705d28989e59b7cb5094e6b362c32c58134366f37a357998307a71f85b0131b55644599b26cbc78b2870e1f71e771872836aed8ad73114ba05e06",
+            "file": "src/lib/key value pair list/ds-key-value-list.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "[dsKeyValueList]",
+            "styleUrls": [
+                "./ds-key-value-list.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-key-value-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "direction",
+                    "defaultValue": "'column'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "DsKeyValueListDirection",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "DsKeyValueListItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "stacked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';\r\n\r\nexport interface DsKeyValueListItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\nexport type DsKeyValueListDirection = 'column' | 'row';\r\n\r\n@Component({\r\n  selector: '[dsKeyValueList]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-list.component.html',\r\n  styleUrls: ['./ds-key-value-list.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueListComponent {\r\n  @Input() items: DsKeyValueListItem[] = [];\r\n  @Input() direction: DsKeyValueListDirection = 'column';\r\n  @Input() stacked = false;\r\n\r\n  @HostBinding('class')\r\n  get hostClasses(): string {\r\n    const classes = ['key-value-list'];\r\n\r\n    if (this.direction === 'row') {\r\n      classes.push('key-value-list-row');\r\n    }\r\n\r\n    if (this.stacked) {\r\n      classes.push('key-value-list-stacked');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-key-value-list.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "hostClasses": {
+                    "name": "hostClasses",
+                    "getSignature": {
+                        "name": "hostClasses",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 23
+                    }
+                }
+            },
+            "templateData": "@for (item of items; track item.key + '-' + item.value + '-' + $index) {\r\n  <div class=\"key-value\">\r\n    <span class=\"key\">{{ item.key }}</span>\r\n    <span class=\"value\">{{ item.value }}</span>\r\n  </div>\r\n}"
+        },
+        {
+            "name": "DsKeyValueTableComponent",
+            "id": "component-DsKeyValueTableComponent-085ff5544b8b3c9f8bdc9cc02206ca1eeb761fa9080c55859f04087dccca6aa843c20148e87399f3029592d74c4fb33c1da61df33349f9232c87793b9d056129",
+            "file": "src/lib/key value pair table/ds-key-value-table.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "[dsKeyValueTable]",
+            "styleUrls": [
+                "./ds-key-value-table.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-key-value-table.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "dividers",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "DsKeyValueTableItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "hostClasses",
+                    "defaultValue": "'key-value-table'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "decorators": [
+                        {
+                            "name": "HostBinding",
+                            "stringifiedArguments": "'class'"
+                        }
+                    ],
+                    "modifierKind": [
+                        171,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [
+                {
+                    "name": "class",
+                    "defaultValue": "'key-value-table'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "\"key-value-table\"",
+                    "decorators": []
+                }
+            ],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';\r\n\r\nexport interface DsKeyValueTableItem {\r\n  key: string;\r\n  value: string;\r\n}\r\n\r\n@Component({\r\n  selector: '[dsKeyValueTable]',\r\n  standalone: true,\r\n  templateUrl: './ds-key-value-table.component.html',\r\n  styleUrls: ['./ds-key-value-table.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsKeyValueTableComponent {\r\n  @Input() items: DsKeyValueTableItem[] = [];\r\n  @Input() dividers = false;\r\n\r\n  @HostBinding('class')\r\n  readonly hostClasses = 'key-value-table';\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host { display: inline-block; }",
+                    "styleUrl": "./ds-key-value-table.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "templateData": "@for (item of items; track item.key + '-' + item.value + '-' + $index) {\r\n  <div class=\"key-value\">\r\n    <span class=\"key\">{{ item.key }}</span>\r\n    <span class=\"value\">{{ item.value }}</span>\r\n  </div>\r\n\r\n  @if (dividers && !$last) {\r\n    <hr>\r\n  }\r\n}"
         },
         {
             "name": "DsLinkComponent",
@@ -4557,6 +5086,39 @@
                 "kind": 193
             },
             {
+                "name": "DsKeyValueExpressive",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "unknown | \"primary\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                "file": "src/lib/key value pair/ds-key-value.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsKeyValueListDirection",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"column\" | \"row\"",
+                "file": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsKeyValueSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"md\" | \"xs\" | \"sm\" | \"lg\" | \"xl\" | \"display\"",
+                "file": "src/lib/key value pair/ds-key-value.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "LinkType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -4897,6 +5459,43 @@
                     "kind": 193
                 }
             ],
+            "src/lib/key value pair/ds-key-value.component.ts": [
+                {
+                    "name": "DsKeyValueExpressive",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "unknown | \"primary\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                    "file": "src/lib/key value pair/ds-key-value.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsKeyValueSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"md\" | \"xs\" | \"sm\" | \"lg\" | \"xl\" | \"display\"",
+                    "file": "src/lib/key value pair/ds-key-value.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/key value pair list/ds-key-value-list.component.ts": [
+                {
+                    "name": "DsKeyValueListDirection",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"column\" | \"row\"",
+                    "file": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/link/ds-link.component.ts": [
                 {
                     "name": "LinkType",
@@ -4931,7 +5530,7 @@
         "children": []
     },
     "coverage": {
-        "count": 4,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -5348,6 +5947,99 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "BuckholtIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair grid/ds-key-value-grid.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsKeyValueGridComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair grid/ds-key-value-grid.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsKeyValueGridItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsKeyValueListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsKeyValueListItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsKeyValueListDirection",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair table/ds-key-value-table.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsKeyValueTableComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair table/ds-key-value-table.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsKeyValueTableItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair/ds-key-value.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsKeyValueComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair/ds-key-value.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsKeyValueExpressive",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/key value pair/ds-key-value.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsKeyValueSize",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

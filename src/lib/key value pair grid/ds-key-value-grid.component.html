@@ -1,0 +1,8 @@
+@for (item of items; track item.key + '-' + item.value + '-' + $index) {
+  <div class="key-value-item">
+    <div class="key-value">
+      <span class="key">{{ item.key }}</span>
+      <span class="value">{{ item.value }}</span>
+    </div>
+  </div>
+}
