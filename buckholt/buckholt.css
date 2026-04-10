@@ -6050,7 +6050,7 @@ fieldset:disabled .carousel-control-next {
   font-variant: normal;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 6 Pro";
+  font-family: "Font Awesome 6 Pro", "FontAwesome";
   font-weight: 400;
   content: "\f061";
   font-size: 1.5rem;
