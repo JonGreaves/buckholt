@@ -432,6 +432,476 @@
             "extends": []
         },
         {
+            "name": "DsListItem",
+            "id": "interface-DsListItem-55d0cf657db6e930e00ab3ecd7275dde2face58a46357639abe8cefdd8b40ea5400535e49b39b7e8e204e78e2536a83b2e1173906f7ac51e528ce519973fdb81",
+            "file": "src/lib/list/ds-list.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport type DsListVariant = 'unordered' | 'ordered';\r\n\r\nexport interface DsListItem {\r\n  text: string;\r\n  isHeading?: boolean;\r\n  icon?: string;\r\n  iconClass?: string;\r\n  children?: DsListItem[];\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-list',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-list.component.html',\r\n  styleUrl: './ds-list.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsListComponent {\r\n  @Input() variant: DsListVariant = 'unordered';\r\n  @Input() unstyled = false;\r\n  @Input() items: DsListItem[] = [];\r\n\r\n  protected isOrdered(): boolean {\r\n    return this.variant === 'ordered';\r\n  }\r\n\r\n  protected trackByIndex(index: number): number {\r\n    return index;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "children",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DsListItem[]",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 9
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "isHeading",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 7
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuActionItem",
+            "id": "interface-DsMenuActionItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 13
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuDividerItem",
+            "id": "interface-DsMenuDividerItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuHeaderItem",
+            "id": "interface-DsMenuHeaderItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 28
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuLinkItem",
+            "id": "interface-DsMenuLinkItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "href",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuSelectableSubmenuItem",
+            "id": "interface-DsMenuSelectableSubmenuItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "checked",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 60
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 61
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 58
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 62
+                },
+                {
+                    "name": "selectionType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"single\" | \"multiple\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 59
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 57
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuSubmenuActionItem",
+            "id": "interface-DsMenuSubmenuActionItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 52
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 53
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 51
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 50
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 49
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuSubmenuItem",
+            "id": "interface-DsMenuSubmenuItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 39
+                },
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DsMenuSubmenuChildItem[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 38
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 37
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "User",
             "id": "interface-User-d4821beac0e4a852e513391b7470981c4353fdd95a18628bb68136c8695b489ee15b926e2e5031bc26cf30e1508e0a362c3ee13a06734702b4d15af140e485d5",
             "file": "src/stories/user.ts",
@@ -1451,7 +1921,203 @@
         },
         {
             "name": "DsCardComponent",
-            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326",
+            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305",
+            "file": "src/lib/card original/ds-card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-card",
+            "styleUrls": [
+                "./ds-card.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "href",
+                    "defaultValue": "'#'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imagePosition",
+                    "defaultValue": "'none'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "CardImagePosition",
+                    "decorators": []
+                },
+                {
+                    "name": "imgAlt",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imgSrc",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "CardSize",
+                    "decorators": []
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "CardStyle",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'base'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "CardVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgTemplateOutlet"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./ds-card.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "isClickable": {
+                    "name": "isClickable",
+                    "getSignature": {
+                        "name": "isClickable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 44
+                    }
+                },
+                "isSelectable": {
+                    "name": "isSelectable",
+                    "getSignature": {
+                        "name": "isSelectable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 48
+                    }
+                },
+                "inputType": {
+                    "name": "inputType",
+                    "getSignature": {
+                        "name": "inputType",
+                        "type": "unknown",
+                        "returnType": "\"radio\" | \"checkbox\"",
+                        "line": 55
+                    }
+                },
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 61
+                    }
+                },
+                "hasImage": {
+                    "name": "hasImage",
+                    "getSignature": {
+                        "name": "hasImage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 91
+                    }
+                }
+            },
+            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
+        },
+        {
+            "name": "DsCardComponent",
+            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326-1",
             "file": "src/lib/card/ds-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -1701,206 +2367,10 @@
                     }
                 }
             },
-            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
-        },
-        {
-            "name": "DsCardComponent",
-            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305-1",
-            "file": "src/lib/card original/ds-card.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "ds-card",
-            "styleUrls": [
-                "./ds-card.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./ds-card.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "checked",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 42,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "href",
-                    "defaultValue": "'#'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 34,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imagePosition",
-                    "defaultValue": "'none'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 32,
-                    "type": "CardImagePosition",
-                    "decorators": []
-                },
-                {
-                    "name": "imgAlt",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 37,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imgSrc",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 36,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputId",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 40,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputValue",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 41,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "name",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 39,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 31,
-                    "type": "CardSize",
-                    "decorators": []
-                },
-                {
-                    "name": "style",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 30,
-                    "type": "CardStyle",
-                    "decorators": []
-                },
-                {
-                    "name": "variant",
-                    "defaultValue": "'base'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 29,
-                    "type": "CardVariant",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "NgIf"
-                },
-                {
-                    "name": "NgTemplateOutlet"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./ds-card.component.css"
-                }
-            ],
-            "stylesData": "",
-            "extends": [],
-            "accessors": {
-                "isClickable": {
-                    "name": "isClickable",
-                    "getSignature": {
-                        "name": "isClickable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 44
-                    }
-                },
-                "isSelectable": {
-                    "name": "isSelectable",
-                    "getSignature": {
-                        "name": "isSelectable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 48
-                    }
-                },
-                "inputType": {
-                    "name": "inputType",
-                    "getSignature": {
-                        "name": "inputType",
-                        "type": "unknown",
-                        "returnType": "\"radio\" | \"checkbox\"",
-                        "line": 55
-                    }
-                },
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 61
-                    }
-                },
-                "hasImage": {
-                    "name": "hasImage",
-                    "getSignature": {
-                        "name": "hasImage",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 91
-                    }
-                }
-            },
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "DsCardComponent-1",
-            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
+            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
         },
         {
             "name": "DsCheckboxComponent",
@@ -4868,6 +5338,316 @@
             "templateData": "<a\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n  [attr.target]=\"computedTarget\"\r\n  [attr.rel]=\"computedRel\"\r\n>\r\n  <!-- Standalone icon only (left) -->\r\n  <span\r\n    class=\"icon\"\r\n    *ngIf=\"showIcon\"\r\n  >\r\n    <i\r\n      [class]=\"iconClass\"\r\n      aria-hidden=\"true\"\r\n    ></i>\r\n  </span>\r\n\r\n  {{ text }}\r\n</a>\r\n"
         },
         {
+            "name": "DsListComponent",
+            "id": "component-DsListComponent-55d0cf657db6e930e00ab3ecd7275dde2face58a46357639abe8cefdd8b40ea5400535e49b39b7e8e204e78e2536a83b2e1173906f7ac51e528ce519973fdb81",
+            "file": "src/lib/list/ds-list.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-list",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-list.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "DsListItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "unstyled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'unordered'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "DsListVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "isOrdered",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ]
+                },
+                {
+                    "name": "trackByIndex",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\nexport type DsListVariant = 'unordered' | 'ordered';\r\n\r\nexport interface DsListItem {\r\n  text: string;\r\n  isHeading?: boolean;\r\n  icon?: string;\r\n  iconClass?: string;\r\n  children?: DsListItem[];\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-list',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-list.component.html',\r\n  styleUrl: './ds-list.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsListComponent {\r\n  @Input() variant: DsListVariant = 'unordered';\r\n  @Input() unstyled = false;\r\n  @Input() items: DsListItem[] = [];\r\n\r\n  protected isOrdered(): boolean {\r\n    return this.variant === 'ordered';\r\n  }\r\n\r\n  protected trackByIndex(index: number): number {\r\n    return index;\r\n  }\r\n}",
+            "styleUrl": "./ds-list.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<ng-template #listItems let-items let-level=\"level\" let-ordered=\"ordered\">\r\n  @for (item of items; track trackByIndex($index)) {\r\n    @if (item.isHeading) {\r\n      @if (ordered && level === 1 && $index === 0) {\r\n        <li class=\"list-heading\" value=\"0\">{{ item.text }}</li>\r\n      } @else {\r\n        <li class=\"list-heading\">{{ item.text }}</li>\r\n      }\r\n    } @else {\r\n      <li class=\"list-item\">\r\n        @if (item.icon) {\r\n          <span class=\"list-icon\" [ngClass]=\"item.iconClass\">\r\n            <i [class]=\"item.icon\"></i>\r\n          </span>\r\n        }\r\n        {{ item.text }}\r\n\r\n        @if (item.children?.length) {\r\n          @if (ordered) {\r\n            <ol>\r\n              <ng-container\r\n                [ngTemplateOutlet]=\"listItems\"\r\n                [ngTemplateOutletContext]=\"{\r\n                  $implicit: item.children,\r\n                  level: level + 1,\r\n                  ordered: ordered\r\n                }\"\r\n              />\r\n            </ol>\r\n          } @else {\r\n            <ul>\r\n              <ng-container\r\n                [ngTemplateOutlet]=\"listItems\"\r\n                [ngTemplateOutletContext]=\"{\r\n                  $implicit: item.children,\r\n                  level: level + 1,\r\n                  ordered: ordered\r\n                }\"\r\n              />\r\n            </ul>\r\n          }\r\n        }\r\n      </li>\r\n    }\r\n  }\r\n</ng-template>\r\n\r\n@if (isOrdered()) {\r\n  <ol class=\"list\" [class.list-unstyled]=\"unstyled\">\r\n    <ng-container\r\n      [ngTemplateOutlet]=\"listItems\"\r\n      [ngTemplateOutletContext]=\"{\r\n        $implicit: items,\r\n        level: 1,\r\n        ordered: true\r\n      }\"\r\n    />\r\n  </ol>\r\n} @else {\r\n  <ul class=\"list\" [class.list-unstyled]=\"unstyled\">\r\n    <ng-container\r\n      [ngTemplateOutlet]=\"listItems\"\r\n      [ngTemplateOutletContext]=\"{\r\n        $implicit: items,\r\n        level: 1,\r\n        ordered: false\r\n      }\"\r\n    />\r\n  </ul>\r\n}"
+        },
+        {
+            "name": "DsMenuComponent",
+            "id": "component-DsMenuComponent-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
+            "file": "src/lib/menu/ds-menu.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-menu",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-menu.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 75,
+                    "type": "DsMenuItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "instanceId",
+                    "defaultValue": "`ds-menu-${DsMenuComponent.nextInstanceId++}`",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 77,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "nextInstanceId",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 73,
+                    "modifierKind": [
+                        123,
+                        126
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getSelectableId",
+                    "args": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 79,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getSelectableName",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "DsMenuSelectableSubmenuItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string | null",
+                    "typeParameters": [],
+                    "line": 83,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "DsMenuSelectableSubmenuItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuItem =\r\n  | DsMenuActionItem\r\n  | DsMenuLinkItem\r\n  | DsMenuHeaderItem\r\n  | DsMenuDividerItem\r\n  | DsMenuSubmenuItem;\r\n\r\nexport interface DsMenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuSubmenuChildItem =\r\n  | DsMenuSubmenuActionItem\r\n  | DsMenuSelectableSubmenuItem;\r\n\r\nexport interface DsMenuSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu',\r\n  standalone: true,\r\n  templateUrl: './ds-menu.component.html',\r\n  styleUrl: './ds-menu.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() items: DsMenuItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-${DsMenuComponent.nextInstanceId++}`;\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "styleUrl": "./ds-menu.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"menu\">\r\n  <div class=\"menu-panel dropdown-menu\">\r\n    <ul class=\"menu-body\" role=\"menu\">\r\n      @for (item of items; track $index) {\r\n        @switch (item.type) {\r\n          @case ('header') {\r\n            <li>\r\n              <h6 class=\"menu-section-header\">{{ item.label }}</h6>\r\n            </li>\r\n          }\r\n\r\n          @case ('divider') {\r\n            <li>\r\n              <hr class=\"menu-divider\">\r\n            </li>\r\n          }\r\n\r\n          @case ('action') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                type=\"button\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n            </li>\r\n          }\r\n\r\n          @case ('link') {\r\n            <li>\r\n              <a\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                [attr.href]=\"item.disabled ? null : item.href\"\r\n                [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\r\n                [attr.tabindex]=\"item.disabled ? '-1' : null\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </a>\r\n            </li>\r\n          }\r\n\r\n          @case ('submenu') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item submenu-toggle\"\r\n                type=\"button\"\r\n                aria-haspopup=\"menu\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n\r\n              <ul class=\"submenu\" role=\"menu\">\r\n                @for (subItem of item.items; track $index; let childIndex = $index) {\r\n                  @switch (subItem.type) {\r\n                    @case ('action') {\r\n                      <li>\r\n                        <button\r\n                          class=\"menu-item\"\r\n                          [class.menu-item-danger]=\"subItem.danger\"\r\n                          type=\"button\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                        >\r\n                          @if (subItem.iconClass) {\r\n                            <i [class]=\"subItem.iconClass\" aria-hidden=\"true\"></i>\r\n                          }\r\n                          {{ subItem.label }}\r\n                        </button>\r\n                      </li>\r\n                    }\r\n\r\n                    @case ('selectable') {\r\n                      <li>\r\n                        <input\r\n                          [type]=\"subItem.selectionType === 'single' ? 'radio' : 'checkbox'\"\r\n                          class=\"submenu-item-selectable\"\r\n                          [id]=\"getSelectableId($index, childIndex)\"\r\n                          [attr.name]=\"getSelectableName(subItem, $index)\"\r\n                          [checked]=\"subItem.checked ?? false\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                          tabindex=\"-1\"\r\n                          aria-hidden=\"true\"\r\n                        >\r\n\r\n                        <label\r\n                          class=\"menu-item\"\r\n                          [attr.for]=\"getSelectableId($index, childIndex)\"\r\n                          tabindex=\"0\"\r\n                          [attr.role]=\"subItem.selectionType === 'single' ? 'menuitemradio' : 'menuitemcheckbox'\"\r\n                          [attr.aria-checked]=\"(subItem.checked ?? false) ? 'true' : 'false'\"\r\n                          [attr.aria-disabled]=\"subItem.disabled ? 'true' : null\"\r\n                          [attr.tabindex]=\"subItem.disabled ? '-1' : '0'\"\r\n                        >\r\n                          {{ subItem.label }}\r\n                        </label>\r\n                      </li>\r\n                    }\r\n                  }\r\n                }\r\n              </ul>\r\n            </li>\r\n          }\r\n        }\r\n      }\r\n    </ul>\r\n  </div>\r\n</div>"
+        },
+        {
             "name": "DsSelectableCardComponent",
             "id": "component-DsSelectableCardComponent-fe40c013cee2df7f2ff01635f423dcdfdaf80bf9fc6f88402793641a6f84ad2916e20b4e46032bb15bbb7d5d50febe8609fe97171cd1d92b4057a951788e245a",
             "file": "src/lib/card selectable/ds-selectable-card.component.ts",
@@ -5602,6 +6382,39 @@
                 "kind": 193
             },
             {
+                "name": "DsListVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"unordered\" | \"ordered\"",
+                "file": "src/lib/list/ds-list.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsMenuItem",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "DsMenuActionItem | DsMenuLinkItem | DsMenuHeaderItem | DsMenuDividerItem | DsMenuSubmenuItem",
+                "file": "src/lib/menu/ds-menu.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsMenuSubmenuChildItem",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "DsMenuSubmenuActionItem | DsMenuSelectableSubmenuItem",
+                "file": "src/lib/menu/ds-menu.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "DsSelectableCardSelectionType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -6030,6 +6843,43 @@
                     "subtype": "typealias",
                     "rawtype": "\"column\" | \"row\"",
                     "file": "src/lib/key value pair list/ds-key-value-list.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/list/ds-list.component.ts": [
+                {
+                    "name": "DsListVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"unordered\" | \"ordered\"",
+                    "file": "src/lib/list/ds-list.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/menu/ds-menu.component.ts": [
+                {
+                    "name": "DsMenuItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "DsMenuActionItem | DsMenuLinkItem | DsMenuHeaderItem | DsMenuDividerItem | DsMenuSubmenuItem",
+                    "file": "src/lib/menu/ds-menu.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsMenuSubmenuChildItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "DsMenuSubmenuActionItem | DsMenuSelectableSubmenuItem",
+                    "file": "src/lib/menu/ds-menu.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -6680,6 +7530,126 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "LinkType",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/list/ds-list.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsListComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/list/ds-list.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsListItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/list/ds-list.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsListVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsMenuComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuActionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuDividerItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuHeaderItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuLinkItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuSelectableSubmenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuSubmenuActionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuSubmenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsMenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu/ds-menu.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsMenuSubmenuChildItem",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

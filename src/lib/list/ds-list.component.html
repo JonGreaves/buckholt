@@ -1,0 +1,70 @@
+<ng-template #listItems let-items let-level="level" let-ordered="ordered">
+  @for (item of items; track trackByIndex($index)) {
+    @if (item.isHeading) {
+      @if (ordered && level === 1 && $index === 0) {
+        <li class="list-heading" value="0">{{ item.text }}</li>
+      } @else {
+        <li class="list-heading">{{ item.text }}</li>
+      }
+    } @else {
+      <li class="list-item">
+        @if (item.icon) {
+          <span class="list-icon" [ngClass]="item.iconClass">
+            <i [class]="item.icon"></i>
+          </span>
+        }
+        {{ item.text }}
+
+        @if (item.children?.length) {
+          @if (ordered) {
+            <ol>
+              <ng-container
+                [ngTemplateOutlet]="listItems"
+                [ngTemplateOutletContext]="{
+                  $implicit: item.children,
+                  level: level + 1,
+                  ordered: ordered
+                }"
+              />
+            </ol>
+          } @else {
+            <ul>
+              <ng-container
+                [ngTemplateOutlet]="listItems"
+                [ngTemplateOutletContext]="{
+                  $implicit: item.children,
+                  level: level + 1,
+                  ordered: ordered
+                }"
+              />
+            </ul>
+          }
+        }
+      </li>
+    }
+  }
+</ng-template>
+
+@if (isOrdered()) {
+  <ol class="list" [class.list-unstyled]="unstyled">
+    <ng-container
+      [ngTemplateOutlet]="listItems"
+      [ngTemplateOutletContext]="{
+        $implicit: items,
+        level: 1,
+        ordered: true
+      }"
+    />
+  </ol>
+} @else {
+  <ul class="list" [class.list-unstyled]="unstyled">
+    <ng-container
+      [ngTemplateOutlet]="listItems"
+      [ngTemplateOutletContext]="{
+        $implicit: items,
+        level: 1,
+        ordered: false
+      }"
+    />
+  </ul>
+}
