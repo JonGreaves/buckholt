@@ -1,0 +1,107 @@
+<div class="menu">
+  <div class="btn-combo">
+    <button type="button" [class]="mainButtonClass">
+      <span class="button-label">{{ label }}</span>
+    </button>
+
+    <button
+      type="button"
+      [class]="toggleButtonClass"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <div class="btn-icon">
+        <i class="fa-solid fa-caret-down" aria-hidden="true"></i>
+      </div>
+    </button>
+
+    <div class="menu-panel dropdown-menu dropdown-menu-end">
+      <ul class="menu-body" role="menu">
+        @for (item of items; track $index) {
+          @switch (item.type) {
+            @case ('header') {
+              <li>
+                <h6 class="menu-section-header">{{ item.label }}</h6>
+              </li>
+            }
+
+            @case ('divider') {
+              <li>
+                <hr class="menu-divider">
+              </li>
+            }
+
+            @case ('action') {
+              <li>
+                <button
+                  class="menu-item"
+                  [class.menu-item-danger]="item.danger"
+                  type="button"
+                  [disabled]="item.disabled ?? false"
+                >
+                  @if (item.iconClass) {
+                    <i [class]="item.iconClass" aria-hidden="true"></i>
+                  }
+                  {{ item.label }}
+                </button>
+              </li>
+            }
+
+            @case ('link') {
+              <li>
+                <a
+                  class="menu-item"
+                  [class.menu-item-danger]="item.danger"
+                  [attr.href]="item.disabled ? null : item.href"
+                  [attr.aria-disabled]="item.disabled ? 'true' : null"
+                  [attr.tabindex]="item.disabled ? '-1' : null"
+                >
+                  @if (item.iconClass) {
+                    <i [class]="item.iconClass" aria-hidden="true"></i>
+                  }
+                  {{ item.label }}
+                </a>
+              </li>
+            }
+
+            @case ('submenu') {
+              <li>
+                <button
+                  class="menu-item submenu-toggle"
+                  type="button"
+                  aria-haspopup="menu"
+                  [disabled]="item.disabled ?? false"
+                >
+                  @if (item.iconClass) {
+                    <i [class]="item.iconClass" aria-hidden="true"></i>
+                  }
+                  {{ item.label }}
+                </button>
+
+                <ul class="submenu" role="menu">
+                  @for (subItem of item.items; track $index) {
+                    @if (subItem.type === 'action') {
+                      <li>
+                        <button
+                          class="menu-item"
+                          [class.menu-item-danger]="subItem.danger"
+                          type="button"
+                          [disabled]="subItem.disabled ?? false"
+                        >
+                          @if (subItem.iconClass) {
+                            <i [class]="subItem.iconClass" aria-hidden="true"></i>
+                          }
+                          {{ subItem.label }}
+                        </button>
+                      </li>
+                    }
+                  }
+                </ul>
+              </li>
+            }
+          }
+        }
+      </ul>
+    </div>
+  </div>
+</div>

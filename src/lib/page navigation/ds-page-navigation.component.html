@@ -1,0 +1,10 @@
+@for (item of items; track trackByIndex($index)) {
+  <li class="nav-item">
+    <a [class]="getLinkClasses(item)" [attr.href]="item.href">
+      @if (item.iconClass) {
+        <i [class]="item.iconClass"></i>
+      }
+      {{ item.label }}
+    </a>
+  </li>
+}

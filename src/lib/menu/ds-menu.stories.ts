@@ -111,7 +111,7 @@ const iconAndDangerItems: DsMenuItem[] = [
 ];
 
 const meta: Meta<DsMenuComponent> = {
-  title: 'Components/Menu',
+  title: 'Buckholt/Menu',
   component: DsMenuComponent,
   tags: ['autodocs'],
   args: {

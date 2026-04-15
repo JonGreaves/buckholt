@@ -562,6 +562,411 @@
             "extends": []
         },
         {
+            "name": "DsMenuButtonActionItem",
+            "id": "interface-DsMenuButtonActionItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 16
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 17
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 15
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonDividerItem",
+            "id": "interface-DsMenuButtonDividerItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 35
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonHeaderItem",
+            "id": "interface-DsMenuButtonHeaderItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonLinkItem",
+            "id": "interface-DsMenuButtonLinkItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 25
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "href",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonSelectableSubmenuItem",
+            "id": "interface-DsMenuButtonSelectableSubmenuItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "checked",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 62
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 63
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 60
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 64
+                },
+                {
+                    "name": "selectionType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "\"single\" | \"multiple\"",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 61
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 59
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonSubmenuActionItem",
+            "id": "interface-DsMenuButtonSubmenuActionItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "danger",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 54
+                },
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 55
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 53
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 52
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 51
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsMenuButtonSubmenuItem",
+            "id": "interface-DsMenuButtonSubmenuItem-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "disabled",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 42
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "items",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DsMenuButtonSubmenuChildItem[]",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 43
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 40
+                },
+                {
+                    "name": "type",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 39
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
             "name": "DsMenuDividerItem",
             "id": "interface-DsMenuDividerItem-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
             "file": "src/lib/menu/ds-menu.component.ts",
@@ -894,6 +1299,61 @@
                     "optional": false,
                     "description": "",
                     "line": 37
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 172,
+            "methods": [],
+            "extends": []
+        },
+        {
+            "name": "DsPageNavigationItem",
+            "id": "interface-DsPageNavigationItem-8caeb433d45970c0b43cff22269aafea19c52a2055c134cf8d047a96eb56882d17024366cdb1bae74c5da882795aa27be90c346220d4b3f59143b9beeaa99a53",
+            "file": "src/lib/page navigation/ds-page-navigation.component.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport interface DsPageNavigationItem {\r\n  label: string;\r\n  href: string;\r\n  active?: boolean;\r\n  iconClass?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ul[ds-page-navigation]',\r\n  standalone: true,\r\n  templateUrl: './ds-page-navigation.component.html',\r\n  styleUrl: './ds-page-navigation.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    class: 'nav',\r\n  },\r\n})\r\nexport class DsPageNavigationComponent {\r\n  /**\r\n   * Buckholt page-navigation items.\r\n   * The docs support a label, link target, optional active state,\r\n   * and optional icon rendered directly inside the anchor.\r\n   */\r\n  @Input({ required: true }) items: DsPageNavigationItem[] = [];\r\n\r\n  getLinkClasses(item: DsPageNavigationItem): string[] {\r\n    return item.active ? ['nav-link', 'active'] : ['nav-link'];\r\n  }\r\n\r\n  trackByIndex(index: number): number {\r\n    return index;\r\n  }\r\n}",
+            "properties": [
+                {
+                    "name": "active",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "boolean",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 6
+                },
+                {
+                    "name": "href",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                },
+                {
+                    "name": "iconClass",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 7
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
                 }
             ],
             "indexSignatures": [],
@@ -1921,203 +2381,7 @@
         },
         {
             "name": "DsCardComponent",
-            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305",
-            "file": "src/lib/card original/ds-card.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "ds-card",
-            "styleUrls": [
-                "./ds-card.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./ds-card.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "checked",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 42,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "href",
-                    "defaultValue": "'#'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 34,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imagePosition",
-                    "defaultValue": "'none'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 32,
-                    "type": "CardImagePosition",
-                    "decorators": []
-                },
-                {
-                    "name": "imgAlt",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 37,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imgSrc",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 36,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputId",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 40,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputValue",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 41,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "name",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 39,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 31,
-                    "type": "CardSize",
-                    "decorators": []
-                },
-                {
-                    "name": "style",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 30,
-                    "type": "CardStyle",
-                    "decorators": []
-                },
-                {
-                    "name": "variant",
-                    "defaultValue": "'base'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 29,
-                    "type": "CardVariant",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "NgIf"
-                },
-                {
-                    "name": "NgTemplateOutlet"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./ds-card.component.css"
-                }
-            ],
-            "stylesData": "",
-            "extends": [],
-            "accessors": {
-                "isClickable": {
-                    "name": "isClickable",
-                    "getSignature": {
-                        "name": "isClickable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 44
-                    }
-                },
-                "isSelectable": {
-                    "name": "isSelectable",
-                    "getSignature": {
-                        "name": "isSelectable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 48
-                    }
-                },
-                "inputType": {
-                    "name": "inputType",
-                    "getSignature": {
-                        "name": "inputType",
-                        "type": "unknown",
-                        "returnType": "\"radio\" | \"checkbox\"",
-                        "line": 55
-                    }
-                },
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 61
-                    }
-                },
-                "hasImage": {
-                    "name": "hasImage",
-                    "getSignature": {
-                        "name": "hasImage",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 91
-                    }
-                }
-            },
-            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
-        },
-        {
-            "name": "DsCardComponent",
-            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326-1",
+            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326",
             "file": "src/lib/card/ds-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2367,10 +2631,206 @@
                     }
                 }
             },
+            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
+        },
+        {
+            "name": "DsCardComponent",
+            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305-1",
+            "file": "src/lib/card original/ds-card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-card",
+            "styleUrls": [
+                "./ds-card.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "href",
+                    "defaultValue": "'#'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imagePosition",
+                    "defaultValue": "'none'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "CardImagePosition",
+                    "decorators": []
+                },
+                {
+                    "name": "imgAlt",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imgSrc",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "CardSize",
+                    "decorators": []
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "CardStyle",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'base'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "CardVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgTemplateOutlet"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./ds-card.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "isClickable": {
+                    "name": "isClickable",
+                    "getSignature": {
+                        "name": "isClickable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 44
+                    }
+                },
+                "isSelectable": {
+                    "name": "isSelectable",
+                    "getSignature": {
+                        "name": "isSelectable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 48
+                    }
+                },
+                "inputType": {
+                    "name": "inputType",
+                    "getSignature": {
+                        "name": "inputType",
+                        "type": "unknown",
+                        "returnType": "\"radio\" | \"checkbox\"",
+                        "line": 55
+                    }
+                },
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 61
+                    }
+                },
+                "hasImage": {
+                    "name": "hasImage",
+                    "getSignature": {
+                        "name": "hasImage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 91
+                    }
+                }
+            },
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "DsCardComponent-1",
-            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
+            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
         },
         {
             "name": "DsCheckboxComponent",
@@ -2979,6 +3439,124 @@
                 }
             },
             "templateData": "<div class=\"collapse-item\">\r\n  <a\r\n    class=\"collapse-trigger\"\r\n    data-bs-toggle=\"collapse\"\r\n    [attr.href]=\"targetSelector\"\r\n    role=\"button\"\r\n    [attr.aria-expanded]=\"ariaExpanded\"\r\n    [attr.aria-controls]=\"id\"\r\n  >\r\n    {{ trigger }}\r\n  </a>\r\n\r\n  <div\r\n    class=\"collapse-card collapse\"\r\n    [class.show]=\"expanded\"\r\n    [id]=\"id\"\r\n  >\r\n    <div class=\"collapse-content\">\r\n      <ng-content />\r\n    </div>\r\n\r\n    @if (showCloseButton) {\r\n      <button\r\n        type=\"button\"\r\n        class=\"btn-close\"\r\n        data-bs-toggle=\"collapse\"\r\n        [attr.href]=\"targetSelector\"\r\n        [attr.aria-label]=\"closeAriaLabel\"\r\n      ></button>\r\n    }\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "DsComboButtonComponent",
+            "id": "component-DsComboButtonComponent-7b815e578d56b30f22957f3f9bc94850a06714c9f0d43773ae47438616167f8590a79613d9c7abeb5273c6116f743f01dc2451bdcba5d29aeef18bb94adeecec",
+            "file": "src/lib/menu button/ds-combo-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-combo-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-combo-button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "DsMenuButtonItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Combo'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "DsComboButtonStyle",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "instanceId",
+                    "defaultValue": "`ds-combo-button-${DsComboButtonComponent.nextInstanceId++}`",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "nextInstanceId",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "modifierKind": [
+                        123,
+                        126
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { DsMenuButtonItem } from './ds-menu-button.component';\r\n\r\nexport type DsComboButtonStyle = 'primary' | 'secondary';\r\n\r\n@Component({\r\n  selector: 'ds-combo-button',\r\n  standalone: true,\r\n  templateUrl: './ds-combo-button.component.html',\r\n  styleUrl: './ds-combo-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsComboButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Combo';\r\n  @Input() style: DsComboButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-combo-button-${DsComboButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get mainButtonClass(): string {\r\n    return `btn btn-${this.style}`;\r\n  }\r\n\r\n  protected get toggleButtonClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n}",
+            "styleUrl": "./ds-combo-button.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "mainButtonClass": {
+                    "name": "mainButtonClass",
+                    "getSignature": {
+                        "name": "mainButtonClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 22
+                    }
+                },
+                "toggleButtonClass": {
+                    "name": "toggleButtonClass",
+                    "getSignature": {
+                        "name": "toggleButtonClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 26
+                    }
+                }
+            },
+            "templateData": "<div class=\"menu\">\r\n  <div class=\"btn-combo\">\r\n    <button type=\"button\" [class]=\"mainButtonClass\">\r\n      <span class=\"button-label\">{{ label }}</span>\r\n    </button>\r\n\r\n    <button\r\n      type=\"button\"\r\n      [class]=\"toggleButtonClass\"\r\n      data-bs-toggle=\"dropdown\"\r\n      aria-expanded=\"false\"\r\n    >\r\n      <div class=\"btn-icon\">\r\n        <i class=\"fa-solid fa-caret-down\" aria-hidden=\"true\"></i>\r\n      </div>\r\n    </button>\r\n\r\n    <div class=\"menu-panel dropdown-menu dropdown-menu-end\">\r\n      <ul class=\"menu-body\" role=\"menu\">\r\n        @for (item of items; track $index) {\r\n          @switch (item.type) {\r\n            @case ('header') {\r\n              <li>\r\n                <h6 class=\"menu-section-header\">{{ item.label }}</h6>\r\n              </li>\r\n            }\r\n\r\n            @case ('divider') {\r\n              <li>\r\n                <hr class=\"menu-divider\">\r\n              </li>\r\n            }\r\n\r\n            @case ('action') {\r\n              <li>\r\n                <button\r\n                  class=\"menu-item\"\r\n                  [class.menu-item-danger]=\"item.danger\"\r\n                  type=\"button\"\r\n                  [disabled]=\"item.disabled ?? false\"\r\n                >\r\n                  @if (item.iconClass) {\r\n                    <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                  }\r\n                  {{ item.label }}\r\n                </button>\r\n              </li>\r\n            }\r\n\r\n            @case ('link') {\r\n              <li>\r\n                <a\r\n                  class=\"menu-item\"\r\n                  [class.menu-item-danger]=\"item.danger\"\r\n                  [attr.href]=\"item.disabled ? null : item.href\"\r\n                  [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\r\n                  [attr.tabindex]=\"item.disabled ? '-1' : null\"\r\n                >\r\n                  @if (item.iconClass) {\r\n                    <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                  }\r\n                  {{ item.label }}\r\n                </a>\r\n              </li>\r\n            }\r\n\r\n            @case ('submenu') {\r\n              <li>\r\n                <button\r\n                  class=\"menu-item submenu-toggle\"\r\n                  type=\"button\"\r\n                  aria-haspopup=\"menu\"\r\n                  [disabled]=\"item.disabled ?? false\"\r\n                >\r\n                  @if (item.iconClass) {\r\n                    <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                  }\r\n                  {{ item.label }}\r\n                </button>\r\n\r\n                <ul class=\"submenu\" role=\"menu\">\r\n                  @for (subItem of item.items; track $index) {\r\n                    @if (subItem.type === 'action') {\r\n                      <li>\r\n                        <button\r\n                          class=\"menu-item\"\r\n                          [class.menu-item-danger]=\"subItem.danger\"\r\n                          type=\"button\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                        >\r\n                          @if (subItem.iconClass) {\r\n                            <i [class]=\"subItem.iconClass\" aria-hidden=\"true\"></i>\r\n                          }\r\n                          {{ subItem.label }}\r\n                        </button>\r\n                      </li>\r\n                    }\r\n                  }\r\n                </ul>\r\n              </li>\r\n            }\r\n          }\r\n        }\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</div>"
         },
         {
             "name": "DsDropdownComponent",
@@ -5459,6 +6037,224 @@
             "templateData": "<ng-template #listItems let-items let-level=\"level\" let-ordered=\"ordered\">\r\n  @for (item of items; track trackByIndex($index)) {\r\n    @if (item.isHeading) {\r\n      @if (ordered && level === 1 && $index === 0) {\r\n        <li class=\"list-heading\" value=\"0\">{{ item.text }}</li>\r\n      } @else {\r\n        <li class=\"list-heading\">{{ item.text }}</li>\r\n      }\r\n    } @else {\r\n      <li class=\"list-item\">\r\n        @if (item.icon) {\r\n          <span class=\"list-icon\" [ngClass]=\"item.iconClass\">\r\n            <i [class]=\"item.icon\"></i>\r\n          </span>\r\n        }\r\n        {{ item.text }}\r\n\r\n        @if (item.children?.length) {\r\n          @if (ordered) {\r\n            <ol>\r\n              <ng-container\r\n                [ngTemplateOutlet]=\"listItems\"\r\n                [ngTemplateOutletContext]=\"{\r\n                  $implicit: item.children,\r\n                  level: level + 1,\r\n                  ordered: ordered\r\n                }\"\r\n              />\r\n            </ol>\r\n          } @else {\r\n            <ul>\r\n              <ng-container\r\n                [ngTemplateOutlet]=\"listItems\"\r\n                [ngTemplateOutletContext]=\"{\r\n                  $implicit: item.children,\r\n                  level: level + 1,\r\n                  ordered: ordered\r\n                }\"\r\n              />\r\n            </ul>\r\n          }\r\n        }\r\n      </li>\r\n    }\r\n  }\r\n</ng-template>\r\n\r\n@if (isOrdered()) {\r\n  <ol class=\"list\" [class.list-unstyled]=\"unstyled\">\r\n    <ng-container\r\n      [ngTemplateOutlet]=\"listItems\"\r\n      [ngTemplateOutletContext]=\"{\r\n        $implicit: items,\r\n        level: 1,\r\n        ordered: true\r\n      }\"\r\n    />\r\n  </ol>\r\n} @else {\r\n  <ul class=\"list\" [class.list-unstyled]=\"unstyled\">\r\n    <ng-container\r\n      [ngTemplateOutlet]=\"listItems\"\r\n      [ngTemplateOutletContext]=\"{\r\n        $implicit: items,\r\n        level: 1,\r\n        ordered: false\r\n      }\"\r\n    />\r\n  </ul>\r\n}"
         },
         {
+            "name": "DsMenuButtonComponent",
+            "id": "component-DsMenuButtonComponent-d7e110b17e6185443a87d7ecb9a0ff1c2a2b09ae011860b1110364c746fa236c58df192f46939d75a74cc6578805bd40165be799145be80ac337997a9e5ffe34",
+            "file": "src/lib/menu button/ds-menu-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-menu-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-menu-button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 79,
+                    "type": "DsMenuButtonItem[]",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Menu button'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 77,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 78,
+                    "type": "DsMenuButtonStyle",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "instanceId",
+                    "defaultValue": "`ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 81,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "nextInstanceId",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 75,
+                    "modifierKind": [
+                        123,
+                        126
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getSelectableId",
+                    "args": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 87,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "childIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getSelectableName",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "DsMenuButtonSelectableSubmenuItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string | null",
+                    "typeParameters": [],
+                    "line": 91,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "DsMenuButtonSelectableSubmenuItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "parentIndex",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsMenuButtonStyle = 'primary' | 'secondary' | 'ghost';\r\n\r\nexport type DsMenuButtonItem =\r\n  | DsMenuButtonActionItem\r\n  | DsMenuButtonLinkItem\r\n  | DsMenuButtonHeaderItem\r\n  | DsMenuButtonDividerItem\r\n  | DsMenuButtonSubmenuItem;\r\n\r\nexport interface DsMenuButtonActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonLinkItem {\r\n  type: 'link';\r\n  label: string;\r\n  href: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonHeaderItem {\r\n  type: 'header';\r\n  label: string;\r\n}\r\n\r\nexport interface DsMenuButtonDividerItem {\r\n  type: 'divider';\r\n}\r\n\r\nexport interface DsMenuButtonSubmenuItem {\r\n  type: 'submenu';\r\n  label: string;\r\n  iconClass?: string;\r\n  disabled?: boolean;\r\n  items: DsMenuButtonSubmenuChildItem[];\r\n}\r\n\r\nexport type DsMenuButtonSubmenuChildItem =\r\n  | DsMenuButtonSubmenuActionItem\r\n  | DsMenuButtonSelectableSubmenuItem;\r\n\r\nexport interface DsMenuButtonSubmenuActionItem {\r\n  type: 'action';\r\n  label: string;\r\n  iconClass?: string;\r\n  danger?: boolean;\r\n  disabled?: boolean;\r\n}\r\n\r\nexport interface DsMenuButtonSelectableSubmenuItem {\r\n  type: 'selectable';\r\n  label: string;\r\n  selectionType: 'single' | 'multiple';\r\n  checked?: boolean;\r\n  disabled?: boolean;\r\n  name?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-menu-button.component.html',\r\n  styleUrl: './ds-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsMenuButtonComponent {\r\n  private static nextInstanceId = 0;\r\n\r\n  @Input() label = 'Menu button';\r\n  @Input() style: DsMenuButtonStyle = 'primary';\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n\r\n  protected readonly instanceId = `ds-menu-button-${DsMenuButtonComponent.nextInstanceId++}`;\r\n\r\n  protected get triggerClass(): string {\r\n    return `btn btn-${this.style} menu-toggle`;\r\n  }\r\n\r\n  protected getSelectableId(parentIndex: number, childIndex: number): string {\r\n    return `${this.instanceId}-${parentIndex}-${childIndex}`;\r\n  }\r\n\r\n  protected getSelectableName(\r\n    item: DsMenuButtonSelectableSubmenuItem,\r\n    parentIndex: number,\r\n  ): string | null {\r\n    if (item.selectionType !== 'single') {\r\n      return null;\r\n    }\r\n\r\n    return item.name?.trim() || `${this.instanceId}-single-${parentIndex}`;\r\n  }\r\n}",
+            "styleUrl": "./ds-menu-button.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "triggerClass": {
+                    "name": "triggerClass",
+                    "getSignature": {
+                        "name": "triggerClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 83
+                    }
+                }
+            },
+            "templateData": "<div class=\"menu\">\r\n  <button\r\n    type=\"button\"\r\n    [class]=\"triggerClass\"\r\n    data-bs-toggle=\"dropdown\"\r\n    aria-expanded=\"false\"\r\n  >\r\n    <span class=\"button-label\">{{ label }}</span>\r\n    <div class=\"btn-icon\">\r\n      <i class=\"fa-solid fa-caret-down\" aria-hidden=\"true\"></i>\r\n    </div>\r\n  </button>\r\n\r\n  <div class=\"menu-panel dropdown-menu\">\r\n    <ul class=\"menu-body\" role=\"menu\">\r\n      @for (item of items; track $index; let parentIndex = $index) {\r\n        @switch (item.type) {\r\n          @case ('header') {\r\n            <li>\r\n              <h6 class=\"menu-section-header\">{{ item.label }}</h6>\r\n            </li>\r\n          }\r\n\r\n          @case ('divider') {\r\n            <li>\r\n              <hr class=\"menu-divider\">\r\n            </li>\r\n          }\r\n\r\n          @case ('action') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                type=\"button\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n            </li>\r\n          }\r\n\r\n          @case ('link') {\r\n            <li>\r\n              <a\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                [attr.href]=\"item.disabled ? null : item.href\"\r\n                [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\r\n                [attr.tabindex]=\"item.disabled ? '-1' : null\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </a>\r\n            </li>\r\n          }\r\n\r\n          @case ('submenu') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item submenu-toggle\"\r\n                type=\"button\"\r\n                aria-haspopup=\"menu\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n\r\n              <ul class=\"submenu\" role=\"menu\">\r\n                @for (subItem of item.items; track $index; let childIndex = $index) {\r\n                  @switch (subItem.type) {\r\n                    @case ('action') {\r\n                      <li>\r\n                        <button\r\n                          class=\"menu-item\"\r\n                          [class.menu-item-danger]=\"subItem.danger\"\r\n                          type=\"button\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                        >\r\n                          @if (subItem.iconClass) {\r\n                            <i [class]=\"subItem.iconClass\" aria-hidden=\"true\"></i>\r\n                          }\r\n                          {{ subItem.label }}\r\n                        </button>\r\n                      </li>\r\n                    }\r\n\r\n                    @case ('selectable') {\r\n                      <li>\r\n                        <input\r\n                          [type]=\"subItem.selectionType === 'single' ? 'radio' : 'checkbox'\"\r\n                          class=\"submenu-item-selectable\"\r\n                          [id]=\"getSelectableId(parentIndex, childIndex)\"\r\n                          [attr.name]=\"getSelectableName(subItem, parentIndex)\"\r\n                          [checked]=\"subItem.checked ?? false\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                          tabindex=\"-1\"\r\n                          aria-hidden=\"true\"\r\n                        >\r\n\r\n                        <label\r\n                          class=\"menu-item\"\r\n                          [attr.for]=\"getSelectableId(parentIndex, childIndex)\"\r\n                          [attr.tabindex]=\"subItem.disabled ? '-1' : '0'\"\r\n                          [attr.role]=\"subItem.selectionType === 'single' ? 'menuitemradio' : 'menuitemcheckbox'\"\r\n                          [attr.aria-checked]=\"(subItem.checked ?? false) ? 'true' : 'false'\"\r\n                          [attr.aria-disabled]=\"subItem.disabled ? 'true' : null\"\r\n                        >\r\n                          {{ subItem.label }}\r\n                        </label>\r\n                      </li>\r\n                    }\r\n                  }\r\n                }\r\n              </ul>\r\n            </li>\r\n          }\r\n        }\r\n      }\r\n    </ul>\r\n  </div>\r\n</div>"
+        },
+        {
             "name": "DsMenuComponent",
             "id": "component-DsMenuComponent-c095ecc081eec491a504742a8319c5fea4d55c5a3ae945bb40b44b8eaf052cbc33a93a65f73033e7e4112aad3948e2f543f199194b0d817a3f85f6c414668158",
             "file": "src/lib/menu/ds-menu.component.ts",
@@ -5646,6 +6442,415 @@
             "stylesData": "",
             "extends": [],
             "templateData": "<div class=\"menu\">\r\n  <div class=\"menu-panel dropdown-menu\">\r\n    <ul class=\"menu-body\" role=\"menu\">\r\n      @for (item of items; track $index) {\r\n        @switch (item.type) {\r\n          @case ('header') {\r\n            <li>\r\n              <h6 class=\"menu-section-header\">{{ item.label }}</h6>\r\n            </li>\r\n          }\r\n\r\n          @case ('divider') {\r\n            <li>\r\n              <hr class=\"menu-divider\">\r\n            </li>\r\n          }\r\n\r\n          @case ('action') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                type=\"button\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n            </li>\r\n          }\r\n\r\n          @case ('link') {\r\n            <li>\r\n              <a\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                [attr.href]=\"item.disabled ? null : item.href\"\r\n                [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\r\n                [attr.tabindex]=\"item.disabled ? '-1' : null\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </a>\r\n            </li>\r\n          }\r\n\r\n          @case ('submenu') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item submenu-toggle\"\r\n                type=\"button\"\r\n                aria-haspopup=\"menu\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n\r\n              <ul class=\"submenu\" role=\"menu\">\r\n                @for (subItem of item.items; track $index; let childIndex = $index) {\r\n                  @switch (subItem.type) {\r\n                    @case ('action') {\r\n                      <li>\r\n                        <button\r\n                          class=\"menu-item\"\r\n                          [class.menu-item-danger]=\"subItem.danger\"\r\n                          type=\"button\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                        >\r\n                          @if (subItem.iconClass) {\r\n                            <i [class]=\"subItem.iconClass\" aria-hidden=\"true\"></i>\r\n                          }\r\n                          {{ subItem.label }}\r\n                        </button>\r\n                      </li>\r\n                    }\r\n\r\n                    @case ('selectable') {\r\n                      <li>\r\n                        <input\r\n                          [type]=\"subItem.selectionType === 'single' ? 'radio' : 'checkbox'\"\r\n                          class=\"submenu-item-selectable\"\r\n                          [id]=\"getSelectableId($index, childIndex)\"\r\n                          [attr.name]=\"getSelectableName(subItem, $index)\"\r\n                          [checked]=\"subItem.checked ?? false\"\r\n                          [disabled]=\"subItem.disabled ?? false\"\r\n                          tabindex=\"-1\"\r\n                          aria-hidden=\"true\"\r\n                        >\r\n\r\n                        <label\r\n                          class=\"menu-item\"\r\n                          [attr.for]=\"getSelectableId($index, childIndex)\"\r\n                          tabindex=\"0\"\r\n                          [attr.role]=\"subItem.selectionType === 'single' ? 'menuitemradio' : 'menuitemcheckbox'\"\r\n                          [attr.aria-checked]=\"(subItem.checked ?? false) ? 'true' : 'false'\"\r\n                          [attr.aria-disabled]=\"subItem.disabled ? 'true' : null\"\r\n                          [attr.tabindex]=\"subItem.disabled ? '-1' : '0'\"\r\n                        >\r\n                          {{ subItem.label }}\r\n                        </label>\r\n                      </li>\r\n                    }\r\n                  }\r\n                }\r\n              </ul>\r\n            </li>\r\n          }\r\n        }\r\n      }\r\n    </ul>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "DsOverflowMenuButtonComponent",
+            "id": "component-DsOverflowMenuButtonComponent-2c03981e49e47e547fe2349e4a030ffbba89dd383de8297d777444c992a2c9486d5c4b48bfe1c9558845a7c41f2a68f7c9bf679f29f2ca5937591d1780af2bc1",
+            "file": "src/lib/menu button/ds-overflow-menu-button.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-overflow-menu-button",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-overflow-menu-button.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "DsMenuButtonItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\nimport { DsMenuButtonItem } from './ds-menu-button.component';\r\n\r\n@Component({\r\n  selector: 'ds-overflow-menu-button',\r\n  standalone: true,\r\n  templateUrl: './ds-overflow-menu-button.component.html',\r\n  styleUrl: './ds-overflow-menu-button.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsOverflowMenuButtonComponent {\r\n  @Input() items: DsMenuButtonItem[] = [];\r\n}",
+            "styleUrl": "./ds-overflow-menu-button.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"menu\">\r\n  <button\r\n    type=\"button\"\r\n    class=\"btn btn-ghost menu-toggle\"\r\n    data-bs-toggle=\"dropdown\"\r\n    aria-expanded=\"false\"\r\n  >\r\n    <div class=\"btn-icon\">\r\n      <i class=\"fa-regular fa-ellipsis-vertical\" aria-hidden=\"true\"></i>\r\n    </div>\r\n  </button>\r\n\r\n  <div class=\"menu-panel dropdown-menu dropdown-menu-end\">\r\n    <ul class=\"menu-body\" role=\"menu\">\r\n      @for (item of items; track $index) {\r\n        @switch (item.type) {\r\n          @case ('header') {\r\n            <li>\r\n              <h6 class=\"menu-section-header\">{{ item.label }}</h6>\r\n            </li>\r\n          }\r\n\r\n          @case ('divider') {\r\n            <li>\r\n              <hr class=\"menu-divider\">\r\n            </li>\r\n          }\r\n\r\n          @case ('action') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                type=\"button\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n            </li>\r\n          }\r\n\r\n          @case ('link') {\r\n            <li>\r\n              <a\r\n                class=\"menu-item\"\r\n                [class.menu-item-danger]=\"item.danger\"\r\n                [attr.href]=\"item.disabled ? null : item.href\"\r\n                [attr.aria-disabled]=\"item.disabled ? 'true' : null\"\r\n                [attr.tabindex]=\"item.disabled ? '-1' : null\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </a>\r\n            </li>\r\n          }\r\n\r\n          @case ('submenu') {\r\n            <li>\r\n              <button\r\n                class=\"menu-item submenu-toggle\"\r\n                type=\"button\"\r\n                aria-haspopup=\"menu\"\r\n                [disabled]=\"item.disabled ?? false\"\r\n              >\r\n                @if (item.iconClass) {\r\n                  <i [class]=\"item.iconClass\" aria-hidden=\"true\"></i>\r\n                }\r\n                {{ item.label }}\r\n              </button>\r\n\r\n              <ul class=\"submenu\" role=\"menu\">\r\n                @for (subItem of item.items; track $index) {\r\n                  @if (subItem.type === 'action') {\r\n                    <li>\r\n                      <button\r\n                        class=\"menu-item\"\r\n                        [class.menu-item-danger]=\"subItem.danger\"\r\n                        type=\"button\"\r\n                        [disabled]=\"subItem.disabled ?? false\"\r\n                      >\r\n                        @if (subItem.iconClass) {\r\n                          <i [class]=\"subItem.iconClass\" aria-hidden=\"true\"></i>\r\n                        }\r\n                        {{ subItem.label }}\r\n                      </button>\r\n                    </li>\r\n                  }\r\n                }\r\n              </ul>\r\n            </li>\r\n          }\r\n        }\r\n      }\r\n    </ul>\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "DsPageNavigationComponent",
+            "id": "component-DsPageNavigationComponent-8caeb433d45970c0b43cff22269aafea19c52a2055c134cf8d047a96eb56882d17024366cdb1bae74c5da882795aa27be90c346220d4b3f59143b9beeaa99a53",
+            "file": "src/lib/page navigation/ds-page-navigation.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "host": {},
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ul[ds-page-navigation]",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-page-navigation.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "required": true,
+                    "name": "items",
+                    "defaultValue": "[]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "optional": false,
+                    "rawdescription": "\n\nBuckholt page-navigation items.\nThe docs support a label, link target, optional active state,\nand optional icon rendered directly inside the anchor.\n",
+                    "description": "<p>Buckholt page-navigation items.\nThe docs support a label, link target, optional active state,\nand optional icon rendered directly inside the anchor.</p>\n",
+                    "line": 26,
+                    "type": "DsPageNavigationItem[]",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "getLinkClasses",
+                    "args": [
+                        {
+                            "name": "item",
+                            "type": "DsPageNavigationItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "string[]",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "item",
+                            "type": "DsPageNavigationItem",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "trackByIndex",
+                    "args": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "index",
+                            "type": "number",
+                            "optional": false,
+                            "dotDotDotToken": false,
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport interface DsPageNavigationItem {\r\n  label: string;\r\n  href: string;\r\n  active?: boolean;\r\n  iconClass?: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'ul[ds-page-navigation]',\r\n  standalone: true,\r\n  templateUrl: './ds-page-navigation.component.html',\r\n  styleUrl: './ds-page-navigation.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    class: 'nav',\r\n  },\r\n})\r\nexport class DsPageNavigationComponent {\r\n  /**\r\n   * Buckholt page-navigation items.\r\n   * The docs support a label, link target, optional active state,\r\n   * and optional icon rendered directly inside the anchor.\r\n   */\r\n  @Input({ required: true }) items: DsPageNavigationItem[] = [];\r\n\r\n  getLinkClasses(item: DsPageNavigationItem): string[] {\r\n    return item.active ? ['nav-link', 'active'] : ['nav-link'];\r\n  }\r\n\r\n  trackByIndex(index: number): number {\r\n    return index;\r\n  }\r\n}",
+            "styleUrl": "./ds-page-navigation.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "@for (item of items; track trackByIndex($index)) {\r\n  <li class=\"nav-item\">\r\n    <a [class]=\"getLinkClasses(item)\" [attr.href]=\"item.href\">\r\n      @if (item.iconClass) {\r\n        <i [class]=\"item.iconClass\"></i>\r\n      }\r\n      {{ item.label }}\r\n    </a>\r\n  </li>\r\n}"
+        },
+        {
+            "name": "DsProgressBarComponent",
+            "id": "component-DsProgressBarComponent-57465ae2f45865b4eb5453f34d8ad717fabb576e4502642231feea33a9a38301da67e9f027868083211245ba8f858d3fbd9cb3f743779664adfbb4b611c4c447",
+            "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-progress-bar",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-progress-bar.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "expressiveColor",
+                    "defaultValue": "'primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "DsProgressBarExpressiveColor",
+                    "decorators": []
+                },
+                {
+                    "name": "helperText",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "id",
+                    "defaultValue": "`ds-progress-bar-${DsProgressBarComponent.nextUniqueId++}`",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nAllows consumers and Storybook to provide a stable id.\nFalls back to an auto-generated id when omitted.\n",
+                    "description": "<p>Allows consumers and Storybook to provide a stable id.\nFalls back to an auto-generated id when omitted.</p>\n",
+                    "line": 42,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "required": true,
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "optional": false,
+                    "line": 22,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "note",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'large'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "DsProgressBarSize",
+                    "decorators": []
+                },
+                {
+                    "name": "status",
+                    "defaultValue": "'active'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "DsProgressBarStatus",
+                    "decorators": []
+                },
+                {
+                    "name": "validationMessage",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 25,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "value",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUsed for determinate mode only.\nValues are clamped between 0 and 100.\n",
+                    "description": "<p>Used for determinate mode only.\nValues are clamped between 0 and 100.</p>\n",
+                    "line": 36,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'determinate'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 27,
+                    "type": "DsProgressBarVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "nextUniqueId",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        123,
+                        126
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsProgressBarVariant = 'determinate' | 'indeterminate';\r\nexport type DsProgressBarStatus = 'active' | 'success' | 'error' | 'inactive';\r\nexport type DsProgressBarSize = 'large' | 'small';\r\nexport type DsProgressBarExpressiveColor =\r\n  | 'primary'\r\n  | 'secondary'\r\n  | 'tertiary'\r\n  | 'quaternary';\r\n\r\n@Component({\r\n  selector: 'ds-progress-bar',\r\n  standalone: true,\r\n  templateUrl: './ds-progress-bar.component.html',\r\n  styleUrl: './ds-progress-bar.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsProgressBarComponent {\r\n  private static nextUniqueId = 0;\r\n\r\n  @Input({ required: true }) label = '';\r\n  @Input() note?: string;\r\n  @Input() helperText?: string;\r\n  @Input() validationMessage?: string;\r\n\r\n  @Input() variant: DsProgressBarVariant = 'determinate';\r\n  @Input() status: DsProgressBarStatus = 'active';\r\n  @Input() size: DsProgressBarSize = 'large';\r\n  @Input() expressiveColor: DsProgressBarExpressiveColor = 'primary';\r\n\r\n  /**\r\n   * Used for determinate mode only.\r\n   * Values are clamped between 0 and 100.\r\n   */\r\n  @Input() value = 0;\r\n\r\n  /**\r\n   * Allows consumers and Storybook to provide a stable id.\r\n   * Falls back to an auto-generated id when omitted.\r\n   */\r\n  @Input() id = `ds-progress-bar-${DsProgressBarComponent.nextUniqueId++}`;\r\n\r\n  get isIndeterminate(): boolean {\r\n    return this.variant === 'indeterminate';\r\n  }\r\n\r\n  get isError(): boolean {\r\n    return this.status === 'error';\r\n  }\r\n\r\n  get progressClasses(): string[] {\r\n    const classes = ['progress'];\r\n\r\n    if (this.size === 'small') {\r\n      classes.push('progress-sm');\r\n    }\r\n\r\n    switch (this.status) {\r\n      case 'success':\r\n        classes.push('is-valid');\r\n        break;\r\n      case 'error':\r\n        classes.push('is-invalid');\r\n        break;\r\n      case 'inactive':\r\n        classes.push('progress-inactive');\r\n        break;\r\n      default:\r\n        break;\r\n    }\r\n\r\n    switch (this.expressiveColor) {\r\n      case 'secondary':\r\n        classes.push('expressive-secondary');\r\n        break;\r\n      case 'tertiary':\r\n        classes.push('expressive-tertiary');\r\n        break;\r\n      case 'quaternary':\r\n        classes.push('expressive-quaternary');\r\n        break;\r\n      default:\r\n        break;\r\n    }\r\n\r\n    return classes;\r\n  }\r\n\r\n  get progressBarClasses(): string[] {\r\n    const classes = ['progress-bar'];\r\n\r\n    if (this.isIndeterminate) {\r\n      classes.push('progress-bar-indeterminate');\r\n    }\r\n\r\n    return classes;\r\n  }\r\n\r\n  get clampedValue(): number {\r\n    if (Number.isNaN(this.value)) {\r\n      return 0;\r\n    }\r\n\r\n    return Math.min(100, Math.max(0, this.value));\r\n  }\r\n\r\n  get effectiveValue(): number {\r\n    if (this.isIndeterminate) {\r\n      return 0;\r\n    }\r\n\r\n    if (\r\n      this.status === 'success' ||\r\n      this.status === 'error' ||\r\n      this.status === 'inactive'\r\n    ) {\r\n      return 100;\r\n    }\r\n\r\n    return this.clampedValue;\r\n  }\r\n\r\n  get progressBarWidth(): string | null {\r\n    if (this.isIndeterminate) {\r\n      return null;\r\n    }\r\n\r\n    if (\r\n      this.status === 'success' ||\r\n      this.status === 'error' ||\r\n      this.status === 'inactive'\r\n    ) {\r\n      return null;\r\n    }\r\n\r\n    return `${this.effectiveValue}%`;\r\n  }\r\n\r\n  get shouldRenderNote(): boolean {\r\n    return !!this.note && this.status === 'active';\r\n  }\r\n\r\n  get shouldRenderHelperText(): boolean {\r\n    return !!this.helperText && !this.isError;\r\n  }\r\n\r\n  get shouldRenderValidationMessage(): boolean {\r\n    return this.isError && !!this.validationMessage;\r\n  }\r\n}",
+            "styleUrl": "./ds-progress-bar.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "isIndeterminate": {
+                    "name": "isIndeterminate",
+                    "getSignature": {
+                        "name": "isIndeterminate",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 44
+                    }
+                },
+                "isError": {
+                    "name": "isError",
+                    "getSignature": {
+                        "name": "isError",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 48
+                    }
+                },
+                "progressClasses": {
+                    "name": "progressClasses",
+                    "getSignature": {
+                        "name": "progressClasses",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 52
+                    }
+                },
+                "progressBarClasses": {
+                    "name": "progressBarClasses",
+                    "getSignature": {
+                        "name": "progressBarClasses",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 90
+                    }
+                },
+                "clampedValue": {
+                    "name": "clampedValue",
+                    "getSignature": {
+                        "name": "clampedValue",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 100
+                    }
+                },
+                "effectiveValue": {
+                    "name": "effectiveValue",
+                    "getSignature": {
+                        "name": "effectiveValue",
+                        "type": "number",
+                        "returnType": "number",
+                        "line": 108
+                    }
+                },
+                "progressBarWidth": {
+                    "name": "progressBarWidth",
+                    "getSignature": {
+                        "name": "progressBarWidth",
+                        "type": "unknown",
+                        "returnType": "string | null",
+                        "line": 124
+                    }
+                },
+                "shouldRenderNote": {
+                    "name": "shouldRenderNote",
+                    "getSignature": {
+                        "name": "shouldRenderNote",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 140
+                    }
+                },
+                "shouldRenderHelperText": {
+                    "name": "shouldRenderHelperText",
+                    "getSignature": {
+                        "name": "shouldRenderHelperText",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 144
+                    }
+                },
+                "shouldRenderValidationMessage": {
+                    "name": "shouldRenderValidationMessage",
+                    "getSignature": {
+                        "name": "shouldRenderValidationMessage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 148
+                    }
+                }
+            },
+            "templateData": "<div class=\"progress-container\">\r\n  <div class=\"progress-header\">\r\n    <label [attr.for]=\"id\" class=\"progress-label\">{{ label }}</label>\r\n\r\n    @if (shouldRenderNote) {\r\n      <span class=\"progress-note\">{{ note }}</span>\r\n    }\r\n  </div>\r\n\r\n  <div\r\n    [id]=\"id\"\r\n    [class]=\"progressClasses.join(' ')\"\r\n    role=\"progressbar\"\r\n    [attr.aria-label]=\"label\"\r\n    [attr.aria-valuenow]=\"isIndeterminate ? null : effectiveValue\"\r\n    [attr.aria-valuemin]=\"isIndeterminate ? null : 0\"\r\n    [attr.aria-valuemax]=\"isIndeterminate ? null : 100\"\r\n  >\r\n    <div\r\n      [class]=\"progressBarClasses.join(' ')\"\r\n      [style.width]=\"progressBarWidth\"\r\n    ></div>\r\n  </div>\r\n\r\n  @if (shouldRenderHelperText) {\r\n    <small class=\"progress-helper\">{{ helperText }}</small>\r\n  }\r\n\r\n  @if (shouldRenderValidationMessage) {\r\n    <div class=\"invalid-feedback\">{{ validationMessage }}</div>\r\n  }\r\n</div>"
         },
         {
             "name": "DsSelectableCardComponent",
@@ -6294,6 +7499,17 @@
                 "kind": 193
             },
             {
+                "name": "DsComboButtonStyle",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"primary\" | \"secondary\"",
+                "file": "src/lib/menu button/ds-combo-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "DsHeadingAttachmentHeadingClass",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -6393,6 +7609,39 @@
                 "kind": 193
             },
             {
+                "name": "DsMenuButtonItem",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "DsMenuButtonActionItem | DsMenuButtonLinkItem | DsMenuButtonHeaderItem | DsMenuButtonDividerItem | DsMenuButtonSubmenuItem",
+                "file": "src/lib/menu button/ds-menu-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsMenuButtonStyle",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"primary\" | \"secondary\" | \"ghost\"",
+                "file": "src/lib/menu button/ds-menu-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsMenuButtonSubmenuChildItem",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "DsMenuButtonSubmenuActionItem | DsMenuButtonSelectableSubmenuItem",
+                "file": "src/lib/menu button/ds-menu-button.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "DsMenuItem",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -6409,6 +7658,50 @@
                 "subtype": "typealias",
                 "rawtype": "DsMenuSubmenuActionItem | DsMenuSelectableSubmenuItem",
                 "file": "src/lib/menu/ds-menu.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsProgressBarExpressiveColor",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"primary\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsProgressBarSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"large\" | \"small\"",
+                "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsProgressBarStatus",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"active\" | \"success\" | \"error\" | \"inactive\"",
+                "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsProgressBarVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"determinate\" | \"indeterminate\"",
+                "file": "src/lib/progress bar/ds-progress-bar.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -6753,6 +8046,19 @@
                     "kind": 193
                 }
             ],
+            "src/lib/menu button/ds-combo-button.component.ts": [
+                {
+                    "name": "DsComboButtonStyle",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"primary\" | \"secondary\"",
+                    "file": "src/lib/menu button/ds-combo-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/heading attachment/ds-heading-attachment.component.ts": [
                 {
                     "name": "DsHeadingAttachmentHeadingClass",
@@ -6862,6 +8168,41 @@
                     "kind": 193
                 }
             ],
+            "src/lib/menu button/ds-menu-button.component.ts": [
+                {
+                    "name": "DsMenuButtonItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "DsMenuButtonActionItem | DsMenuButtonLinkItem | DsMenuButtonHeaderItem | DsMenuButtonDividerItem | DsMenuButtonSubmenuItem",
+                    "file": "src/lib/menu button/ds-menu-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsMenuButtonStyle",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"primary\" | \"secondary\" | \"ghost\"",
+                    "file": "src/lib/menu button/ds-menu-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsMenuButtonSubmenuChildItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "DsMenuButtonSubmenuActionItem | DsMenuButtonSelectableSubmenuItem",
+                    "file": "src/lib/menu button/ds-menu-button.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/menu/ds-menu.component.ts": [
                 {
                     "name": "DsMenuItem",
@@ -6880,6 +8221,52 @@
                     "subtype": "typealias",
                     "rawtype": "DsMenuSubmenuActionItem | DsMenuSelectableSubmenuItem",
                     "file": "src/lib/menu/ds-menu.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/progress bar/ds-progress-bar.component.ts": [
+                {
+                    "name": "DsProgressBarExpressiveColor",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"primary\" | \"secondary\" | \"tertiary\" | \"quaternary\"",
+                    "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsProgressBarSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"large\" | \"small\"",
+                    "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsProgressBarStatus",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"active\" | \"success\" | \"error\" | \"inactive\"",
+                    "file": "src/lib/progress bar/ds-progress-bar.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsProgressBarVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"determinate\" | \"indeterminate\"",
+                    "file": "src/lib/progress bar/ds-progress-bar.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -6933,7 +8320,7 @@
         "children": []
     },
     "coverage": {
-        "count": 3,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -7563,6 +8950,136 @@
                 "status": "low"
             },
             {
+                "filePath": "src/lib/menu button/ds-combo-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsComboButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-combo-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsComboButtonStyle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsMenuButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonActionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonDividerItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonHeaderItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonLinkItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonSelectableSubmenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonSubmenuActionItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsMenuButtonSubmenuItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsMenuButtonItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsMenuButtonStyle",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-menu-button.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsMenuButtonSubmenuChildItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/menu button/ds-overflow-menu-button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsOverflowMenuButtonComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
                 "filePath": "src/lib/menu/ds-menu.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -7650,6 +9167,73 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "typealias",
                 "name": "DsMenuSubmenuChildItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/page navigation/ds-page-navigation.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsPageNavigationComponent",
+                "coveragePercent": 25,
+                "coverageCount": "1/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/page navigation/ds-page-navigation.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "DsPageNavigationItem",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsProgressBarComponent",
+                "coveragePercent": 16,
+                "coverageCount": "2/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsProgressBarExpressiveColor",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsProgressBarSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsProgressBarStatus",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/progress bar/ds-progress-bar.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsProgressBarVariant",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

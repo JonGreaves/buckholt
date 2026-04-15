@@ -1,0 +1,32 @@
+<div class="progress-container">
+  <div class="progress-header">
+    <label [attr.for]="id" class="progress-label">{{ label }}</label>
+
+    @if (shouldRenderNote) {
+      <span class="progress-note">{{ note }}</span>
+    }
+  </div>
+
+  <div
+    [id]="id"
+    [class]="progressClasses.join(' ')"
+    role="progressbar"
+    [attr.aria-label]="label"
+    [attr.aria-valuenow]="isIndeterminate ? null : effectiveValue"
+    [attr.aria-valuemin]="isIndeterminate ? null : 0"
+    [attr.aria-valuemax]="isIndeterminate ? null : 100"
+  >
+    <div
+      [class]="progressBarClasses.join(' ')"
+      [style.width]="progressBarWidth"
+    ></div>
+  </div>
+
+  @if (shouldRenderHelperText) {
+    <small class="progress-helper">{{ helperText }}</small>
+  }
+
+  @if (shouldRenderValidationMessage) {
+    <div class="invalid-feedback">{{ validationMessage }}</div>
+  }
+</div>
