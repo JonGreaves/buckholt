@@ -9,7 +9,8 @@
     "storybook": "ng run angular-latest:storybook",
     "build-storybook": "ng run angular-latest:build-storybook",
     "deploy-storybook": "npm run build-storybook && gh-pages -d storybook-static",
-    "update:icons": "node scripts/update-buckholt-icons.mjs"
+    "update:icons": "node scripts/update-buckholt-icons.mjs",
+    "chromatic": "npx chromatic --project-token=chpt_b3be15637a47e34"
   },
   "prettier": {
     "printWidth": 100,
@@ -47,6 +48,7 @@
     "@compodoc/compodoc": "^1.2.1",
     "@storybook/addon-docs": "^10.2.8",
     "@storybook/angular": "^10.2.7",
+    "chromatic": "^16.3.0",
     "css-loader": "^7.1.3",
     "gh-pages": "^6.3.0",
     "jsdom": "^27.1.0",

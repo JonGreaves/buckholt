@@ -1,0 +1,23 @@
+<div
+  class="summary-meta"
+  [class.summary-meta-stacked]="stacked">
+  <div [class]="iconBlockClasses">
+    <i
+      [class]="iconClasses"
+      aria-hidden="true"></i>
+  </div>
+
+  <div class="summary-meta-body">
+    @if (headline) {
+      <h4 class="summary-meta-headline">{{ headline }}</h4>
+    }
+
+    @if (label) {
+      <div class="summary-meta-label">{{ label }}</div>
+    }
+
+    @if (text) {
+      <p class="summary-meta-text">{{ text }}</p>
+    }
+  </div>
+</div>
