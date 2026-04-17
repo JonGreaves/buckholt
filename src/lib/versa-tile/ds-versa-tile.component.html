@@ -1,0 +1,38 @@
+<div class="versatile">
+  <div class="versatile-content">
+    <div class="versatile-body">
+      @if (hasIcon()) {
+        <div class="icon-block">
+          <i [class]="iconClass()"></i>
+        </div>
+      }
+
+      <div class="versatile-meta">
+        <div class="versatile-label">{{ label() }}</div>
+        <p class="versatile-text">{{ text() }}</p>
+      </div>
+    </div>
+
+    @if (actionsTemplate) {
+      <div class="versatile-actions">
+        <ng-container [ngTemplateOutlet]="actionsTemplate.templateRef"></ng-container>
+      </div>
+    }
+  </div>
+
+  @if (hasProgress()) {
+    <div
+      class="progress progress-sm"
+      role="progressbar"
+      aria-label="Versatile progress bar"
+      [attr.aria-valuenow]="clampedProgressValue()"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar"
+        [style.width]="progressWidth()"
+      ></div>
+    </div>
+  }
+</div>

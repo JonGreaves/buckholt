@@ -1,0 +1,32 @@
+<span
+  [class]="classes.join(' ')"
+  [attr.type]="isSelectable ? 'option' : null"
+  [attr.aria-selected]="wrapperAriaSelected"
+>
+  @if (isSelectable) {
+    <input
+      [type]="selectType"
+      [attr.id]="resolvedInputId"
+      [attr.name]="name || null"
+      [class]="inputClass"
+      [checked]="checked"
+      [disabled]="disabled"
+    />
+  }
+
+  @if (shouldRenderIcon) {
+    <span class="icon">
+      <i [class]="icon"></i>
+    </span>
+  }
+
+  <span class="tag-label">{{ label }}</span>
+
+  @if (isDismissible) {
+    <button
+      type="button"
+      class="btn-close btn-close-sm"
+      [attr.aria-label]="closeAriaLabel"
+    ></button>
+  }
+</span>

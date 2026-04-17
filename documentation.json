@@ -1391,7 +1391,75 @@
     "guards": [],
     "interceptors": [],
     "classes": [],
-    "directives": [],
+    "directives": [
+        {
+            "name": "DsVersaTileActionsDirective",
+            "id": "directive-DsVersaTileActionsDirective-2ac570c2b2686b6babc57b694cb205e7b5ad996e81417fd4b3fe73fe0a098691f480664d0496ef90984e40024aa53781be412edc18035284394c1b477fe57666",
+            "file": "src/lib/versa-tile/ds-versa-tile.component.ts",
+            "type": "directive",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  ContentChild,\r\n  Directive,\r\n  TemplateRef,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Directive({\r\n  selector: 'ng-template[dsVersaTileActions]',\r\n  standalone: true,\r\n})\r\nexport class DsVersaTileActionsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<unknown>) {}\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-versa-tile',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-versa-tile.component.html',\r\n  styleUrl: './ds-versa-tile.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsVersaTileComponent {\r\n  readonly label = input.required<string>();\r\n  readonly text = input.required<string>();\r\n  readonly iconClass = input<string | null>(null);\r\n  readonly progressValue = input<number | null>(null);\r\n\r\n  @ContentChild(DsVersaTileActionsDirective)\r\n  protected actionsTemplate?: DsVersaTileActionsDirective;\r\n\r\n  protected readonly hasIcon = computed(() => {\r\n    const iconClass = this.iconClass();\r\n    return typeof iconClass === 'string' && iconClass.trim().length > 0;\r\n  });\r\n\r\n  protected readonly hasProgress = computed(() => this.progressValue() !== null);\r\n\r\n  protected readonly clampedProgressValue = computed(() => {\r\n    const value = this.progressValue();\r\n\r\n    if (value === null || Number.isNaN(value)) {\r\n      return 0;\r\n    }\r\n\r\n    return Math.min(100, Math.max(0, value));\r\n  });\r\n\r\n  protected readonly progressWidth = computed(() => `${this.clampedProgressValue()}%`);\r\n}",
+            "selector": "ng-template[dsVersaTileActions]",
+            "providers": [],
+            "hostDirectives": [],
+            "standalone": true,
+            "inputsClass": [],
+            "outputsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "propertiesClass": [
+                {
+                    "name": "templateRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TemplateRef<unknown>",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        125,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "extends": [],
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<unknown>",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 16,
+                "jsdoctags": [
+                    {
+                        "name": "templateRef",
+                        "type": "TemplateRef<unknown>",
+                        "optional": false,
+                        "dotDotDotToken": false,
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
     "components": [
         {
             "name": "App",
@@ -2381,7 +2449,203 @@
         },
         {
             "name": "DsCardComponent",
-            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326",
+            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305",
+            "file": "src/lib/card original/ds-card.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-card",
+            "styleUrls": [
+                "./ds-card.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ds-card.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "href",
+                    "defaultValue": "'#'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imagePosition",
+                    "defaultValue": "'none'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "CardImagePosition",
+                    "decorators": []
+                },
+                {
+                    "name": "imgAlt",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 37,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "imgSrc",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 36,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputValue",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 39,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "CardSize",
+                    "decorators": []
+                },
+                {
+                    "name": "style",
+                    "defaultValue": "'default'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 30,
+                    "type": "CardStyle",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'base'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "CardVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "NgIf"
+                },
+                {
+                    "name": "NgTemplateOutlet"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./ds-card.component.css"
+                }
+            ],
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "isClickable": {
+                    "name": "isClickable",
+                    "getSignature": {
+                        "name": "isClickable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 44
+                    }
+                },
+                "isSelectable": {
+                    "name": "isSelectable",
+                    "getSignature": {
+                        "name": "isSelectable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 48
+                    }
+                },
+                "inputType": {
+                    "name": "inputType",
+                    "getSignature": {
+                        "name": "inputType",
+                        "type": "unknown",
+                        "returnType": "\"radio\" | \"checkbox\"",
+                        "line": 55
+                    }
+                },
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 61
+                    }
+                },
+                "hasImage": {
+                    "name": "hasImage",
+                    "getSignature": {
+                        "name": "hasImage",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 91
+                    }
+                }
+            },
+            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
+        },
+        {
+            "name": "DsCardComponent",
+            "id": "component-DsCardComponent-6600dde1f77d331780a48cef611905a64c493351718b0d7d2311ff51798dc7b5d06fa1d2a86c6883e5bd6b93bf2d97e0fc58d72ad3f52286b11a6becac7ac326-1",
             "file": "src/lib/card/ds-card.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -2631,206 +2895,10 @@
                     }
                 }
             },
-            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
-        },
-        {
-            "name": "DsCardComponent",
-            "id": "component-DsCardComponent-8e0f4fd9d3dca223f506ae29b8f05ad6c67cdb43761bd66cc4d45d2d93fe98a9f836e3a45cd2b770881bdeabda10f64229c4057a2ff395a9f3b79e8233c09305-1",
-            "file": "src/lib/card original/ds-card.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "ds-card",
-            "styleUrls": [
-                "./ds-card.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./ds-card.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "name": "checked",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 42,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "href",
-                    "defaultValue": "'#'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 34,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imagePosition",
-                    "defaultValue": "'none'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 32,
-                    "type": "CardImagePosition",
-                    "decorators": []
-                },
-                {
-                    "name": "imgAlt",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 37,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "imgSrc",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 36,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputId",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 40,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "inputValue",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 41,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "name",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 39,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "size",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 31,
-                    "type": "CardSize",
-                    "decorators": []
-                },
-                {
-                    "name": "style",
-                    "defaultValue": "'default'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 30,
-                    "type": "CardStyle",
-                    "decorators": []
-                },
-                {
-                    "name": "variant",
-                    "defaultValue": "'base'",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 29,
-                    "type": "CardVariant",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [
-                {
-                    "name": "NgIf"
-                },
-                {
-                    "name": "NgTemplateOutlet"
-                }
-            ],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  Input,\r\n} from '@angular/core';\r\nimport {\r\n  NgIf,\r\n  NgTemplateOutlet,\r\n} from '@angular/common';\r\n\r\ntype CardVariant =\r\n  | 'base'\r\n  | 'clickable'\r\n  | 'selectable-radio'\r\n  | 'selectable-checkbox';\r\ntype CardStyle = 'default' | 'secondary';\r\ntype CardSize = 'default' | 'large';\r\ntype CardImagePosition = 'none' | 'top' | 'left' | 'right';\r\n\r\n@Component({\r\n  selector: 'ds-card',\r\n  standalone: true,\r\n  imports: [NgIf, NgTemplateOutlet],\r\n  templateUrl: './ds-card.component.html',\r\n  styleUrls: ['./ds-card.component.css'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsCardComponent {\r\n  @Input() variant: CardVariant = 'base';\r\n  @Input() style: CardStyle = 'default';\r\n  @Input() size: CardSize = 'default';\r\n  @Input() imagePosition: CardImagePosition = 'none';\r\n\r\n  @Input() href = '#';\r\n\r\n  @Input() imgSrc?: string;\r\n  @Input() imgAlt = '';\r\n\r\n  @Input() name?: string;\r\n  @Input() inputId?: string;\r\n  @Input() inputValue = '';\r\n  @Input() checked = false;\r\n\r\n  get isClickable(): boolean {\r\n    return this.variant === 'clickable';\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return (\r\n      this.variant === 'selectable-radio' ||\r\n      this.variant === 'selectable-checkbox'\r\n    );\r\n  }\r\n\r\n  get inputType(): 'radio' | 'checkbox' {\r\n    return this.variant === 'selectable-radio'\r\n      ? 'radio'\r\n      : 'checkbox';\r\n  }\r\n\r\n  get classes(): string {\r\n    const classes = ['card'];\r\n\r\n    if (this.isClickable) {\r\n      classes.push('card-clickable');\r\n    }\r\n\r\n    if (this.isSelectable) {\r\n      classes.push('card-selectable');\r\n    }\r\n\r\n    if (this.style === 'secondary') {\r\n      classes.push('card-secondary');\r\n    }\r\n\r\n    if (this.size === 'large') {\r\n      classes.push('card-lg');\r\n    }\r\n\r\n    if (this.imagePosition === 'left') {\r\n      classes.push('card-horizontal');\r\n    }\r\n\r\n    if (this.imagePosition === 'right') {\r\n      classes.push('card-horizontal', 'card-horizontal-right');\r\n    }\r\n\r\n    return classes.join(' ');\r\n  }\r\n\r\n  get hasImage(): boolean {\r\n    return this.imagePosition !== 'none' && !!this.imgSrc;\r\n  }\r\n}",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./ds-card.component.css"
-                }
-            ],
-            "stylesData": "",
-            "extends": [],
-            "accessors": {
-                "isClickable": {
-                    "name": "isClickable",
-                    "getSignature": {
-                        "name": "isClickable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 44
-                    }
-                },
-                "isSelectable": {
-                    "name": "isSelectable",
-                    "getSignature": {
-                        "name": "isSelectable",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 48
-                    }
-                },
-                "inputType": {
-                    "name": "inputType",
-                    "getSignature": {
-                        "name": "inputType",
-                        "type": "unknown",
-                        "returnType": "\"radio\" | \"checkbox\"",
-                        "line": 55
-                    }
-                },
-                "classes": {
-                    "name": "classes",
-                    "getSignature": {
-                        "name": "classes",
-                        "type": "string",
-                        "returnType": "string",
-                        "line": 61
-                    }
-                },
-                "hasImage": {
-                    "name": "hasImage",
-                    "getSignature": {
-                        "name": "hasImage",
-                        "type": "boolean",
-                        "returnType": "boolean",
-                        "line": 91
-                    }
-                }
-            },
             "isDuplicate": true,
             "duplicateId": 1,
             "duplicateName": "DsCardComponent-1",
-            "templateData": "<!-- Clickable variant -->\r\n<a\r\n  *ngIf=\"isClickable; else nonClickable\"\r\n  [href]=\"href\"\r\n  [class]=\"classes\"\r\n>\r\n\r\n  <!-- Optional image -->\r\n  <img\r\n    *ngIf=\"hasImage\"\r\n    [src]=\"imgSrc\"\r\n    class=\"card-img\"\r\n    [alt]=\"imgAlt\"\r\n  />\r\n\r\n  <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n</a>\r\n\r\n<!-- Non-clickable variants -->\r\n<ng-template #nonClickable>\r\n\r\n  <div [class]=\"classes\">\r\n\r\n    <!-- Selectable input -->\r\n    <input\r\n      *ngIf=\"isSelectable\"\r\n      class=\"form-check-input\"\r\n      [type]=\"inputType\"\r\n      [name]=\"name\"\r\n      [id]=\"inputId\"\r\n      [value]=\"inputValue\"\r\n      [checked]=\"checked\"\r\n    />\r\n\r\n    <!-- Optional image -->\r\n    <img\r\n      *ngIf=\"hasImage\"\r\n      [src]=\"imgSrc\"\r\n      class=\"card-img\"\r\n      [alt]=\"imgAlt\"\r\n    />\r\n\r\n    <ng-container [ngTemplateOutlet]=\"cardBody\"></ng-container>\r\n\r\n  </div>\r\n</ng-template>\r\n\r\n<ng-template #cardBody>\r\n  <div class=\"card-body\">\r\n    <ng-content></ng-content>\r\n  </div>\r\n</ng-template>"
+            "templateData": "@if (isClickable) {\r\n  <a [href]=\"href\" [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </a>\r\n} @else {\r\n  <div [class]=\"''\" [ngClass]=\"cardClasses\">\r\n    @if (hasImage) {\r\n      <img\r\n        [src]=\"imageSrc\"\r\n        class=\"card-img\"\r\n        [alt]=\"imageAlt\"\r\n      />\r\n    }\r\n\r\n    <div class=\"card-body\">\r\n      <div class=\"text-block\">\r\n        @if (title) {\r\n          <h4 class=\"title-03\">\r\n            {{ title }}\r\n          </h4>\r\n        }\r\n\r\n        @if (body) {\r\n          <p>{{ body }}</p>\r\n        }\r\n      </div>\r\n\r\n      @if (hasStandaloneLink) {\r\n        <a class=\"link-standalone\" [href]=\"linkHref\" [target]=\"linkTarget\">\r\n          <span class=\"icon\">\r\n            <i class=\"fa-regular fa-arrow-right\" aria-hidden=\"true\"></i>\r\n          </span>\r\n          {{ linkText }}\r\n        </a>\r\n      }\r\n    </div>\r\n\r\n    @if (hasEmphasisTile) {\r\n      <div class=\"card-body\">\r\n        <div [ngClass]=\"emphasisTileClasses\">\r\n          @if (emphasisTitle) {\r\n            <h4 class=\"title-03\">{{ emphasisTitle }}</h4>\r\n          }\r\n\r\n          @if (emphasisBody) {\r\n            <p>{{ emphasisBody }}</p>\r\n          }\r\n        </div>\r\n      </div>\r\n    }\r\n  </div>\r\n}"
         },
         {
             "name": "DsCheckboxComponent",
@@ -7035,85 +7103,16 @@
             "templateData": "<div class=\"card card-selectable\" (click)=\"onCardClick($event)\">\r\n  <input\r\n    class=\"form-check-input\"\r\n    [type]=\"selectionType\"\r\n    [attr.name]=\"selectionType === 'radio' ? name : null\"\r\n    [id]=\"inputId\"\r\n    [attr.value]=\"selectionType === 'checkbox' ? value : null\"\r\n    [checked]=\"checked\"\r\n    (change)=\"onInputChange($event)\"\r\n  />\r\n\r\n  <div class=\"card-body\">\r\n    <div class=\"text-block\">\r\n      @if (title) {\r\n        <h4 class=\"title-03\">\r\n          {{ title }}\r\n        </h4>\r\n      }\r\n\r\n      @if (body) {\r\n        <p>{{ body }}</p>\r\n      }\r\n    </div>\r\n  </div>\r\n</div>"
         },
         {
-            "name": "DsSummaryMetaBodyComponent",
-            "id": "component-DsSummaryMetaBodyComponent-e25481b5c50b69506811991272d81adfd5910240bfc827e0351c405f12b06049845465cbf67a6c858fd4c748ffa6ac0ab76c9451b4276117f6ba095796a26ec4",
-            "file": "src/lib/summary-meta/ds-summary-meta-body.component.ts",
-            "changeDetection": "ChangeDetectionStrategy.OnPush",
-            "encapsulation": [],
-            "entryComponents": [],
-            "host": {},
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "[dsSummaryMetaBody]",
-            "styleUrls": [],
-            "styles": [],
-            "templateUrl": [
-                "./ds-summary-meta-body.component.html"
-            ],
-            "viewProviders": [],
-            "hostDirectives": [],
-            "inputsClass": [
-                {
-                    "required": true,
-                    "name": "headline",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "optional": false,
-                    "line": 14,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "label",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "text",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 16,
-                    "type": "string",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "standalone": true,
-            "imports": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: '[dsSummaryMetaBody]',\r\n  standalone: true,\r\n  templateUrl: './ds-summary-meta-body.component.html',\r\n  styleUrl: './ds-summary-meta-body.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    'class': 'summary-meta-body',\r\n  },\r\n})\r\nexport class DsSummaryMetaBodyComponent {\r\n  @Input({ required: true }) headline = '';\r\n  @Input() label?: string;\r\n  @Input() text?: string;\r\n}",
-            "styleUrl": "./ds-summary-meta-body.component.css",
-            "assetsDirs": [],
-            "styleUrlsData": "",
-            "stylesData": "",
-            "extends": [],
-            "templateData": "@if (headline) {\r\n  <h4 class=\"summary-meta-headline\">{{ headline }}</h4>\r\n}\r\n\r\n@if (label) {\r\n  <div class=\"summary-meta-label\">{{ label }}</div>\r\n}\r\n\r\n@if (text) {\r\n  <p class=\"summary-meta-text\">{{ text }}</p>\r\n}"
-        },
-        {
             "name": "DsSummaryMetaComponent",
-            "id": "component-DsSummaryMetaComponent-321785885b8eedce9c46cd848e1335d6518a47db4165bd4b8524306ea0c937d24569d3cc09d42d874350c4119625243b6dc0883f86df02308d80dbe7377bcbf1",
+            "id": "component-DsSummaryMetaComponent-617b94fb11318eed1004eef5b78369b0753f42cfa167b6e1a5be892eafbcfce5d6cb3f6c0b722c1de94cfdc81fde60e2a5d4f6963a5c80112c7275606f9fedcf",
             "file": "src/lib/summary-meta/ds-summary-meta.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
-            "host": {},
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "[dsSummaryMeta]",
+            "selector": "ds-summary-meta",
             "styleUrls": [],
             "styles": [],
             "templateUrl": [
@@ -7123,12 +7122,59 @@
             "hostDirectives": [],
             "inputsClass": [
                 {
+                    "name": "headline",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "iconBlockClasses",
+                    "defaultValue": "'icon-block icon-block-xxl expressive-dark expressive-primary'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nMatches Buckholt’s documented icon block example by default.\nKeep this honest: classes map directly to the rendered icon block.\n",
+                    "description": "<p>Matches Buckholt’s documented icon block example by default.\nKeep this honest: classes map directly to the rendered icon block.</p>\n",
+                    "line": 21,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "iconClasses",
+                    "defaultValue": "'fa-regular fa-ghost'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nDirect class mapping for the icon element.\n",
+                    "description": "<p>Direct class mapping for the icon element.</p>\n",
+                    "line": 26,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
                     "name": "stacked",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 11,
                     "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "string",
                     "decorators": []
                 }
             ],
@@ -7144,13 +7190,714 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: '[dsSummaryMeta]',\r\n  standalone: true,\r\n  templateUrl: './ds-summary-meta.component.html',\r\n  styleUrl: './ds-summary-meta.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n  host: {\r\n    'class': 'summary-meta',\r\n    '[class.summary-meta-stacked]': 'stacked',\r\n  },\r\n})\r\nexport class DsSummaryMetaComponent {\r\n  @Input() stacked = false;\r\n}",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'ds-summary-meta',\r\n  standalone: true,\r\n  templateUrl: './ds-summary-meta.component.html',\r\n  styleUrl: './ds-summary-meta.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsSummaryMetaComponent {\r\n  @Input() stacked = false;\r\n\r\n  @Input() headline = '';\r\n  @Input() label?: string;\r\n  @Input() text?: string;\r\n\r\n  /**\r\n   * Matches Buckholt’s documented icon block example by default.\r\n   * Keep this honest: classes map directly to the rendered icon block.\r\n   */\r\n  @Input() iconBlockClasses = 'icon-block icon-block-xxl expressive-dark expressive-primary';\r\n\r\n  /**\r\n   * Direct class mapping for the icon element.\r\n   */\r\n  @Input() iconClasses = 'fa-regular fa-ghost';\r\n}",
             "styleUrl": "./ds-summary-meta.component.css",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
             "extends": [],
-            "templateData": "<ng-content select=\".icon-block, [dsSummaryMetaIcon]\"></ng-content>\r\n<ng-content select=\".summary-meta-body, [dsSummaryMetaBody]\"></ng-content>"
+            "templateData": "<div\r\n  class=\"summary-meta\"\r\n  [class.summary-meta-stacked]=\"stacked\">\r\n  <div [class]=\"iconBlockClasses\">\r\n    <i\r\n      [class]=\"iconClasses\"\r\n      aria-hidden=\"true\"></i>\r\n  </div>\r\n\r\n  <div class=\"summary-meta-body\">\r\n    @if (headline) {\r\n      <h4 class=\"summary-meta-headline\">{{ headline }}</h4>\r\n    }\r\n\r\n    @if (label) {\r\n      <div class=\"summary-meta-label\">{{ label }}</div>\r\n    }\r\n\r\n    @if (text) {\r\n      <p class=\"summary-meta-text\">{{ text }}</p>\r\n    }\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "DsTagComponent",
+            "id": "component-DsTagComponent-05f21d3caa9a7c0abebccc4faa7271d017511527c06eac500243155555633bf3baedf2d292ba0f165348aa8b4847b31fd127fefcd941a2a937e6f1847c2c5364",
+            "file": "src/lib/tag/ds-tag.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-tag",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-tag.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "ariaSelected",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nBuckholt examples show aria-selected on the wrapper.\n",
+                    "description": "<p>Buckholt examples show aria-selected on the wrapper.</p>\n",
+                    "line": 48,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "checked",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 42,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "closeAriaLabel",
+                    "defaultValue": "'Close'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nClose button aria-label for dismissible tags.\n",
+                    "description": "<p>Close button aria-label for dismissible tags.</p>\n",
+                    "line": 53,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "disabled",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 43,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "icon",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nFont Awesome icon class string, e.g. \"fa-solid fa-sparkles\".\nOnly renders where the documented Buckholt patterns support icons.\n",
+                    "description": "<p>Font Awesome icon class string, e.g. &quot;fa-solid fa-sparkles&quot;.\nOnly renders where the documented Buckholt patterns support icons.</p>\n",
+                    "line": 25,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "inputId",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nNative input attributes for selectable tags.\n",
+                    "description": "<p>Native input attributes for selectable tags.</p>\n",
+                    "line": 40,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "required": true,
+                    "name": "label",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "optional": false,
+                    "line": 16,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "name",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 41,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "selectType",
+                    "defaultValue": "'checkbox'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSelectable tag input type.\n",
+                    "description": "<p>Selectable tag input type.</p>\n",
+                    "line": 35,
+                    "type": "DsTagSelectType",
+                    "decorators": []
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "DsTagSize",
+                    "decorators": []
+                },
+                {
+                    "name": "status",
+                    "defaultValue": "'info'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nStatus modifier for status tags only.\n",
+                    "description": "<p>Status modifier for status tags only.</p>\n",
+                    "line": 30,
+                    "type": "DsTagStatus",
+                    "decorators": []
+                },
+                {
+                    "name": "variant",
+                    "defaultValue": "'read-only'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "DsTagVariant",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsTagVariant = 'read-only' | 'dismissible' | 'selectable' | 'status';\r\nexport type DsTagSize = 'medium' | 'small';\r\nexport type DsTagSelectType = 'radio' | 'checkbox';\r\nexport type DsTagStatus = 'info' | 'success' | 'warning' | 'error';\r\n\r\n@Component({\r\n  selector: 'ds-tag',\r\n  standalone: true,\r\n  templateUrl: './ds-tag.component.html',\r\n  styleUrl: './ds-tag.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsTagComponent {\r\n  @Input({ required: true }) label = '';\r\n\r\n  @Input() variant: DsTagVariant = 'read-only';\r\n  @Input() size: DsTagSize = 'medium';\r\n\r\n  /**\r\n   * Font Awesome icon class string, e.g. \"fa-solid fa-sparkles\".\r\n   * Only renders where the documented Buckholt patterns support icons.\r\n   */\r\n  @Input() icon?: string;\r\n\r\n  /**\r\n   * Status modifier for status tags only.\r\n   */\r\n  @Input() status: DsTagStatus = 'info';\r\n\r\n  /**\r\n   * Selectable tag input type.\r\n   */\r\n  @Input() selectType: DsTagSelectType = 'checkbox';\r\n\r\n  /**\r\n   * Native input attributes for selectable tags.\r\n   */\r\n  @Input() inputId?: string;\r\n  @Input() name?: string;\r\n  @Input() checked = false;\r\n  @Input() disabled = false;\r\n\r\n  /**\r\n   * Buckholt examples show aria-selected on the wrapper.\r\n   */\r\n  @Input() ariaSelected = false;\r\n\r\n  /**\r\n   * Close button aria-label for dismissible tags.\r\n   */\r\n  @Input() closeAriaLabel = 'Close';\r\n\r\n  get classes(): string[] {\r\n    const classes = ['tag'];\r\n\r\n    if (this.variant === 'dismissible') {\r\n      classes.push('tag-dismissible');\r\n    }\r\n\r\n    if (this.variant === 'selectable') {\r\n      classes.push('tag-selectable');\r\n    }\r\n\r\n    if (this.variant === 'status') {\r\n      classes.push('tag-status', `tag-status-${this.status}`);\r\n    }\r\n\r\n    if (this.isSmall) {\r\n      classes.push('tag-sm');\r\n    }\r\n\r\n    return classes;\r\n  }\r\n\r\n  get isSmall(): boolean {\r\n    return this.size === 'small' && this.supportsSmallSize;\r\n  }\r\n\r\n  get supportsSmallSize(): boolean {\r\n    return this.variant === 'read-only' || this.variant === 'status';\r\n  }\r\n\r\n  get shouldRenderIcon(): boolean {\r\n    if (!this.icon) {\r\n      return false;\r\n    }\r\n\r\n    if (this.isSmall) {\r\n      return false;\r\n    }\r\n\r\n    return true;\r\n  }\r\n\r\n  get isSelectable(): boolean {\r\n    return this.variant === 'selectable';\r\n  }\r\n\r\n  get isDismissible(): boolean {\r\n    return this.variant === 'dismissible';\r\n  }\r\n\r\n  get isStatus(): boolean {\r\n    return this.variant === 'status';\r\n  }\r\n\r\n  get resolvedInputId(): string | null {\r\n    if (!this.isSelectable) {\r\n      return null;\r\n    }\r\n\r\n    return this.inputId?.trim() || null;\r\n  }\r\n\r\n  get wrapperAriaSelected(): 'true' | 'false' | null {\r\n    if (!this.isSelectable) {\r\n      return null;\r\n    }\r\n\r\n    return this.ariaSelected ? 'true' : 'false';\r\n  }\r\n\r\n  get inputClass(): string | null {\r\n    return this.checked ? 'active' : null;\r\n  }\r\n}",
+            "styleUrl": "./ds-tag.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 55
+                    }
+                },
+                "isSmall": {
+                    "name": "isSmall",
+                    "getSignature": {
+                        "name": "isSmall",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 77
+                    }
+                },
+                "supportsSmallSize": {
+                    "name": "supportsSmallSize",
+                    "getSignature": {
+                        "name": "supportsSmallSize",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 81
+                    }
+                },
+                "shouldRenderIcon": {
+                    "name": "shouldRenderIcon",
+                    "getSignature": {
+                        "name": "shouldRenderIcon",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 85
+                    }
+                },
+                "isSelectable": {
+                    "name": "isSelectable",
+                    "getSignature": {
+                        "name": "isSelectable",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 97
+                    }
+                },
+                "isDismissible": {
+                    "name": "isDismissible",
+                    "getSignature": {
+                        "name": "isDismissible",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 101
+                    }
+                },
+                "isStatus": {
+                    "name": "isStatus",
+                    "getSignature": {
+                        "name": "isStatus",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 105
+                    }
+                },
+                "resolvedInputId": {
+                    "name": "resolvedInputId",
+                    "getSignature": {
+                        "name": "resolvedInputId",
+                        "type": "unknown",
+                        "returnType": "string | null",
+                        "line": 109
+                    }
+                },
+                "wrapperAriaSelected": {
+                    "name": "wrapperAriaSelected",
+                    "getSignature": {
+                        "name": "wrapperAriaSelected",
+                        "type": "unknown",
+                        "returnType": "\"true\" | \"false\" | null",
+                        "line": 117
+                    }
+                },
+                "inputClass": {
+                    "name": "inputClass",
+                    "getSignature": {
+                        "name": "inputClass",
+                        "type": "unknown",
+                        "returnType": "string | null",
+                        "line": 125
+                    }
+                }
+            },
+            "templateData": "<span\r\n  [class]=\"classes.join(' ')\"\r\n  [attr.type]=\"isSelectable ? 'option' : null\"\r\n  [attr.aria-selected]=\"wrapperAriaSelected\"\r\n>\r\n  @if (isSelectable) {\r\n    <input\r\n      [type]=\"selectType\"\r\n      [attr.id]=\"resolvedInputId\"\r\n      [attr.name]=\"name || null\"\r\n      [class]=\"inputClass\"\r\n      [checked]=\"checked\"\r\n      [disabled]=\"disabled\"\r\n    />\r\n  }\r\n\r\n  @if (shouldRenderIcon) {\r\n    <span class=\"icon\">\r\n      <i [class]=\"icon\"></i>\r\n    </span>\r\n  }\r\n\r\n  <span class=\"tag-label\">{{ label }}</span>\r\n\r\n  @if (isDismissible) {\r\n    <button\r\n      type=\"button\"\r\n      class=\"btn-close btn-close-sm\"\r\n      [attr.aria-label]=\"closeAriaLabel\"\r\n    ></button>\r\n  }\r\n</span>"
+        },
+        {
+            "name": "DsToastComponent",
+            "id": "component-DsToastComponent-47ebfe266d300fd5bc42a6afd18c85768113687c07011ae3132a86de04a1a5396e27b937e7c1942feb2442d3c4ae3992a20cb3f81ff551dc3f0a438fc97c1da9",
+            "file": "src/lib/toast/ds-toast.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-toast",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-toast.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "ariaAtomic",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 29,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "ariaLive",
+                    "defaultValue": "'assertive'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 28,
+                    "type": "\"assertive\" | \"polite\" | \"off\"",
+                    "decorators": []
+                },
+                {
+                    "name": "autoHide",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 26,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "contextBarButtonLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 33,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "contextBarLinkHref",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 35,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "contextBarLinkLabel",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 34,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "contextBarText",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 32,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "contextBarType",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 31,
+                    "type": "DsToastContextBarType | null",
+                    "decorators": []
+                },
+                {
+                    "name": "fade",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 23,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "required": true,
+                    "name": "message",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "optional": false,
+                    "line": 14,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "note",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "show",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 24,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showClose",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 21,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "showIcon",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "smallNote",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "status",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "DsToastStatus | null",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component, Input } from '@angular/core';\r\n\r\nexport type DsToastStatus = 'info' | 'success' | 'warning' | 'error';\r\nexport type DsToastContextBarType = 'timestamp' | 'button' | 'link';\r\n\r\n@Component({\r\n  selector: 'ds-toast',\r\n  standalone: true,\r\n  templateUrl: './ds-toast.component.html',\r\n  styleUrl: './ds-toast.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsToastComponent {\r\n  @Input({ required: true }) message = '';\r\n\r\n  @Input() status: DsToastStatus | null = null;\r\n  @Input() note?: string;\r\n  @Input() smallNote?: string;\r\n\r\n  @Input() showIcon = false;\r\n  @Input() showClose = false;\r\n\r\n  @Input() fade = false;\r\n  @Input() show = false;\r\n\r\n  @Input() autoHide = false;\r\n\r\n  @Input() ariaLive: 'assertive' | 'polite' | 'off' = 'assertive';\r\n  @Input() ariaAtomic = true;\r\n\r\n  @Input() contextBarType: DsToastContextBarType | null = null;\r\n  @Input() contextBarText?: string;\r\n  @Input() contextBarButtonLabel?: string;\r\n  @Input() contextBarLinkLabel?: string;\r\n  @Input() contextBarLinkHref?: string;\r\n\r\n  get toastClasses(): string[] {\r\n    const classes = ['toast'];\r\n\r\n    if (this.status) {\r\n      classes.push(`toast-${this.status}`);\r\n    }\r\n\r\n    if (this.fade) {\r\n      classes.push('fade');\r\n    }\r\n\r\n    if (this.show) {\r\n      classes.push('show');\r\n    }\r\n\r\n    return classes;\r\n  }\r\n\r\n  get iconClasses(): string[] {\r\n    return ['fa-solid', this.statusIconClass];\r\n  }\r\n\r\n  get statusIconClass(): string {\r\n    switch (this.status) {\r\n      case 'warning':\r\n        return 'fa-triangle-exclamation';\r\n      case 'error':\r\n        return 'fa-circle-exclamation';\r\n      case 'info':\r\n      case 'success':\r\n      default:\r\n        return 'fa-circle-info';\r\n    }\r\n  }\r\n\r\n  get hasContextBar(): boolean {\r\n    switch (this.contextBarType) {\r\n      case 'timestamp':\r\n        return !!this.contextBarText;\r\n      case 'button':\r\n        return !!this.contextBarButtonLabel;\r\n      case 'link':\r\n        return !!this.contextBarLinkLabel && !!this.contextBarLinkHref;\r\n      default:\r\n        return false;\r\n    }\r\n  }\r\n\r\n  get dataBsAutohide(): 'true' | 'false' {\r\n    return this.autoHide ? 'true' : 'false';\r\n  }\r\n}",
+            "styleUrl": "./ds-toast.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "accessors": {
+                "toastClasses": {
+                    "name": "toastClasses",
+                    "getSignature": {
+                        "name": "toastClasses",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 37
+                    }
+                },
+                "iconClasses": {
+                    "name": "iconClasses",
+                    "getSignature": {
+                        "name": "iconClasses",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 55
+                    }
+                },
+                "statusIconClass": {
+                    "name": "statusIconClass",
+                    "getSignature": {
+                        "name": "statusIconClass",
+                        "type": "string",
+                        "returnType": "string",
+                        "line": 59
+                    }
+                },
+                "hasContextBar": {
+                    "name": "hasContextBar",
+                    "getSignature": {
+                        "name": "hasContextBar",
+                        "type": "boolean",
+                        "returnType": "boolean",
+                        "line": 72
+                    }
+                },
+                "dataBsAutohide": {
+                    "name": "dataBsAutohide",
+                    "getSignature": {
+                        "name": "dataBsAutohide",
+                        "type": "unknown",
+                        "returnType": "\"true\" | \"false\"",
+                        "line": 85
+                    }
+                }
+            },
+            "templateData": "<div\r\n  [class]=\"toastClasses.join(' ')\"\r\n  role=\"alert\"\r\n  [attr.aria-live]=\"ariaLive\"\r\n  [attr.aria-atomic]=\"ariaAtomic ? 'true' : 'false'\"\r\n  [attr.data-bs-autohide]=\"dataBsAutohide\"\r\n>\r\n  <div class=\"toast-content\">\r\n    @if (showIcon && status) {\r\n      <span class=\"toast-icon\">\r\n        <i [class]=\"iconClasses.join(' ')\" aria-hidden=\"true\"></i>\r\n      </span>\r\n    }\r\n\r\n    <div class=\"toast-body\">\r\n      <div class=\"toast-message\">\r\n        <h6>{{ message }}</h6>\r\n      </div>\r\n\r\n      @if (note || smallNote) {\r\n        <div class=\"toast-note\">\r\n          @if (note) {\r\n            {{ note }}\r\n          }\r\n\r\n          @if (smallNote) {\r\n            <p><small>{{ smallNote }}</small></p>\r\n          }\r\n        </div>\r\n      }\r\n\r\n      @if (hasContextBar) {\r\n        <div class=\"toast-contextbar\">\r\n          @switch (contextBarType) {\r\n            @case ('timestamp') {\r\n              {{ contextBarText }}\r\n            }\r\n            @case ('button') {\r\n              <button type=\"button\" class=\"btn btn-secondary btn-sm\">\r\n                <span class=\"button-label\">{{ contextBarButtonLabel }}</span>\r\n              </button>\r\n            }\r\n            @case ('link') {\r\n              <a [href]=\"contextBarLinkHref\">\r\n                {{ contextBarLinkLabel }}\r\n              </a>\r\n            }\r\n          }\r\n        </div>\r\n      }\r\n    </div>\r\n\r\n    @if (showClose) {\r\n      <button\r\n        type=\"button\"\r\n        class=\"btn-close\"\r\n        data-bs-dismiss=\"toast\"\r\n        aria-label=\"Close\"\r\n      ></button>\r\n    }\r\n  </div>\r\n</div>"
+        },
+        {
+            "name": "DsToastContainerComponent",
+            "id": "component-DsToastContainerComponent-ed1113768b0e580102cbb91b917da14284b6624009cf195e9a3a60de6342e7b94bfce388dcb1da175ffc84bbf8de1120f06778bce9617837a81705f5b194e4f7",
+            "file": "src/lib/toast/ds-toast-container.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-toast-container",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-toast-container.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectionStrategy, Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'ds-toast-container',\r\n  standalone: true,\r\n  templateUrl: './ds-toast-container.component.html',\r\n  styleUrl: './ds-toast-container.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsToastContainerComponent {}",
+            "styleUrl": "./ds-toast-container.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"toast-container\">\r\n  <ng-content />\r\n</div>"
+        },
+        {
+            "name": "DsVersaTileComponent",
+            "id": "component-DsVersaTileComponent-2ac570c2b2686b6babc57b694cb205e7b5ad996e81417fd4b3fe73fe0a098691f480664d0496ef90984e40024aa53781be412edc18035284394c1b477fe57666",
+            "file": "src/lib/versa-tile/ds-versa-tile.component.ts",
+            "changeDetection": "ChangeDetectionStrategy.OnPush",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "ds-versa-tile",
+            "styleUrls": [],
+            "styles": [],
+            "templateUrl": [
+                "./ds-versa-tile.component.html"
+            ],
+            "viewProviders": [],
+            "hostDirectives": [],
+            "inputsClass": [
+                {
+                    "name": "iconClass",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "label",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                },
+                {
+                    "name": "progressValue",
+                    "defaultValue": "null",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number | null",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 32,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": false
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 30,
+                    "modifierKind": [
+                        148
+                    ],
+                    "required": true
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "actionsTemplate",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DsVersaTileActionsDirective",
+                    "indexKey": "",
+                    "optional": true,
+                    "description": "",
+                    "line": 35,
+                    "decorators": [
+                        {
+                            "name": "ContentChild",
+                            "stringifiedArguments": "DsVersaTileActionsDirective"
+                        }
+                    ],
+                    "modifierKind": [
+                        171,
+                        124
+                    ]
+                },
+                {
+                    "name": "clampedProgressValue",
+                    "defaultValue": "computed(() => {\r\n    const value = this.progressValue();\r\n\r\n    if (value === null || Number.isNaN(value)) {\r\n      return 0;\r\n    }\r\n\r\n    return Math.min(100, Math.max(0, value));\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 44,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hasIcon",
+                    "defaultValue": "computed(() => {\r\n    const iconClass = this.iconClass();\r\n    return typeof iconClass === 'string' && iconClass.trim().length > 0;\r\n  })",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 37,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "hasProgress",
+                    "defaultValue": "computed(() => this.progressValue() !== null)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 42,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                },
+                {
+                    "name": "progressWidth",
+                    "defaultValue": "computed(() => `${this.clampedProgressValue()}%`)",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "unknown",
+                    "indexKey": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 54,
+                    "modifierKind": [
+                        124,
+                        148
+                    ]
+                }
+            ],
+            "methodsClass": [],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "standalone": true,
+            "imports": [
+                {
+                    "name": "CommonModule",
+                    "type": "module"
+                }
+            ],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {\r\n  ChangeDetectionStrategy,\r\n  Component,\r\n  ContentChild,\r\n  Directive,\r\n  TemplateRef,\r\n  computed,\r\n  input,\r\n} from '@angular/core';\r\nimport { CommonModule } from '@angular/common';\r\n\r\n@Directive({\r\n  selector: 'ng-template[dsVersaTileActions]',\r\n  standalone: true,\r\n})\r\nexport class DsVersaTileActionsDirective {\r\n  constructor(public readonly templateRef: TemplateRef<unknown>) {}\r\n}\r\n\r\n@Component({\r\n  selector: 'ds-versa-tile',\r\n  standalone: true,\r\n  imports: [CommonModule],\r\n  templateUrl: './ds-versa-tile.component.html',\r\n  styleUrl: './ds-versa-tile.component.css',\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class DsVersaTileComponent {\r\n  readonly label = input.required<string>();\r\n  readonly text = input.required<string>();\r\n  readonly iconClass = input<string | null>(null);\r\n  readonly progressValue = input<number | null>(null);\r\n\r\n  @ContentChild(DsVersaTileActionsDirective)\r\n  protected actionsTemplate?: DsVersaTileActionsDirective;\r\n\r\n  protected readonly hasIcon = computed(() => {\r\n    const iconClass = this.iconClass();\r\n    return typeof iconClass === 'string' && iconClass.trim().length > 0;\r\n  });\r\n\r\n  protected readonly hasProgress = computed(() => this.progressValue() !== null);\r\n\r\n  protected readonly clampedProgressValue = computed(() => {\r\n    const value = this.progressValue();\r\n\r\n    if (value === null || Number.isNaN(value)) {\r\n      return 0;\r\n    }\r\n\r\n    return Math.min(100, Math.max(0, value));\r\n  });\r\n\r\n  protected readonly progressWidth = computed(() => `${this.clampedProgressValue()}%`);\r\n}",
+            "styleUrl": "./ds-versa-tile.component.css",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "extends": [],
+            "templateData": "<div class=\"versatile\">\r\n  <div class=\"versatile-content\">\r\n    <div class=\"versatile-body\">\r\n      @if (hasIcon()) {\r\n        <div class=\"icon-block\">\r\n          <i [class]=\"iconClass()\"></i>\r\n        </div>\r\n      }\r\n\r\n      <div class=\"versatile-meta\">\r\n        <div class=\"versatile-label\">{{ label() }}</div>\r\n        <p class=\"versatile-text\">{{ text() }}</p>\r\n      </div>\r\n    </div>\r\n\r\n    @if (actionsTemplate) {\r\n      <div class=\"versatile-actions\">\r\n        <ng-container [ngTemplateOutlet]=\"actionsTemplate.templateRef\"></ng-container>\r\n      </div>\r\n    }\r\n  </div>\r\n\r\n  @if (hasProgress()) {\r\n    <div\r\n      class=\"progress progress-sm\"\r\n      role=\"progressbar\"\r\n      aria-label=\"Versatile progress bar\"\r\n      [attr.aria-valuenow]=\"clampedProgressValue()\"\r\n      aria-valuemin=\"0\"\r\n      aria-valuemax=\"100\"\r\n    >\r\n      <div\r\n        class=\"progress-bar\"\r\n        [style.width]=\"progressWidth()\"\r\n      ></div>\r\n    </div>\r\n  }\r\n</div>"
         },
         {
             "name": "HeaderComponent",
@@ -7837,6 +8584,72 @@
                 "kind": 193
             },
             {
+                "name": "DsTagSelectType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"radio\" | \"checkbox\"",
+                "file": "src/lib/tag/ds-tag.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsTagSize",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"medium\" | \"small\"",
+                "file": "src/lib/tag/ds-tag.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsTagStatus",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                "file": "src/lib/tag/ds-tag.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsTagVariant",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"read-only\" | \"dismissible\" | \"selectable\" | \"status\"",
+                "file": "src/lib/tag/ds-tag.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsToastContextBarType",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"timestamp\" | \"button\" | \"link\"",
+                "file": "src/lib/toast/ds-toast.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
+                "name": "DsToastStatus",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                "file": "src/lib/toast/ds-toast.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 193
+            },
+            {
                 "name": "LinkType",
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
@@ -8404,6 +9217,76 @@
                     "kind": 193
                 }
             ],
+            "src/lib/tag/ds-tag.component.ts": [
+                {
+                    "name": "DsTagSelectType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"radio\" | \"checkbox\"",
+                    "file": "src/lib/tag/ds-tag.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsTagSize",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"medium\" | \"small\"",
+                    "file": "src/lib/tag/ds-tag.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsTagStatus",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                    "file": "src/lib/tag/ds-tag.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsTagVariant",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"read-only\" | \"dismissible\" | \"selectable\" | \"status\"",
+                    "file": "src/lib/tag/ds-tag.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
+            "src/lib/toast/ds-toast.component.ts": [
+                {
+                    "name": "DsToastContextBarType",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"timestamp\" | \"button\" | \"link\"",
+                    "file": "src/lib/toast/ds-toast.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                },
+                {
+                    "name": "DsToastStatus",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"info\" | \"success\" | \"warning\" | \"error\"",
+                    "file": "src/lib/toast/ds-toast.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 193
+                }
+            ],
             "src/lib/link/ds-link.component.ts": [
                 {
                     "name": "LinkType",
@@ -8438,7 +9321,7 @@
         "children": []
     },
     "coverage": {
-        "count": 2,
+        "count": 3,
         "status": "low",
         "files": [
             {
@@ -9357,21 +10240,117 @@
                 "status": "low"
             },
             {
-                "filePath": "src/lib/summary-meta/ds-summary-meta-body.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "DsSummaryMetaBodyComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
-            },
-            {
                 "filePath": "src/lib/summary-meta/ds-summary-meta.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "DsSummaryMetaComponent",
+                "coveragePercent": 28,
+                "coverageCount": "2/7",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/lib/tag/ds-tag.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsTagComponent",
+                "coveragePercent": 46,
+                "coverageCount": "6/13",
+                "status": "medium"
+            },
+            {
+                "filePath": "src/lib/tag/ds-tag.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsTagSelectType",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/tag/ds-tag.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsTagSize",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/tag/ds-tag.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsTagStatus",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/tag/ds-tag.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsTagVariant",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/toast/ds-toast-container.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsToastContainerComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/toast/ds-toast.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsToastComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/17",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/toast/ds-toast.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsToastContextBarType",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/toast/ds-toast.component.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "DsToastStatus",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/versa-tile/ds-versa-tile.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DsVersaTileComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/10",
+                "status": "low"
+            },
+            {
+                "filePath": "src/lib/versa-tile/ds-versa-tile.component.ts",
+                "type": "directive",
+                "linktype": "directive",
+                "name": "DsVersaTileActionsDirective",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {

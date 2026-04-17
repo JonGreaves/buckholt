@@ -5511,8 +5511,7 @@ fieldset:disabled .carousel-control-next {
 }
 
 /* Tag ________________________________________________________________________ */
-/* Update to fix Storybook rendering bug - added :not(.token.tag) */
-.tag:not(.token.tag) {
+.tag {
   --tag-padding-y: calc(0.25rem - 1px);
   --tag-padding-x: calc(0.5rem - 1px);
   --tag-radius: 2rem;
@@ -15808,5 +15807,21 @@ a[data-bs-toggle=tooltip] {
     display: none !important;
   }
 }
+
+
+span.token.tag {
+    border-radius:0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 1.25rem;
+    height: auto;
+    min-width: auto;
+    padding:0;
+    display: inline;
+    align-items: center;
+}
+
+
 
 /* DEBUG */

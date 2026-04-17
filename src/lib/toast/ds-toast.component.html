@@ -1,0 +1,62 @@
+<div
+  [class]="toastClasses.join(' ')"
+  role="alert"
+  [attr.aria-live]="ariaLive"
+  [attr.aria-atomic]="ariaAtomic ? 'true' : 'false'"
+  [attr.data-bs-autohide]="dataBsAutohide"
+>
+  <div class="toast-content">
+    @if (showIcon && status) {
+      <span class="toast-icon">
+        <i [class]="iconClasses.join(' ')" aria-hidden="true"></i>
+      </span>
+    }
+
+    <div class="toast-body">
+      <div class="toast-message">
+        <h6>{{ message }}</h6>
+      </div>
+
+      @if (note || smallNote) {
+        <div class="toast-note">
+          @if (note) {
+            {{ note }}
+          }
+
+          @if (smallNote) {
+            <p><small>{{ smallNote }}</small></p>
+          }
+        </div>
+      }
+
+      @if (hasContextBar) {
+        <div class="toast-contextbar">
+          @switch (contextBarType) {
+            @case ('timestamp') {
+              {{ contextBarText }}
+            }
+            @case ('button') {
+              <button type="button" class="btn btn-secondary btn-sm">
+                <span class="button-label">{{ contextBarButtonLabel }}</span>
+              </button>
+            }
+            @case ('link') {
+              <a [href]="contextBarLinkHref">
+                {{ contextBarLinkLabel }}
+              </a>
+            }
+          }
+        </div>
+      }
+    </div>
+
+    @if (showClose) {
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    }
+  </div>
+</div>
