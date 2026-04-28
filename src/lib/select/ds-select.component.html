@@ -1,0 +1,41 @@
+<div class="input">
+  <div class="input-label">
+    <label [for]="id" class="form-label">{{ label }}</label>
+    @if (assistiveText) {
+      <small class="form-helper">
+        {{ assistiveText }}
+      </small>
+    }
+  </div>
+  <div class="response select-input">
+    <select
+      [class]="selectClasses"
+      [id]="id"
+      [name]="name || null"
+      [value]="value"
+      [required]="required"
+      [disabled]="isDisabled"
+    >
+      @if (placeholder) {
+        <option selected disabled value="">{{ placeholder }}</option>
+      }
+      @for (option of options; track option.value) {
+        <option [value]="option.value" [disabled]="option.disabled">
+          {{ option.label }}
+        </option>
+      }
+    </select>
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">
+      {{ helperText }}
+    </small>
+  }
+
+  @if (showValidationMessage) {
+    <div class="invalid-feedback">
+      {{ validationMessage }}
+    </div>
+  }
+</div>

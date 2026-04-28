@@ -1,0 +1,85 @@
+<div class="text-block">
+  @if (showIconBlock) {
+    <div [class]="iconBlockClasses">
+      <i [class]="iconClass"></i>
+    </div>
+  }
+
+  @if (showEyebrow) {
+    <span class="eyebrow">{{ eyebrow }}</span>
+  }
+
+  @if (hasHeading) {
+    @switch (headingLevel) {
+      @case ('h1') {
+        <h1 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h1>
+      }
+
+      @case ('h2') {
+        <h2 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h2>
+      }
+
+      @case ('h3') {
+        <h3 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h3>
+      }
+
+      @case ('h4') {
+        <h4 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h4>
+      }
+
+      @case ('h5') {
+        <h5 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h5>
+      }
+
+      @case ('h6') {
+        <h6 [class]="headingStyle">
+          @if (showInlineIcon) {
+            <span class="icon">
+              <i [class]="iconClass" aria-hidden="true"></i>
+            </span>
+          }
+          {{ heading }}
+        </h6>
+      }
+    }
+  }
+
+  @for (paragraph of paragraphItems; track paragraph) {
+    <p>{{ paragraph }}</p>
+  }
+</div>

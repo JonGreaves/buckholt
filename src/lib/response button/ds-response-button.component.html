@@ -1,0 +1,48 @@
+<div class="input">
+  <div class="input-label">
+    <label [for]="optionId(options[0], 0)" class="form-label">
+      {{ label }}
+    </label>
+
+    @if (assistiveText) {
+      <small class="form-helper">{{ assistiveText }}</small>
+    }
+  </div>
+
+  <div [class]="responseClasses.join(' ')">
+    @for (option of options; track option.value; let index = $index) {
+      <input
+        [type]="inputType"
+        class="btn-check"
+        [name]="name"
+        [id]="optionId(option, index)"
+        [value]="option.value"
+        [checked]="option.checked"
+        [disabled]="optionDisabled(option)"
+        [required]="required"
+      >
+      <label
+        [class]="optionLabelClasses(option).join(' ')"
+        [for]="optionId(option, index)"
+      >
+        @if (showIcon(option)) {
+          <span class="icon">
+            <i [class]="option.iconClass"></i>
+          </span>
+        }
+
+        {{ option.label }}
+      </label>
+    }
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">{{ helperText }}</small>
+  }
+
+  @if (validationMessage) {
+    <div class="invalid-feedback">
+      {{ validationMessage }}
+    </div>
+  }
+</div>

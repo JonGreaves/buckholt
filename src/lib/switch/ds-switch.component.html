@@ -1,0 +1,16 @@
+<div [class]="switchClasses.join(' ')">
+  <input
+    class="form-check-input"
+    [type]="inputType"
+    role="switch"
+    [id]="id"
+    [checked]="isChecked"
+    [disabled]="disabled"
+  >
+  <div class="input-label">
+    <label class="form-check-label" [for]="id">{{ label }}</label>
+    @if (helperText) {
+      <small class="form-helper">{{ helperText }}</small>
+    }
+  </div>
+</div>

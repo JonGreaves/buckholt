@@ -1,0 +1,36 @@
+<div class="input" [class.disabled]="disabled">
+  <div class="input-label">
+    <label [for]="labelFor" class="form-label">{{ label }}</label>
+    @if (assistiveText) {
+      <small class="form-helper">
+        {{ assistiveText }}
+      </small>
+    }
+  </div>
+
+  <div class="response check-input">
+    @for (option of options; track option.id) {
+      <ds-radio
+        [id]="option.id"
+        [label]="option.label"
+        [name]="name"
+        [value]="option.value"
+        [checked]="option.checked ?? false"
+        [disabled]="disabled || (option.disabled ?? false)"
+        [readonly]="readonly || (option.readonly ?? false)"
+      />
+    }
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">
+      {{ helperText }}
+    </small>
+  }
+
+  @if (invalidFeedback) {
+    <div class="invalid-feedback">
+      {{ invalidFeedback }}
+    </div>
+  }
+</div>

@@ -1,0 +1,67 @@
+<div class="input">
+  <div class="input-label">
+    <label [for]="id" class="form-label">{{ label }}</label>
+
+    @if (assistiveText) {
+      <small class="form-helper">{{ assistiveText }}</small>
+    }
+  </div>
+
+  <div class="response slider-input">
+    <div class="slider-container">
+      <span class="minmax">{{ min }}</span>
+
+      <div class="slider-wrapper">
+        <input
+          type="range"
+          [class]="readonly ? 'form-slider readonly' : showNumberInput ? 'form-slider' : 'form-slider form-slider-output'"
+          [id]="id"
+          [min]="min"
+          [max]="max"
+          [step]="step"
+          [value]="value"
+          [disabled]="disabled || readonly"
+          (input)="onValueInput($event)"
+        >
+
+        @if (showTicks) {
+          <div class="ticks">
+            @for (_ of ticks; track $index) {
+              <span class="tick"></span>
+            }
+          </div>
+        }
+      </div>
+
+      <span class="minmax">{{ max }}</span>
+
+      @if (showNumberInput) {
+        <input
+          type="number"
+          class="form-control"
+          style="width: 4ch;"
+          [value]="value"
+          [id]="outputId"
+          [min]="min"
+          [max]="max"
+          [step]="step"
+          [disabled]="disabled"
+          [readonly]="readonly"
+          (input)="onValueInput($event)"
+        >
+      } @else {
+        <output [attr.for]="id" id="rangeValue">{{ value }}</output>
+      }
+    </div>
+  </div>
+
+  @if (helperText) {
+    <small class="form-helper">{{ helperText }}</small>
+  }
+
+  @if (errorMessage) {
+    <div class="invalid-feedback">
+      {{ errorMessage }}
+    </div>
+  }
+</div>
