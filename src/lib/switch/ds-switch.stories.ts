@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { DsSwitchComponent } from './ds-switch.component';
 
 const meta: Meta<DsSwitchComponent> = {
-  title: 'Buckholt/Forms Inputs/Switch',
+  title: 'Buckholt/Switch',
   component: DsSwitchComponent,
   tags: ['autodocs'],
   parameters: {

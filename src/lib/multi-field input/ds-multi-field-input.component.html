@@ -1,0 +1,35 @@
+<div class="input">
+  <div class="input-label">
+    <label [attr.for]="labelFor" class="form-label">{{ label }}</label>
+  </div>
+
+  <div [class]="responseClasses.join(' ')">
+    @for (field of fields; track field.id) {
+      @if (field.type === 'select') {
+        <select
+          class="form-select"
+          [id]="field.id"
+          [name]="field.name ?? null"
+          [disabled]="field.disabled || null"
+        >
+          @for (option of field.options ?? []; track option.value) {
+            <option [value]="option.value" [selected]="option.value === field.value">
+              {{ option.label }}
+            </option>
+          }
+        </select>
+      } @else {
+        <input
+          type="text"
+          class="form-control"
+          [id]="field.id"
+          [name]="field.name ?? null"
+          [placeholder]="field.placeholder ?? null"
+          [value]="field.value ?? ''"
+          [disabled]="field.disabled || null"
+          [readOnly]="field.readonly || null"
+        />
+      }
+    }
+  </div>
+</div>
